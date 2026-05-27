@@ -1,15 +1,16 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Dashboard Monitoring Bencana Aceh API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: bencana
+    description: Disaster monitoring data
 paths:
   /healthz:
     get:
@@ -24,6 +25,80 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /bencana/summary:
+    get:
+      operationId: getBencanaSummary
+      tags: [bencana]
+      summary: Get KPI summary stats
+      responses:
+        "200":
+          description: Summary stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BencanaSummary"
+
+  /bencana/dampak:
+    get:
+      operationId: getBencanaDampak
+      tags: [bencana]
+      summary: Get impact data per kabupaten
+      responses:
+        "200":
+          description: List of impact records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DampakRecord"
+
+  /bencana/pengungsi:
+    get:
+      operationId: getBencanaPengungsi
+      tags: [bencana]
+      summary: Get refugee data
+      responses:
+        "200":
+          description: List of refugee records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PengungsiRecord"
+
+  /bencana/bantuan:
+    get:
+      operationId: getBencanaBantuan
+      tags: [bencana]
+      summary: Get aid/logistics data
+      responses:
+        "200":
+          description: List of aid records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BantuanRecord"
+
+  /bencana/markers:
+    get:
+      operationId: getBencanaMarkers
+      tags: [bencana]
+      summary: Get map markers for Leaflet
+      responses:
+        "200":
+          description: List of map markers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MapMarker"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +109,162 @@ components:
       required:
         - status
 
+    BencanaSummary:
+      type: object
+      required:
+        - totalKorban
+        - totalPengungsi
+        - titikPengungsian
+        - rumahRusak
+        - sawahHa
+        - kabupatenTerdampak
+        - lastUpdate
+      properties:
+        totalKorban:
+          type: integer
+        totalPengungsi:
+          type: integer
+        titikPengungsian:
+          type: integer
+        rumahRusak:
+          type: integer
+        sawahHa:
+          type: number
+        kabupatenTerdampak:
+          type: integer
+        lastUpdate:
+          type: string
+
+    DampakRecord:
+      type: object
+      required:
+        - id
+        - kabupaten
+        - kecamatan
+        - jenisKejadian
+        - korbanJiwa
+        - korbanLuka
+        - rumahRusakBerat
+        - rumahRusakRingan
+        - sawahTerdampakHa
+        - tanggal
+        - status
+      properties:
+        id:
+          type: integer
+        kabupaten:
+          type: string
+        kecamatan:
+          type: string
+        jenisKejadian:
+          type: string
+        korbanJiwa:
+          type: integer
+        korbanLuka:
+          type: integer
+        rumahRusakBerat:
+          type: integer
+        rumahRusakRingan:
+          type: integer
+        sawahTerdampakHa:
+          type: number
+        tanggal:
+          type: string
+        status:
+          type: string
+
+    PengungsiRecord:
+      type: object
+      required:
+        - id
+        - kabupaten
+        - lokasi
+        - jumlahKepalaKeluarga
+        - jumlahJiwa
+        - lakiLaki
+        - perempuan
+        - anakAnak
+        - lansia
+        - status
+      properties:
+        id:
+          type: integer
+        kabupaten:
+          type: string
+        lokasi:
+          type: string
+        jumlahKepalaKeluarga:
+          type: integer
+        jumlahJiwa:
+          type: integer
+        lakiLaki:
+          type: integer
+        perempuan:
+          type: integer
+        anakAnak:
+          type: integer
+        lansia:
+          type: integer
+        status:
+          type: string
+
+    BantuanRecord:
+      type: object
+      required:
+        - id
+        - kabupaten
+        - jenisLogistik
+        - jumlah
+        - satuan
+        - sumberBantuan
+        - tanggalDistribusi
+        - status
+      properties:
+        id:
+          type: integer
+        kabupaten:
+          type: string
+        jenisLogistik:
+          type: string
+        jumlah:
+          type: integer
+        satuan:
+          type: string
+        sumberBantuan:
+          type: string
+        tanggalDistribusi:
+          type: string
+        status:
+          type: string
+
+    MapMarker:
+      type: object
+      required:
+        - id
+        - lat
+        - lng
+        - kabupaten
+        - kecamatan
+        - jenisBencana
+        - severity
+        - korban
+        - pengungsi
+      properties:
+        id:
+          type: integer
+        lat:
+          type: number
+        lng:
+          type: number
+        kabupaten:
+          type: string
+        kecamatan:
+          type: string
+        jenisBencana:
+          type: string
+        severity:
+          type: string
+        korban:
+          type: integer
+        pengungsi:
+          type: integer
