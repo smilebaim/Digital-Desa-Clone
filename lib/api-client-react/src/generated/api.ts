@@ -16,12 +16,14 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
-  BantuanRecord,
+  BantuanDesaRecord,
   BencanaSummary,
   DampakRecord,
   HealthStatus,
   MapMarker,
-  PengungsiRecord
+  OrangHilangRecord,
+  PendudukRecord,
+  PertanianRecord
 } from './api.schemas';
 
 import { customFetch } from '../custom-fetch';
@@ -45,7 +47,6 @@ export const getHealthCheckUrl = () => {
 }
 
 /**
- * Returns server health status
  * @summary Health check
  */
 export const healthCheck = async ( options?: RequestInit): Promise<HealthStatus> => {
@@ -123,7 +124,7 @@ export const getGetBencanaSummaryUrl = () => {
 }
 
 /**
- * @summary Get KPI summary stats
+ * @summary Get full dashboard summary
  */
 export const getBencanaSummary = async ( options?: RequestInit): Promise<BencanaSummary> => {
 
@@ -170,7 +171,7 @@ export type GetBencanaSummaryQueryError = ErrorType<unknown>
 
 
 /**
- * @summary Get KPI summary stats
+ * @summary Get full dashboard summary
  */
 
 export function useGetBencanaSummary<TData = Awaited<ReturnType<typeof getBencanaSummary>>, TError = ErrorType<unknown>>(
@@ -268,6 +269,83 @@ export function useGetBencanaDampak<TData = Awaited<ReturnType<typeof getBencana
 
 
 
+export const getGetBencanaPertanianUrl = () => {
+
+
+
+
+  return `/api/bencana/pertanian`
+}
+
+/**
+ * @summary Get agriculture damage data
+ */
+export const getBencanaPertanian = async ( options?: RequestInit): Promise<PertanianRecord[]> => {
+
+  return customFetch<PertanianRecord[]>(getGetBencanaPertanianUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetBencanaPertanianQueryKey = () => {
+    return [
+    `/api/bencana/pertanian`
+    ] as const;
+    }
+
+
+export const getGetBencanaPertanianQueryOptions = <TData = Awaited<ReturnType<typeof getBencanaPertanian>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getBencanaPertanian>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetBencanaPertanianQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getBencanaPertanian>>> = ({ signal }) => getBencanaPertanian({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getBencanaPertanian>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetBencanaPertanianQueryResult = NonNullable<Awaited<ReturnType<typeof getBencanaPertanian>>>
+export type GetBencanaPertanianQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Get agriculture damage data
+ */
+
+export function useGetBencanaPertanian<TData = Awaited<ReturnType<typeof getBencanaPertanian>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getBencanaPertanian>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetBencanaPertanianQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
 export const getGetBencanaPengungsiUrl = () => {
 
 
@@ -277,11 +355,11 @@ export const getGetBencanaPengungsiUrl = () => {
 }
 
 /**
- * @summary Get refugee data
+ * @summary Get population/refugee data per kabupaten
  */
-export const getBencanaPengungsi = async ( options?: RequestInit): Promise<PengungsiRecord[]> => {
+export const getBencanaPengungsi = async ( options?: RequestInit): Promise<PendudukRecord[]> => {
 
-  return customFetch<PengungsiRecord[]>(getGetBencanaPengungsiUrl(),
+  return customFetch<PendudukRecord[]>(getGetBencanaPengungsiUrl(),
   {
     ...options,
     method: 'GET'
@@ -324,7 +402,7 @@ export type GetBencanaPengungsiQueryError = ErrorType<unknown>
 
 
 /**
- * @summary Get refugee data
+ * @summary Get population/refugee data per kabupaten
  */
 
 export function useGetBencanaPengungsi<TData = Awaited<ReturnType<typeof getBencanaPengungsi>>, TError = ErrorType<unknown>>(
@@ -333,6 +411,83 @@ export function useGetBencanaPengungsi<TData = Awaited<ReturnType<typeof getBenc
  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
 
   const queryOptions = getGetBencanaPengungsiQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getGetBencanaOrangHilangUrl = () => {
+
+
+
+
+  return `/api/bencana/orang-hilang`
+}
+
+/**
+ * @summary Get missing persons data
+ */
+export const getBencanaOrangHilang = async ( options?: RequestInit): Promise<OrangHilangRecord[]> => {
+
+  return customFetch<OrangHilangRecord[]>(getGetBencanaOrangHilangUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetBencanaOrangHilangQueryKey = () => {
+    return [
+    `/api/bencana/orang-hilang`
+    ] as const;
+    }
+
+
+export const getGetBencanaOrangHilangQueryOptions = <TData = Awaited<ReturnType<typeof getBencanaOrangHilang>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getBencanaOrangHilang>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetBencanaOrangHilangQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getBencanaOrangHilang>>> = ({ signal }) => getBencanaOrangHilang({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getBencanaOrangHilang>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetBencanaOrangHilangQueryResult = NonNullable<Awaited<ReturnType<typeof getBencanaOrangHilang>>>
+export type GetBencanaOrangHilangQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Get missing persons data
+ */
+
+export function useGetBencanaOrangHilang<TData = Awaited<ReturnType<typeof getBencanaOrangHilang>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getBencanaOrangHilang>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetBencanaOrangHilangQueryOptions(options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
@@ -354,11 +509,11 @@ export const getGetBencanaBantuanUrl = () => {
 }
 
 /**
- * @summary Get aid/logistics data
+ * @summary Get village-level aid distribution data
  */
-export const getBencanaBantuan = async ( options?: RequestInit): Promise<BantuanRecord[]> => {
+export const getBencanaBantuan = async ( options?: RequestInit): Promise<BantuanDesaRecord[]> => {
 
-  return customFetch<BantuanRecord[]>(getGetBencanaBantuanUrl(),
+  return customFetch<BantuanDesaRecord[]>(getGetBencanaBantuanUrl(),
   {
     ...options,
     method: 'GET'
@@ -401,7 +556,7 @@ export type GetBencanaBantuanQueryError = ErrorType<unknown>
 
 
 /**
- * @summary Get aid/logistics data
+ * @summary Get village-level aid distribution data
  */
 
 export function useGetBencanaBantuan<TData = Awaited<ReturnType<typeof getBencanaBantuan>>, TError = ErrorType<unknown>>(
@@ -431,7 +586,7 @@ export const getGetBencanaMarkersUrl = () => {
 }
 
 /**
- * @summary Get map markers for Leaflet
+ * @summary Get map markers
  */
 export const getBencanaMarkers = async ( options?: RequestInit): Promise<MapMarker[]> => {
 
@@ -478,7 +633,7 @@ export type GetBencanaMarkersQueryError = ErrorType<unknown>
 
 
 /**
- * @summary Get map markers for Leaflet
+ * @summary Get map markers
  */
 
 export function useGetBencanaMarkers<TData = Awaited<ReturnType<typeof getBencanaMarkers>>, TError = ErrorType<unknown>>(

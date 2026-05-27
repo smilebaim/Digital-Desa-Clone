@@ -6,15 +6,12 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface PengungsiRecord {
+export interface OrangHilangRecord {
   id: number;
+  nama: string;
+  usia: number;
+  kecamatan: string;
   kabupaten: string;
-  lokasi: string;
-  jumlahKepalaKeluarga: number;
-  jumlahJiwa: number;
-  lakiLaki: number;
-  perempuan: number;
-  anakAnak: number;
-  lansia: number;
   status: string;
+  tanggal: string;
 }

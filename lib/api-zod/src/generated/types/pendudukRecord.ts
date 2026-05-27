@@ -6,13 +6,11 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface BantuanRecord {
+export interface PendudukRecord {
   id: number;
   kabupaten: string;
-  jenisLogistik: string;
-  jumlah: number;
-  satuan: string;
-  sumberBantuan: string;
-  tanggalDistribusi: string;
-  status: string;
+  penduduk: number;
+  kk: number;
+  disabilitas: number;
+  pengungsi: number;
 }

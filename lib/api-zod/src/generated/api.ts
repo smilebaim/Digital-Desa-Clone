@@ -9,7 +9,6 @@ import * as zod from 'zod';
 
 
 /**
- * Returns server health status
  * @summary Health check
  */
 export const HealthCheckResponse = zod.object({
@@ -18,7 +17,7 @@ export const HealthCheckResponse = zod.object({
 
 
 /**
- * @summary Get KPI summary stats
+ * @summary Get full dashboard summary
  */
 export const GetBencanaSummaryResponse = zod.object({
   "totalKorban": zod.number(),
@@ -27,6 +26,40 @@ export const GetBencanaSummaryResponse = zod.object({
   "rumahRusak": zod.number(),
   "sawahHa": zod.number(),
   "kabupatenTerdampak": zod.number(),
+  "fasumRusak": zod.number(),
+  "kebunHa": zod.number(),
+  "tambakHa": zod.number(),
+  "rekapCluster": zod.object({
+  "kerusakan": zod.string(),
+  "kerugian": zod.string(),
+  "total": zod.string(),
+  "perSektor": zod.array(zod.object({
+  "nama": zod.string(),
+  "nilai": zod.string()
+}))
+}),
+  "faskes": zod.object({
+  "puskesmas": zod.number(),
+  "rsud": zod.number(),
+  "fasyankes": zod.number()
+}),
+  "jaringan": zod.object({
+  "critical": zod.number(),
+  "warning": zod.number(),
+  "normal": zod.number()
+}),
+  "posko": zod.object({
+  "totalPosko": zod.number(),
+  "totalPengungsi": zod.number(),
+  "titikPengungsian": zod.number()
+}),
+  "bantuan": zod.object({
+  "totalDesa": zod.number(),
+  "kuning": zod.number(),
+  "biru": zod.number(),
+  "abu": zod.number(),
+  "putih": zod.number()
+}),
   "lastUpdate": zod.string()
 })
 
@@ -51,41 +84,65 @@ export const GetBencanaDampakResponse = zod.array(GetBencanaDampakResponseItem)
 
 
 /**
- * @summary Get refugee data
+ * @summary Get agriculture damage data
+ */
+export const GetBencanaPertanianResponseItem = zod.object({
+  "id": zod.number(),
+  "nama": zod.string(),
+  "kabupaten": zod.string(),
+  "kecamatan": zod.string(),
+  "volume": zod.number(),
+  "kerugian": zod.string(),
+  "kondisi": zod.string()
+})
+export const GetBencanaPertanianResponse = zod.array(GetBencanaPertanianResponseItem)
+
+
+/**
+ * @summary Get population/refugee data per kabupaten
  */
 export const GetBencanaPengungsiResponseItem = zod.object({
   "id": zod.number(),
   "kabupaten": zod.string(),
-  "lokasi": zod.string(),
-  "jumlahKepalaKeluarga": zod.number(),
-  "jumlahJiwa": zod.number(),
-  "lakiLaki": zod.number(),
-  "perempuan": zod.number(),
-  "anakAnak": zod.number(),
-  "lansia": zod.number(),
-  "status": zod.string()
+  "penduduk": zod.number(),
+  "kk": zod.number(),
+  "disabilitas": zod.number(),
+  "pengungsi": zod.number()
 })
 export const GetBencanaPengungsiResponse = zod.array(GetBencanaPengungsiResponseItem)
 
 
 /**
- * @summary Get aid/logistics data
+ * @summary Get missing persons data
+ */
+export const GetBencanaOrangHilangResponseItem = zod.object({
+  "id": zod.number(),
+  "nama": zod.string(),
+  "usia": zod.number(),
+  "kecamatan": zod.string(),
+  "kabupaten": zod.string(),
+  "status": zod.string(),
+  "tanggal": zod.string()
+})
+export const GetBencanaOrangHilangResponse = zod.array(GetBencanaOrangHilangResponseItem)
+
+
+/**
+ * @summary Get village-level aid distribution data
  */
 export const GetBencanaBantuanResponseItem = zod.object({
   "id": zod.number(),
+  "desa": zod.string(),
+  "kecamatan": zod.string(),
   "kabupaten": zod.string(),
-  "jenisLogistik": zod.string(),
-  "jumlah": zod.number(),
   "satuan": zod.string(),
-  "sumberBantuan": zod.string(),
-  "tanggalDistribusi": zod.string(),
-  "status": zod.string()
+  "warna": zod.string()
 })
 export const GetBencanaBantuanResponse = zod.array(GetBencanaBantuanResponseItem)
 
 
 /**
- * @summary Get map markers for Leaflet
+ * @summary Get map markers
  */
 export const GetBencanaMarkersResponseItem = zod.object({
   "id": zod.number(),

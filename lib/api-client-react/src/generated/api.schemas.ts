@@ -9,6 +9,44 @@ export interface HealthStatus {
   status: string;
 }
 
+export type RekapClusterPerSektorItem = {
+  nama: string;
+  nilai: string;
+};
+
+export interface RekapCluster {
+  kerusakan: string;
+  kerugian: string;
+  total: string;
+  perSektor: RekapClusterPerSektorItem[];
+}
+
+export interface FaskesStats {
+  puskesmas: number;
+  rsud: number;
+  fasyankes: number;
+}
+
+export interface JaringanStats {
+  critical: number;
+  warning: number;
+  normal: number;
+}
+
+export interface PoskoStats {
+  totalPosko: number;
+  totalPengungsi: number;
+  titikPengungsian: number;
+}
+
+export interface BantuanStatusStats {
+  totalDesa: number;
+  kuning: number;
+  biru: number;
+  abu: number;
+  putih: number;
+}
+
 export interface BencanaSummary {
   totalKorban: number;
   totalPengungsi: number;
@@ -16,6 +54,14 @@ export interface BencanaSummary {
   rumahRusak: number;
   sawahHa: number;
   kabupatenTerdampak: number;
+  fasumRusak: number;
+  kebunHa: number;
+  tambakHa: number;
+  rekapCluster: RekapCluster;
+  faskes: FaskesStats;
+  jaringan: JaringanStats;
+  posko: PoskoStats;
+  bantuan: BantuanStatusStats;
   lastUpdate: string;
 }
 
@@ -33,28 +79,42 @@ export interface DampakRecord {
   status: string;
 }
 
-export interface PengungsiRecord {
+export interface PertanianRecord {
   id: number;
+  nama: string;
   kabupaten: string;
-  lokasi: string;
-  jumlahKepalaKeluarga: number;
-  jumlahJiwa: number;
-  lakiLaki: number;
-  perempuan: number;
-  anakAnak: number;
-  lansia: number;
-  status: string;
+  kecamatan: string;
+  volume: number;
+  kerugian: string;
+  kondisi: string;
 }
 
-export interface BantuanRecord {
+export interface PendudukRecord {
   id: number;
   kabupaten: string;
-  jenisLogistik: string;
-  jumlah: number;
-  satuan: string;
-  sumberBantuan: string;
-  tanggalDistribusi: string;
+  penduduk: number;
+  kk: number;
+  disabilitas: number;
+  pengungsi: number;
+}
+
+export interface OrangHilangRecord {
+  id: number;
+  nama: string;
+  usia: number;
+  kecamatan: string;
+  kabupaten: string;
   status: string;
+  tanggal: string;
+}
+
+export interface BantuanDesaRecord {
+  id: number;
+  desa: string;
+  kecamatan: string;
+  kabupaten: string;
+  satuan: string;
+  warna: string;
 }
 
 export interface MapMarker {

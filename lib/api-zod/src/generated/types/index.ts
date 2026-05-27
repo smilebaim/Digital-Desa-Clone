@@ -6,9 +6,17 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export * from './bantuanRecord';
+export * from './bantuanDesaRecord';
+export * from './bantuanStatusStats';
 export * from './bencanaSummary';
 export * from './dampakRecord';
+export * from './faskesStats';
 export * from './healthStatus';
+export * from './jaringanStats';
 export * from './mapMarker';
-export * from './pengungsiRecord';
+export * from './orangHilangRecord';
+export * from './pendudukRecord';
+export * from './pertanianRecord';
+export * from './poskoStats';
+export * from './rekapCluster';
+export * from './rekapClusterPerSektorItem';

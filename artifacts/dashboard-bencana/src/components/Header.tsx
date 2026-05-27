@@ -6,41 +6,42 @@ interface HeaderProps {
 
 export default function Header({ onMenuClick, onRefresh, lastUpdate }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-50 bg-gradient-to-r from-red-700 via-red-600 to-red-700 text-white shadow-md">
-      <div className="container mx-auto px-4 h-[60px] md:h-[72px] flex items-center justify-between">
-        
-        {/* Left: Logo and Title */}
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center shrink-0">
-            <i className="fa-solid fa-shield-halved text-xl"></i>
-          </div>
-          <div className="flex flex-col">
-            <h1 className="text-base md:text-xl font-bold leading-tight tracking-tight uppercase">Dashboard Monitoring</h1>
-            <span className="text-xs md:text-sm text-red-100 font-medium tracking-wide">Hidrometeorologi Aceh</span>
-          </div>
-        </div>
-
-        {/* Right: Actions */}
-        <div className="flex items-center gap-4">
-          <div className="hidden md:flex flex-col items-end mr-2">
-            <span className="text-xs text-red-200">Update Terakhir</span>
-            <span className="text-sm font-semibold">{lastUpdate} WIB</span>
+    <header className="bg-gradient-to-r from-red-700 via-red-600 to-red-700 text-white shadow-lg sticky top-0 z-50">
+      <div className="px-2 md:px-4">
+        <div className="flex items-center justify-between h-14 md:h-16">
+          <div className="flex items-center gap-2 md:gap-3 min-w-0 flex-1">
+            <div className="bg-white/20 p-1.5 md:p-2 rounded-lg flex-shrink-0">
+              <i className="fas fa-shield-alt text-lg md:text-2xl"></i>
+            </div>
+            <div>
+              <h1 className="text-sm md:text-lg font-bold truncate">Dashboard Monitoring</h1>
+              <p className="text-xs text-red-200 hidden md:block">Hidrometeorologi</p>
+            </div>
           </div>
           
-          <button 
-            onClick={onRefresh}
-            className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center"
-            title="Refresh Data"
-          >
-            <i className="fa-solid fa-sync-alt text-sm"></i>
-          </button>
-          
-          <button 
-            onClick={onMenuClick}
-            className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center md:hidden"
-          >
-            <i className="fa-solid fa-bars text-sm"></i>
-          </button>
+          <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
+            <div className="text-right hidden sm:block">
+              <p className="text-xs text-red-200">Update Terakhir</p>
+              <p className="text-xs md:text-sm font-medium">{lastUpdate}</p>
+            </div>
+            
+            <button 
+              onClick={onRefresh}
+              className="bg-white/20 hover:bg-white/30 p-1.5 md:p-2 rounded-lg transition"
+              title="Refresh Data"
+              data-testid="button-refresh"
+            >
+              <i className="fas fa-sync-alt text-sm md:text-base"></i>
+            </button>
+            
+            <button 
+              onClick={onMenuClick}
+              className="md:hidden bg-white/20 hover:bg-white/30 p-1.5 rounded-lg transition"
+              data-testid="button-mobile-menu"
+            >
+              <i className="fas fa-bars text-lg"></i>
+            </button>
+          </div>
         </div>
       </div>
     </header>

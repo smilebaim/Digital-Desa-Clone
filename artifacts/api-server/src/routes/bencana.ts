@@ -9,6 +9,25 @@ const bencanaSummary = {
   rumahRusak: 1256,
   sawahHa: 847.5,
   kabupatenTerdampak: 8,
+  fasumRusak: 34,
+  kebunHa: 312.0,
+  tambakHa: 89.5,
+  rekapCluster: {
+    kerusakan: "Rp 12,4 M",
+    kerugian: "Rp 8,7 M",
+    total: "Rp 21,1 M",
+    perSektor: [
+      { nama: "Permukiman", nilai: "Rp 7,2 M" },
+      { nama: "Pertanian", nilai: "Rp 4,8 M" },
+      { nama: "Infrastruktur", nilai: "Rp 5,1 M" },
+      { nama: "Sosial", nilai: "Rp 2,3 M" },
+      { nama: "Ekonomi", nilai: "Rp 1,7 M" },
+    ],
+  },
+  faskes: { puskesmas: 12, rsud: 3, fasyankes: 8 },
+  jaringan: { critical: 4, warning: 7, normal: 15 },
+  posko: { totalPosko: 23, totalPengungsi: 3842, titikPengungsian: 23 },
+  bantuan: { totalDesa: 142, kuning: 58, biru: 34, abu: 21, putih: 29 },
   lastUpdate: "27 Mei 2025, 14:30 WIB",
 };
 
@@ -29,34 +48,58 @@ const dampakData = [
   { id: 14, kabupaten: "Simeulue", kecamatan: "Simeulue Timur", jenisKejadian: "Abrasi", korbanJiwa: 0, korbanLuka: 0, rumahRusakBerat: 8, rumahRusakRingan: 11, sawahTerdampakHa: 0, tanggal: "2025-05-17", status: "Waspada" },
 ];
 
-const pengungsiData = [
-  { id: 1, kabupaten: "Pidie Jaya", lokasi: "Gedung SDN 01 Bandar Baru", jumlahKepalaKeluarga: 145, jumlahJiwa: 612, lakiLaki: 298, perempuan: 314, anakAnak: 185, lansia: 42, status: "Aktif" },
-  { id: 2, kabupaten: "Pidie Jaya", lokasi: "Masjid Agung Bandar Baru", jumlahKepalaKeluarga: 98, jumlahJiwa: 423, lakiLaki: 205, perempuan: 218, anakAnak: 127, lansia: 31, status: "Aktif" },
-  { id: 3, kabupaten: "Aceh Besar", lokasi: "Balai Desa Kuta Baro", jumlahKepalaKeluarga: 67, jumlahJiwa: 287, lakiLaki: 140, perempuan: 147, anakAnak: 88, lansia: 19, status: "Aktif" },
-  { id: 4, kabupaten: "Pidie", lokasi: "Posko BPBD Padang Tiji", jumlahKepalaKeluarga: 89, jumlahJiwa: 378, lakiLaki: 183, perempuan: 195, anakAnak: 112, lansia: 28, status: "Aktif" },
-  { id: 5, kabupaten: "Bireuen", lokasi: "GOR Kota Juang", jumlahKepalaKeluarga: 112, jumlahJiwa: 476, lakiLaki: 231, perempuan: 245, anakAnak: 143, lansia: 35, status: "Aktif" },
-  { id: 6, kabupaten: "Aceh Utara", lokasi: "Meunasah Gampong Sawang", jumlahKepalaKeluarga: 54, jumlahJiwa: 231, lakiLaki: 112, perempuan: 119, anakAnak: 69, lansia: 17, status: "Aktif" },
-  { id: 7, kabupaten: "Aceh Timur", lokasi: "Gedung Serbaguna Idi", jumlahKepalaKeluarga: 78, jumlahJiwa: 334, lakiLaki: 162, perempuan: 172, anakAnak: 100, lansia: 24, status: "Aktif" },
-  { id: 8, kabupaten: "Aceh Tamiang", lokasi: "Kantor Camat Karang Baru", jumlahKepalaKeluarga: 45, jumlahJiwa: 193, lakiLaki: 94, perempuan: 99, anakAnak: 58, lansia: 14, status: "Aktif" },
-  { id: 9, kabupaten: "Aceh Jaya", lokasi: "Posko Terpadu Sampoinet", jumlahKepalaKeluarga: 62, jumlahJiwa: 267, lakiLaki: 130, perempuan: 137, anakAnak: 80, lansia: 18, status: "Aktif" },
-  { id: 10, kabupaten: "Simeulue", lokasi: "Balai Pertemuan Simeulue Timur", jumlahKepalaKeluarga: 38, jumlahJiwa: 161, lakiLaki: 78, perempuan: 83, anakAnak: 48, lansia: 12, status: "Aktif" },
+const pertanianData = [
+  { id: 1, nama: "Sawah Irigasi Kuta Baro", kabupaten: "Aceh Besar", kecamatan: "Kuta Baro", volume: 85.5, kerugian: "Rp 427.500.000", kondisi: "Berat" },
+  { id: 2, nama: "Kebun Pisang Darul Imarah", kabupaten: "Aceh Besar", kecamatan: "Darul Imarah", volume: 22.0, kerugian: "Rp 132.000.000", kondisi: "Ringan" },
+  { id: 3, nama: "Sawah Tadah Hujan Padang Tiji", kabupaten: "Pidie", kecamatan: "Padang Tiji", volume: 43.0, kerugian: "Rp 258.000.000", kondisi: "Berat" },
+  { id: 4, nama: "Perkebunan Karet Bandar Baru", kabupaten: "Pidie Jaya", kecamatan: "Bandar Baru", volume: 120.0, kerugian: "Rp 840.000.000", kondisi: "Berat" },
+  { id: 5, nama: "Tambak Udang Peureulak", kabupaten: "Aceh Timur", kecamatan: "Peureulak", volume: 45.5, kerugian: "Rp 682.500.000", kondisi: "Berat" },
+  { id: 6, nama: "Sawah Irigasi Kota Juang", kabupaten: "Bireuen", kecamatan: "Kota Juang", volume: 65.5, kerugian: "Rp 327.500.000", kondisi: "Sedang" },
+  { id: 7, nama: "Kebun Kelapa Sawit Sawang", kabupaten: "Aceh Utara", kecamatan: "Sawang", volume: 38.0, kerugian: "Rp 266.000.000", kondisi: "Ringan" },
+  { id: 8, nama: "Tambak Bandeng Karang Baru", kabupaten: "Aceh Tamiang", kecamatan: "Karang Baru", volume: 28.5, kerugian: "Rp 342.000.000", kondisi: "Sedang" },
+  { id: 9, nama: "Kebun Cengkeh Sampoinet", kabupaten: "Aceh Jaya", kecamatan: "Sampoinet", volume: 55.0, kerugian: "Rp 495.000.000", kondisi: "Berat" },
+  { id: 10, nama: "Sawah Lebak Peusangan", kabupaten: "Bireuen", kecamatan: "Peusangan", volume: 52.0, kerugian: "Rp 208.000.000", kondisi: "Ringan" },
 ];
 
-const bantuanData = [
-  { id: 1, kabupaten: "Pidie Jaya", jenisLogistik: "Sembako", jumlah: 500, satuan: "Paket", sumberBantuan: "BNPB Pusat", tanggalDistribusi: "2025-05-24", status: "Disalurkan" },
-  { id: 2, kabupaten: "Pidie Jaya", jenisLogistik: "Tenda", jumlah: 50, satuan: "Unit", sumberBantuan: "BPBD Aceh", tanggalDistribusi: "2025-05-24", status: "Disalurkan" },
-  { id: 3, kabupaten: "Pidie Jaya", jenisLogistik: "Selimut", jumlah: 300, satuan: "Lembar", sumberBantuan: "PMI Aceh", tanggalDistribusi: "2025-05-24", status: "Disalurkan" },
-  { id: 4, kabupaten: "Pidie", jenisLogistik: "Sembako", jumlah: 350, satuan: "Paket", sumberBantuan: "BNPB Pusat", tanggalDistribusi: "2025-05-23", status: "Disalurkan" },
-  { id: 5, kabupaten: "Pidie", jenisLogistik: "Matras", jumlah: 200, satuan: "Lembar", sumberBantuan: "BPBD Aceh", tanggalDistribusi: "2025-05-23", status: "Disalurkan" },
-  { id: 6, kabupaten: "Aceh Besar", jenisLogistik: "Sembako", jumlah: 250, satuan: "Paket", sumberBantuan: "Baznas Aceh", tanggalDistribusi: "2025-05-23", status: "Disalurkan" },
-  { id: 7, kabupaten: "Bireuen", jenisLogistik: "Air Bersih", jumlah: 10000, satuan: "Liter", sumberBantuan: "PDAM Bireuen", tanggalDistribusi: "2025-05-22", status: "Proses" },
-  { id: 8, kabupaten: "Bireuen", jenisLogistik: "P3K", jumlah: 80, satuan: "Kotak", sumberBantuan: "Dinkes Bireuen", tanggalDistribusi: "2025-05-22", status: "Disalurkan" },
-  { id: 9, kabupaten: "Aceh Utara", jenisLogistik: "Sembako", jumlah: 180, satuan: "Paket", sumberBantuan: "Pemkab Aceh Utara", tanggalDistribusi: "2025-05-21", status: "Disalurkan" },
-  { id: 10, kabupaten: "Aceh Utara", jenisLogistik: "Tenda", jumlah: 25, satuan: "Unit", sumberBantuan: "BPBD Aceh", tanggalDistribusi: "2025-05-21", status: "Proses" },
-  { id: 11, kabupaten: "Aceh Timur", jenisLogistik: "Sembako", jumlah: 300, satuan: "Paket", sumberBantuan: "Pemkab Aceh Timur", tanggalDistribusi: "2025-05-20", status: "Disalurkan" },
-  { id: 12, kabupaten: "Aceh Tamiang", jenisLogistik: "Selimut", jumlah: 120, satuan: "Lembar", sumberBantuan: "PMI Tamiang", tanggalDistribusi: "2025-05-19", status: "Disalurkan" },
-  { id: 13, kabupaten: "Aceh Jaya", jenisLogistik: "Matras", jumlah: 150, satuan: "Lembar", sumberBantuan: "BNPB Pusat", tanggalDistribusi: "2025-05-18", status: "Proses" },
-  { id: 14, kabupaten: "Simeulue", jenisLogistik: "Air Bersih", jumlah: 5000, satuan: "Liter", sumberBantuan: "PDAM Simeulue", tanggalDistribusi: "2025-05-17", status: "Disalurkan" },
+const pendudukData = [
+  { id: 1, kabupaten: "Aceh Besar", penduduk: 432850, kk: 108213, disabilitas: 1245, pengungsi: 287 },
+  { id: 2, kabupaten: "Pidie", penduduk: 398124, kk: 99531, disabilitas: 1087, pengungsi: 378 },
+  { id: 3, kabupaten: "Pidie Jaya", penduduk: 164285, kk: 41071, disabilitas: 476, pengungsi: 1035 },
+  { id: 4, kabupaten: "Bireuen", penduduk: 452693, kk: 113173, disabilitas: 1325, pengungsi: 476 },
+  { id: 5, kabupaten: "Aceh Utara", penduduk: 598742, kk: 149686, disabilitas: 1764, pengungsi: 231 },
+  { id: 6, kabupaten: "Aceh Timur", penduduk: 409853, kk: 102463, disabilitas: 1198, pengungsi: 334 },
+  { id: 7, kabupaten: "Aceh Tamiang", penduduk: 290384, kk: 72596, disabilitas: 847, pengungsi: 193 },
+  { id: 8, kabupaten: "Aceh Jaya", penduduk: 92456, kk: 23114, disabilitas: 268, pengungsi: 267 },
+  { id: 9, kabupaten: "Simeulue", penduduk: 98543, kk: 24636, disabilitas: 286, pengungsi: 161 },
+];
+
+const orangHilangData = [
+  { id: 1, nama: "Ahmad Fauzi", usia: 34, kecamatan: "Padang Tiji", kabupaten: "Pidie", status: "Dicari", tanggal: "2025-05-23" },
+  { id: 2, nama: "Siti Rahma", usia: 12, kecamatan: "Bandar Baru", kabupaten: "Pidie Jaya", status: "Ditemukan", tanggal: "2025-05-23" },
+  { id: 3, nama: "Zulkifli Harun", usia: 58, kecamatan: "Nisam", kabupaten: "Aceh Utara", status: "Dicari", tanggal: "2025-05-21" },
+  { id: 4, nama: "Nurjanah", usia: 67, kecamatan: "Sampoinet", kabupaten: "Aceh Jaya", status: "Dicari", tanggal: "2025-05-18" },
+  { id: 5, nama: "Muhammad Rizki", usia: 8, kecamatan: "Bandar Baru", kabupaten: "Pidie Jaya", status: "Ditemukan", tanggal: "2025-05-24" },
+];
+
+const bantuanDesaData = [
+  { id: 1, desa: "Gampong Cot Bak U", kecamatan: "Kuta Baro", kabupaten: "Aceh Besar", satuan: "Kecamatan Kuta Baro", warna: "kuning" },
+  { id: 2, desa: "Gampong Lampisang", kecamatan: "Darul Imarah", kabupaten: "Aceh Besar", satuan: "Kecamatan Darul Imarah", warna: "kuning" },
+  { id: 3, desa: "Gampong Blang Mee", kecamatan: "Padang Tiji", kabupaten: "Pidie", satuan: "Kecamatan Padang Tiji", warna: "kuning" },
+  { id: 4, desa: "Gampong Pante Rawa", kecamatan: "Bandar Baru", kabupaten: "Pidie Jaya", satuan: "Kecamatan Bandar Baru", warna: "biru" },
+  { id: 5, desa: "Gampong Krueng Baro", kecamatan: "Bandar Baru", kabupaten: "Pidie Jaya", satuan: "Kecamatan Bandar Baru", warna: "biru" },
+  { id: 6, desa: "Gampong Jangka Mesjid", kecamatan: "Kota Juang", kabupaten: "Bireuen", satuan: "Kecamatan Kota Juang", warna: "kuning" },
+  { id: 7, desa: "Gampong Pulo Pisang", kecamatan: "Peusangan", kabupaten: "Bireuen", satuan: "Kecamatan Peusangan", warna: "biru_keabuan" },
+  { id: 8, desa: "Gampong Sawang Barat", kecamatan: "Sawang", kabupaten: "Aceh Utara", satuan: "Kecamatan Sawang", warna: "kuning" },
+  { id: 9, desa: "Gampong Krueng Kiran", kecamatan: "Nisam", kabupaten: "Aceh Utara", satuan: "Kecamatan Nisam", warna: "putih" },
+  { id: 10, desa: "Gampong Idi Cut", kecamatan: "Idi Rayeuk", kabupaten: "Aceh Timur", satuan: "Kecamatan Idi Rayeuk", warna: "kuning" },
+  { id: 11, desa: "Gampong Alur Manis", kecamatan: "Peureulak", kabupaten: "Aceh Timur", satuan: "Kecamatan Peureulak", warna: "biru_keabuan" },
+  { id: 12, desa: "Gampong Karang Jadi", kecamatan: "Karang Baru", kabupaten: "Aceh Tamiang", satuan: "Kecamatan Karang Baru", warna: "kuning" },
+  { id: 13, desa: "Gampong Geulumbuk", kecamatan: "Bendahara", kabupaten: "Aceh Tamiang", satuan: "Kecamatan Bendahara", warna: "putih" },
+  { id: 14, desa: "Gampong Pante Cermin", kecamatan: "Sampoinet", kabupaten: "Aceh Jaya", satuan: "Kecamatan Sampoinet", warna: "biru" },
+  { id: 15, desa: "Gampong Lugu", kecamatan: "Simeulue Timur", kabupaten: "Simeulue", satuan: "Kecamatan Simeulue Timur", warna: "putih" },
+  { id: 16, desa: "Gampong Latak", kecamatan: "Kuta Baro", kabupaten: "Aceh Besar", satuan: "Kecamatan Kuta Baro", warna: "biru_keabuan" },
+  { id: 17, desa: "Gampong Blang Tingkeum", kecamatan: "Bandar Baru", kabupaten: "Pidie Jaya", satuan: "Kecamatan Bandar Baru", warna: "putih" },
+  { id: 18, desa: "Gampong Meunasah Kulam", kecamatan: "Kota Juang", kabupaten: "Bireuen", satuan: "Kecamatan Kota Juang", warna: "biru" },
 ];
 
 const markersData = [
@@ -75,24 +118,12 @@ const markersData = [
   { id: 13, lat: 2.6892, lng: 96.0532, kabupaten: "Simeulue", kecamatan: "Simeulue Timur", jenisBencana: "Abrasi", severity: "normal", korban: 0, pengungsi: 161 },
 ];
 
-router.get("/bencana/summary", (req, res) => {
-  res.json(bencanaSummary);
-});
-
-router.get("/bencana/dampak", (req, res) => {
-  res.json(dampakData);
-});
-
-router.get("/bencana/pengungsi", (req, res) => {
-  res.json(pengungsiData);
-});
-
-router.get("/bencana/bantuan", (req, res) => {
-  res.json(bantuanData);
-});
-
-router.get("/bencana/markers", (req, res) => {
-  res.json(markersData);
-});
+router.get("/bencana/summary", (req, res) => { res.json(bencanaSummary); });
+router.get("/bencana/dampak", (req, res) => { res.json(dampakData); });
+router.get("/bencana/pertanian", (req, res) => { res.json(pertanianData); });
+router.get("/bencana/pengungsi", (req, res) => { res.json(pendudukData); });
+router.get("/bencana/orang-hilang", (req, res) => { res.json(orangHilangData); });
+router.get("/bencana/bantuan", (req, res) => { res.json(bantuanDesaData); });
+router.get("/bencana/markers", (req, res) => { res.json(markersData); });
 
 export default router;

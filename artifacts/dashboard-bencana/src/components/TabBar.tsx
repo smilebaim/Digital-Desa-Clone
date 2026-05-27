@@ -12,18 +12,19 @@ export default function TabBar({ activeTab, onTabChange }: TabBarProps) {
   ] as const;
 
   return (
-    <div className="flex w-max min-w-full md:w-full">
+    <div className="flex w-max min-w-full md:w-full border-b bg-white shadow-sm sticky top-[56px] md:top-[64px] z-40">
       {tabs.map((tab) => (
         <button
           key={tab.id}
           onClick={() => onTabChange(tab.id)}
           className={`tab-btn flex-1 flex items-center justify-center gap-2 whitespace-nowrap px-4 md:px-6 h-12 md:h-14 transition-all duration-200 ${
             activeTab === tab.id 
-              ? "active" 
-              : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
+              ? "active text-red-600 border-b-2 border-red-600" 
+              : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
           }`}
+          data-testid={`tab-${tab.id}`}
         >
-          <i className={`fa-solid ${tab.icon} ${activeTab === tab.id ? "text-primary" : ""}`}></i>
+          <i className={`fas ${tab.icon}`}></i>
           <span className="font-semibold">{tab.label}</span>
         </button>
       ))}

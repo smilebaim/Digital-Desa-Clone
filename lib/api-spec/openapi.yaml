@@ -17,7 +17,6 @@ paths:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -30,7 +29,7 @@ paths:
     get:
       operationId: getBencanaSummary
       tags: [bencana]
-      summary: Get KPI summary stats
+      summary: Get full dashboard summary
       responses:
         "200":
           description: Summary stats
@@ -54,41 +53,71 @@ paths:
                 items:
                   $ref: "#/components/schemas/DampakRecord"
 
-  /bencana/pengungsi:
+  /bencana/pertanian:
     get:
-      operationId: getBencanaPengungsi
+      operationId: getBencanaPertanian
       tags: [bencana]
-      summary: Get refugee data
+      summary: Get agriculture damage data
       responses:
         "200":
-          description: List of refugee records
+          description: List of agriculture damage records
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/PengungsiRecord"
+                  $ref: "#/components/schemas/PertanianRecord"
+
+  /bencana/pengungsi:
+    get:
+      operationId: getBencanaPengungsi
+      tags: [bencana]
+      summary: Get population/refugee data per kabupaten
+      responses:
+        "200":
+          description: List of population records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PendudukRecord"
+
+  /bencana/orang-hilang:
+    get:
+      operationId: getBencanaOrangHilang
+      tags: [bencana]
+      summary: Get missing persons data
+      responses:
+        "200":
+          description: List of missing persons
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OrangHilangRecord"
 
   /bencana/bantuan:
     get:
       operationId: getBencanaBantuan
       tags: [bencana]
-      summary: Get aid/logistics data
+      summary: Get village-level aid distribution data
       responses:
         "200":
-          description: List of aid records
+          description: List of village aid records
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/BantuanRecord"
+                  $ref: "#/components/schemas/BantuanDesaRecord"
 
   /bencana/markers:
     get:
       operationId: getBencanaMarkers
       tags: [bencana]
-      summary: Get map markers for Leaflet
+      summary: Get map markers
       responses:
         "200":
           description: List of map markers
@@ -106,8 +135,76 @@ components:
       properties:
         status:
           type: string
-      required:
-        - status
+      required: [status]
+
+    RekapCluster:
+      type: object
+      required: [kerusakan, kerugian, total, perSektor]
+      properties:
+        kerusakan:
+          type: string
+        kerugian:
+          type: string
+        total:
+          type: string
+        perSektor:
+          type: array
+          items:
+            type: object
+            required: [nama, nilai]
+            properties:
+              nama:
+                type: string
+              nilai:
+                type: string
+
+    FaskesStats:
+      type: object
+      required: [puskesmas, rsud, fasyankes]
+      properties:
+        puskesmas:
+          type: integer
+        rsud:
+          type: integer
+        fasyankes:
+          type: integer
+
+    JaringanStats:
+      type: object
+      required: [critical, warning, normal]
+      properties:
+        critical:
+          type: integer
+        warning:
+          type: integer
+        normal:
+          type: integer
+
+    PoskoStats:
+      type: object
+      required: [totalPosko, totalPengungsi, titikPengungsian]
+      properties:
+        totalPosko:
+          type: integer
+        totalPengungsi:
+          type: integer
+        titikPengungsian:
+          type: integer
+
+    BantuanStatusStats:
+      type: object
+      required: [totalDesa, kuning, biru, abu, putih]
+      properties:
+        totalDesa:
+          type: integer
+        kuning:
+          type: integer
+        biru:
+          type: integer
+        abu:
+          type: integer
+        putih:
+          type: integer
 
     BencanaSummary:
       type: object
@@ -118,6 +215,14 @@ components:
         - rumahRusak
         - sawahHa
         - kabupatenTerdampak
+        - fasumRusak
+        - kebunHa
+        - tambakHa
+        - rekapCluster
+        - faskes
+        - jaringan
+        - posko
+        - bantuan
         - lastUpdate
       properties:
         totalKorban:
@@ -132,6 +237,22 @@ components:
           type: number
         kabupatenTerdampak:
           type: integer
+        fasumRusak:
+          type: integer
+        kebunHa:
+          type: number
+        tambakHa:
+          type: number
+        rekapCluster:
+          $ref: "#/components/schemas/RekapCluster"
+        faskes:
+          $ref: "#/components/schemas/FaskesStats"
+        jaringan:
+          $ref: "#/components/schemas/JaringanStats"
+        posko:
+          $ref: "#/components/schemas/PoskoStats"
+        bantuan:
+          $ref: "#/components/schemas/BantuanStatusStats"
         lastUpdate:
           type: string
 
@@ -173,82 +294,81 @@ components:
         status:
           type: string
 
-    PengungsiRecord:
+    PertanianRecord:
       type: object
-      required:
-        - id
-        - kabupaten
-        - lokasi
-        - jumlahKepalaKeluarga
-        - jumlahJiwa
-        - lakiLaki
-        - perempuan
-        - anakAnak
-        - lansia
-        - status
+      required: [id, nama, kabupaten, kecamatan, volume, kerugian, kondisi]
       properties:
         id:
           type: integer
+        nama:
+          type: string
         kabupaten:
           type: string
-        lokasi:
+        kecamatan:
           type: string
-        jumlahKepalaKeluarga:
-          type: integer
-        jumlahJiwa:
-          type: integer
-        lakiLaki:
-          type: integer
-        perempuan:
-          type: integer
-        anakAnak:
-          type: integer
-        lansia:
-          type: integer
-        status:
+        volume:
+          type: number
+        kerugian:
+          type: string
+        kondisi:
           type: string
 
-    BantuanRecord:
+    PendudukRecord:
       type: object
-      required:
-        - id
-        - kabupaten
-        - jenisLogistik
-        - jumlah
-        - satuan
-        - sumberBantuan
-        - tanggalDistribusi
-        - status
+      required: [id, kabupaten, penduduk, kk, disabilitas, pengungsi]
       properties:
         id:
           type: integer
         kabupaten:
           type: string
-        jenisLogistik:
-          type: string
-        jumlah:
+        penduduk:
           type: integer
-        satuan:
+        kk:
+          type: integer
+        disabilitas:
+          type: integer
+        pengungsi:
+          type: integer
+
+    OrangHilangRecord:
+      type: object
+      required: [id, nama, usia, kecamatan, kabupaten, status, tanggal]
+      properties:
+        id:
+          type: integer
+        nama:
           type: string
-        sumberBantuan:
+        usia:
+          type: integer
+        kecamatan:
           type: string
-        tanggalDistribusi:
+        kabupaten:
           type: string
         status:
+          type: string
+        tanggal:
+          type: string
+
+    BantuanDesaRecord:
+      type: object
+      required: [id, desa, kecamatan, kabupaten, satuan, warna]
+      properties:
+        id:
+          type: integer
+        desa:
+          type: string
+        kecamatan:
+          type: string
+        kabupaten:
+          type: string
+        satuan:
+          type: string
+        warna:
           type: string
 
     MapMarker:
       type: object
-      required:
-        - id
-        - lat
-        - lng
-        - kabupaten
-        - kecamatan
-        - jenisBencana
-        - severity
-        - korban
-        - pengungsi
+      required: [id, lat, lng, kabupaten, kecamatan, jenisBencana, severity, korban, pengungsi]
       properties:
         id:
           type: integer
