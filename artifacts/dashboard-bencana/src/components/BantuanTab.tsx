@@ -1,4 +1,4 @@
-import { useGetBencanaBantuan, useGetBencanaSummary } from "@workspace/api-client-react";
+import { useGetBencanaBantuan, useGetBencanaSummary, useGetBencanaMarkers } from "@workspace/api-client-react";
 import KpiCard from "./KpiCard";
 import LeafletMap from "./LeafletMap";
 import { useState, useRef, useEffect, useMemo } from "react";
@@ -6,6 +6,7 @@ import { useState, useRef, useEffect, useMemo } from "react";
 export default function BantuanTab() {
   const { data: summary, isLoading: loadingSummary } = useGetBencanaSummary();
   const { data: bantuan, isLoading: loadingBantuan } = useGetBencanaBantuan();
+  const { data: markers } = useGetBencanaMarkers();
   
   const [filterKab, setFilterKab] = useState("all");
   const [filterStatus, setFilterStatus] = useState("all");
@@ -140,17 +141,11 @@ export default function BantuanTab() {
         </div>
 
         {/* Center Map */}
-        <div className="lg:col-span-2 panel p-0 overflow-hidden relative min-h-[500px]">
+        <div className="lg:col-span-2 panel p-0 overflow-hidden relative">
           <div className="absolute top-4 left-4 z-[400] bg-white px-3 py-2 rounded shadow text-sm font-bold text-gray-700 border">
-            <i className="fas fa-map-marked-alt text-blue-600 mr-2"></i>Peta Persebaran Bantuan
+            <i className="fas fa-map-marked-alt text-blue-600 mr-2"></i>Peta Sebaran Wilayah Bencana
           </div>
-          {/* Map needs to support bantuan markers coloring. We rely on LeafletMap doing nothing extra for now since we don't have lat/lng in BantuanDesaRecord. But we place the map container. */}
-          <LeafletMap height="100%" zoom={8} center={[4.695135, 96.749397]} />
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-[400] bg-white/40">
-            <span className="bg-white/90 px-4 py-2 rounded-full shadow text-sm font-medium text-gray-600 backdrop-blur-sm border">
-              <i className="fas fa-info-circle mr-2 text-blue-500"></i>Data Spasial Desa Dalam Penyiapan
-            </span>
-          </div>
+          <LeafletMap markers={markers} height="500px" zoom={8} center={[4.695135, 96.749397]} />
         </div>
 
         {/* Right Col */}

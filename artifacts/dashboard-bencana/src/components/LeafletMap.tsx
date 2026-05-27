@@ -20,12 +20,15 @@ export default function LeafletMap({
   const mapInstanceRef = useRef<any>(null);
   const layerRef = useRef<any>(null);
 
+  const centerLat = center[0];
+  const centerLng = center[1];
+
   useEffect(() => {
     if (!mapRef.current || mapInstanceRef.current) return;
     const L = (window as any).L;
     if (!L) return;
     
-    const map = L.map(mapRef.current, { center, zoom });
+    const map = L.map(mapRef.current, { center: [centerLat, centerLng], zoom });
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
@@ -38,7 +41,8 @@ export default function LeafletMap({
       mapInstanceRef.current = null; 
       layerRef.current = null;
     };
-  }, [center, zoom]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [centerLat, centerLng, zoom]);
 
   useEffect(() => {
     if (!mapInstanceRef.current) return;
