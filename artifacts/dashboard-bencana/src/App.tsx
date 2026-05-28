@@ -1,5 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Switch, Route } from "wouter";
 import Dashboard from "./pages/Dashboard";
+import AdminPage from "./pages/AdminPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -12,7 +14,10 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Dashboard />
+      <Switch>
+        <Route path="/admin" component={AdminPage} />
+        <Route path="/" component={Dashboard} />
+      </Switch>
     </QueryClientProvider>
   );
 }

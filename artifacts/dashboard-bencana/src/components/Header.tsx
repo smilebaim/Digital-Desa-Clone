@@ -1,3 +1,5 @@
+import { Link } from "wouter";
+
 interface HeaderProps {
   onMenuClick: () => void;
   onRefresh: () => void;
@@ -25,6 +27,15 @@ export default function Header({ onMenuClick, onRefresh, lastUpdate }: HeaderPro
               <p className="text-xs md:text-sm font-medium">{lastUpdate}</p>
             </div>
             
+            <Link
+              href="/admin"
+              className="hidden md:flex items-center gap-1.5 bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg text-xs font-medium transition"
+              title="Panel Admin"
+            >
+              <i className="fas fa-cog text-sm"></i>
+              Admin
+            </Link>
+
             <button 
               onClick={onRefresh}
               className="bg-white/20 hover:bg-white/30 p-1.5 md:p-2 rounded-lg transition"

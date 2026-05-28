@@ -6,28 +6,38 @@
  * OpenAPI spec version: 0.1.0
  */
 import {
+  useMutation,
   useQuery
 } from '@tanstack/react-query';
 import type {
+  MutationFunction,
   QueryFunction,
   QueryKey,
+  UseMutationOptions,
+  UseMutationResult,
   UseQueryOptions,
   UseQueryResult
 } from '@tanstack/react-query';
 
 import type {
+  BantuanDesaInput,
   BantuanDesaRecord,
   BencanaSummary,
+  DampakInput,
   DampakRecord,
   HealthStatus,
   MapMarker,
+  MapMarkerInput,
+  OrangHilangInput,
   OrangHilangRecord,
+  PendudukInput,
   PendudukRecord,
+  PertanianInput,
   PertanianRecord
 } from './api.schemas';
 
 import { customFetch } from '../custom-fetch';
-import type { ErrorType } from '../custom-fetch';
+import type { ErrorType , BodyType } from '../custom-fetch';
 
 type AwaitedInput<T> = PromiseLike<T> | T;
 
@@ -192,6 +202,77 @@ export function useGetBencanaSummary<TData = Awaited<ReturnType<typeof getBencan
 
 
 
+export const getUpdateBencanaSummaryUrl = () => {
+
+
+
+
+  return `/api/bencana/summary`
+}
+
+/**
+ * @summary Update dashboard summary
+ */
+export const updateBencanaSummary = async (bencanaSummary: BencanaSummary, options?: RequestInit): Promise<BencanaSummary> => {
+
+  return customFetch<BencanaSummary>(getUpdateBencanaSummaryUrl(),
+  {
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      bencanaSummary,)
+  }
+);}
+
+
+
+
+export const getUpdateBencanaSummaryMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateBencanaSummary>>, TError,{data: BodyType<BencanaSummary>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateBencanaSummary>>, TError,{data: BodyType<BencanaSummary>}, TContext> => {
+
+const mutationKey = ['updateBencanaSummary'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateBencanaSummary>>, {data: BodyType<BencanaSummary>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  updateBencanaSummary(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateBencanaSummaryMutationResult = NonNullable<Awaited<ReturnType<typeof updateBencanaSummary>>>
+    export type UpdateBencanaSummaryMutationBody = BodyType<BencanaSummary>
+    export type UpdateBencanaSummaryMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Update dashboard summary
+ */
+export const useUpdateBencanaSummary = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateBencanaSummary>>, TError,{data: BodyType<BencanaSummary>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof updateBencanaSummary>>,
+        TError,
+        {data: BodyType<BencanaSummary>},
+        TContext
+      > => {
+      return useMutation(getUpdateBencanaSummaryMutationOptions(options));
+    }
+
 export const getGetBencanaDampakUrl = () => {
 
 
@@ -268,6 +349,219 @@ export function useGetBencanaDampak<TData = Awaited<ReturnType<typeof getBencana
 
 
 
+
+export const getCreateBencanaDampakUrl = () => {
+
+
+
+
+  return `/api/bencana/dampak`
+}
+
+/**
+ * @summary Create a new dampak record
+ */
+export const createBencanaDampak = async (dampakInput: DampakInput, options?: RequestInit): Promise<DampakRecord> => {
+
+  return customFetch<DampakRecord>(getCreateBencanaDampakUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      dampakInput,)
+  }
+);}
+
+
+
+
+export const getCreateBencanaDampakMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createBencanaDampak>>, TError,{data: BodyType<DampakInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createBencanaDampak>>, TError,{data: BodyType<DampakInput>}, TContext> => {
+
+const mutationKey = ['createBencanaDampak'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createBencanaDampak>>, {data: BodyType<DampakInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createBencanaDampak(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateBencanaDampakMutationResult = NonNullable<Awaited<ReturnType<typeof createBencanaDampak>>>
+    export type CreateBencanaDampakMutationBody = BodyType<DampakInput>
+    export type CreateBencanaDampakMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Create a new dampak record
+ */
+export const useCreateBencanaDampak = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createBencanaDampak>>, TError,{data: BodyType<DampakInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createBencanaDampak>>,
+        TError,
+        {data: BodyType<DampakInput>},
+        TContext
+      > => {
+      return useMutation(getCreateBencanaDampakMutationOptions(options));
+    }
+
+export const getUpdateBencanaDampakUrl = (id: number,) => {
+
+
+
+
+  return `/api/bencana/dampak/${id}`
+}
+
+/**
+ * @summary Update a dampak record
+ */
+export const updateBencanaDampak = async (id: number,
+    dampakInput: DampakInput, options?: RequestInit): Promise<DampakRecord> => {
+
+  return customFetch<DampakRecord>(getUpdateBencanaDampakUrl(id),
+  {
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      dampakInput,)
+  }
+);}
+
+
+
+
+export const getUpdateBencanaDampakMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateBencanaDampak>>, TError,{id: number;data: BodyType<DampakInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateBencanaDampak>>, TError,{id: number;data: BodyType<DampakInput>}, TContext> => {
+
+const mutationKey = ['updateBencanaDampak'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateBencanaDampak>>, {id: number;data: BodyType<DampakInput>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  updateBencanaDampak(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateBencanaDampakMutationResult = NonNullable<Awaited<ReturnType<typeof updateBencanaDampak>>>
+    export type UpdateBencanaDampakMutationBody = BodyType<DampakInput>
+    export type UpdateBencanaDampakMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Update a dampak record
+ */
+export const useUpdateBencanaDampak = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateBencanaDampak>>, TError,{id: number;data: BodyType<DampakInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof updateBencanaDampak>>,
+        TError,
+        {id: number;data: BodyType<DampakInput>},
+        TContext
+      > => {
+      return useMutation(getUpdateBencanaDampakMutationOptions(options));
+    }
+
+export const getDeleteBencanaDampakUrl = (id: number,) => {
+
+
+
+
+  return `/api/bencana/dampak/${id}`
+}
+
+/**
+ * @summary Delete a dampak record
+ */
+export const deleteBencanaDampak = async (id: number, options?: RequestInit): Promise<void> => {
+
+  return customFetch<void>(getDeleteBencanaDampakUrl(id),
+  {
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+
+export const getDeleteBencanaDampakMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteBencanaDampak>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteBencanaDampak>>, TError,{id: number}, TContext> => {
+
+const mutationKey = ['deleteBencanaDampak'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteBencanaDampak>>, {id: number}> = (props) => {
+          const {id} = props ?? {};
+
+          return  deleteBencanaDampak(id,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteBencanaDampakMutationResult = NonNullable<Awaited<ReturnType<typeof deleteBencanaDampak>>>
+
+    export type DeleteBencanaDampakMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Delete a dampak record
+ */
+export const useDeleteBencanaDampak = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteBencanaDampak>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof deleteBencanaDampak>>,
+        TError,
+        {id: number},
+        TContext
+      > => {
+      return useMutation(getDeleteBencanaDampakMutationOptions(options));
+    }
 
 export const getGetBencanaPertanianUrl = () => {
 
@@ -346,6 +640,219 @@ export function useGetBencanaPertanian<TData = Awaited<ReturnType<typeof getBenc
 
 
 
+export const getCreateBencanaPertanianUrl = () => {
+
+
+
+
+  return `/api/bencana/pertanian`
+}
+
+/**
+ * @summary Create a new pertanian record
+ */
+export const createBencanaPertanian = async (pertanianInput: PertanianInput, options?: RequestInit): Promise<PertanianRecord> => {
+
+  return customFetch<PertanianRecord>(getCreateBencanaPertanianUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      pertanianInput,)
+  }
+);}
+
+
+
+
+export const getCreateBencanaPertanianMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createBencanaPertanian>>, TError,{data: BodyType<PertanianInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createBencanaPertanian>>, TError,{data: BodyType<PertanianInput>}, TContext> => {
+
+const mutationKey = ['createBencanaPertanian'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createBencanaPertanian>>, {data: BodyType<PertanianInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createBencanaPertanian(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateBencanaPertanianMutationResult = NonNullable<Awaited<ReturnType<typeof createBencanaPertanian>>>
+    export type CreateBencanaPertanianMutationBody = BodyType<PertanianInput>
+    export type CreateBencanaPertanianMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Create a new pertanian record
+ */
+export const useCreateBencanaPertanian = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createBencanaPertanian>>, TError,{data: BodyType<PertanianInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createBencanaPertanian>>,
+        TError,
+        {data: BodyType<PertanianInput>},
+        TContext
+      > => {
+      return useMutation(getCreateBencanaPertanianMutationOptions(options));
+    }
+
+export const getUpdateBencanaPertanianUrl = (id: number,) => {
+
+
+
+
+  return `/api/bencana/pertanian/${id}`
+}
+
+/**
+ * @summary Update a pertanian record
+ */
+export const updateBencanaPertanian = async (id: number,
+    pertanianInput: PertanianInput, options?: RequestInit): Promise<PertanianRecord> => {
+
+  return customFetch<PertanianRecord>(getUpdateBencanaPertanianUrl(id),
+  {
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      pertanianInput,)
+  }
+);}
+
+
+
+
+export const getUpdateBencanaPertanianMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateBencanaPertanian>>, TError,{id: number;data: BodyType<PertanianInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateBencanaPertanian>>, TError,{id: number;data: BodyType<PertanianInput>}, TContext> => {
+
+const mutationKey = ['updateBencanaPertanian'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateBencanaPertanian>>, {id: number;data: BodyType<PertanianInput>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  updateBencanaPertanian(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateBencanaPertanianMutationResult = NonNullable<Awaited<ReturnType<typeof updateBencanaPertanian>>>
+    export type UpdateBencanaPertanianMutationBody = BodyType<PertanianInput>
+    export type UpdateBencanaPertanianMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Update a pertanian record
+ */
+export const useUpdateBencanaPertanian = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateBencanaPertanian>>, TError,{id: number;data: BodyType<PertanianInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof updateBencanaPertanian>>,
+        TError,
+        {id: number;data: BodyType<PertanianInput>},
+        TContext
+      > => {
+      return useMutation(getUpdateBencanaPertanianMutationOptions(options));
+    }
+
+export const getDeleteBencanaPertanianUrl = (id: number,) => {
+
+
+
+
+  return `/api/bencana/pertanian/${id}`
+}
+
+/**
+ * @summary Delete a pertanian record
+ */
+export const deleteBencanaPertanian = async (id: number, options?: RequestInit): Promise<void> => {
+
+  return customFetch<void>(getDeleteBencanaPertanianUrl(id),
+  {
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+
+export const getDeleteBencanaPertanianMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteBencanaPertanian>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteBencanaPertanian>>, TError,{id: number}, TContext> => {
+
+const mutationKey = ['deleteBencanaPertanian'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteBencanaPertanian>>, {id: number}> = (props) => {
+          const {id} = props ?? {};
+
+          return  deleteBencanaPertanian(id,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteBencanaPertanianMutationResult = NonNullable<Awaited<ReturnType<typeof deleteBencanaPertanian>>>
+
+    export type DeleteBencanaPertanianMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Delete a pertanian record
+ */
+export const useDeleteBencanaPertanian = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteBencanaPertanian>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof deleteBencanaPertanian>>,
+        TError,
+        {id: number},
+        TContext
+      > => {
+      return useMutation(getDeleteBencanaPertanianMutationOptions(options));
+    }
+
 export const getGetBencanaPengungsiUrl = () => {
 
 
@@ -422,6 +929,219 @@ export function useGetBencanaPengungsi<TData = Awaited<ReturnType<typeof getBenc
 
 
 
+
+export const getCreateBencanaPengungsiUrl = () => {
+
+
+
+
+  return `/api/bencana/pengungsi`
+}
+
+/**
+ * @summary Create a new penduduk record
+ */
+export const createBencanaPengungsi = async (pendudukInput: PendudukInput, options?: RequestInit): Promise<PendudukRecord> => {
+
+  return customFetch<PendudukRecord>(getCreateBencanaPengungsiUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      pendudukInput,)
+  }
+);}
+
+
+
+
+export const getCreateBencanaPengungsiMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createBencanaPengungsi>>, TError,{data: BodyType<PendudukInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createBencanaPengungsi>>, TError,{data: BodyType<PendudukInput>}, TContext> => {
+
+const mutationKey = ['createBencanaPengungsi'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createBencanaPengungsi>>, {data: BodyType<PendudukInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createBencanaPengungsi(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateBencanaPengungsiMutationResult = NonNullable<Awaited<ReturnType<typeof createBencanaPengungsi>>>
+    export type CreateBencanaPengungsiMutationBody = BodyType<PendudukInput>
+    export type CreateBencanaPengungsiMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Create a new penduduk record
+ */
+export const useCreateBencanaPengungsi = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createBencanaPengungsi>>, TError,{data: BodyType<PendudukInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createBencanaPengungsi>>,
+        TError,
+        {data: BodyType<PendudukInput>},
+        TContext
+      > => {
+      return useMutation(getCreateBencanaPengungsiMutationOptions(options));
+    }
+
+export const getUpdateBencanaPengungsiUrl = (id: number,) => {
+
+
+
+
+  return `/api/bencana/pengungsi/${id}`
+}
+
+/**
+ * @summary Update a penduduk record
+ */
+export const updateBencanaPengungsi = async (id: number,
+    pendudukInput: PendudukInput, options?: RequestInit): Promise<PendudukRecord> => {
+
+  return customFetch<PendudukRecord>(getUpdateBencanaPengungsiUrl(id),
+  {
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      pendudukInput,)
+  }
+);}
+
+
+
+
+export const getUpdateBencanaPengungsiMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateBencanaPengungsi>>, TError,{id: number;data: BodyType<PendudukInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateBencanaPengungsi>>, TError,{id: number;data: BodyType<PendudukInput>}, TContext> => {
+
+const mutationKey = ['updateBencanaPengungsi'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateBencanaPengungsi>>, {id: number;data: BodyType<PendudukInput>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  updateBencanaPengungsi(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateBencanaPengungsiMutationResult = NonNullable<Awaited<ReturnType<typeof updateBencanaPengungsi>>>
+    export type UpdateBencanaPengungsiMutationBody = BodyType<PendudukInput>
+    export type UpdateBencanaPengungsiMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Update a penduduk record
+ */
+export const useUpdateBencanaPengungsi = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateBencanaPengungsi>>, TError,{id: number;data: BodyType<PendudukInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof updateBencanaPengungsi>>,
+        TError,
+        {id: number;data: BodyType<PendudukInput>},
+        TContext
+      > => {
+      return useMutation(getUpdateBencanaPengungsiMutationOptions(options));
+    }
+
+export const getDeleteBencanaPengungsiUrl = (id: number,) => {
+
+
+
+
+  return `/api/bencana/pengungsi/${id}`
+}
+
+/**
+ * @summary Delete a penduduk record
+ */
+export const deleteBencanaPengungsi = async (id: number, options?: RequestInit): Promise<void> => {
+
+  return customFetch<void>(getDeleteBencanaPengungsiUrl(id),
+  {
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+
+export const getDeleteBencanaPengungsiMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteBencanaPengungsi>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteBencanaPengungsi>>, TError,{id: number}, TContext> => {
+
+const mutationKey = ['deleteBencanaPengungsi'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteBencanaPengungsi>>, {id: number}> = (props) => {
+          const {id} = props ?? {};
+
+          return  deleteBencanaPengungsi(id,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteBencanaPengungsiMutationResult = NonNullable<Awaited<ReturnType<typeof deleteBencanaPengungsi>>>
+
+    export type DeleteBencanaPengungsiMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Delete a penduduk record
+ */
+export const useDeleteBencanaPengungsi = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteBencanaPengungsi>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof deleteBencanaPengungsi>>,
+        TError,
+        {id: number},
+        TContext
+      > => {
+      return useMutation(getDeleteBencanaPengungsiMutationOptions(options));
+    }
 
 export const getGetBencanaOrangHilangUrl = () => {
 
@@ -500,6 +1220,219 @@ export function useGetBencanaOrangHilang<TData = Awaited<ReturnType<typeof getBe
 
 
 
+export const getCreateBencanaOrangHilangUrl = () => {
+
+
+
+
+  return `/api/bencana/orang-hilang`
+}
+
+/**
+ * @summary Create a missing person record
+ */
+export const createBencanaOrangHilang = async (orangHilangInput: OrangHilangInput, options?: RequestInit): Promise<OrangHilangRecord> => {
+
+  return customFetch<OrangHilangRecord>(getCreateBencanaOrangHilangUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      orangHilangInput,)
+  }
+);}
+
+
+
+
+export const getCreateBencanaOrangHilangMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createBencanaOrangHilang>>, TError,{data: BodyType<OrangHilangInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createBencanaOrangHilang>>, TError,{data: BodyType<OrangHilangInput>}, TContext> => {
+
+const mutationKey = ['createBencanaOrangHilang'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createBencanaOrangHilang>>, {data: BodyType<OrangHilangInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createBencanaOrangHilang(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateBencanaOrangHilangMutationResult = NonNullable<Awaited<ReturnType<typeof createBencanaOrangHilang>>>
+    export type CreateBencanaOrangHilangMutationBody = BodyType<OrangHilangInput>
+    export type CreateBencanaOrangHilangMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Create a missing person record
+ */
+export const useCreateBencanaOrangHilang = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createBencanaOrangHilang>>, TError,{data: BodyType<OrangHilangInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createBencanaOrangHilang>>,
+        TError,
+        {data: BodyType<OrangHilangInput>},
+        TContext
+      > => {
+      return useMutation(getCreateBencanaOrangHilangMutationOptions(options));
+    }
+
+export const getUpdateBencanaOrangHilangUrl = (id: number,) => {
+
+
+
+
+  return `/api/bencana/orang-hilang/${id}`
+}
+
+/**
+ * @summary Update a missing person record
+ */
+export const updateBencanaOrangHilang = async (id: number,
+    orangHilangInput: OrangHilangInput, options?: RequestInit): Promise<OrangHilangRecord> => {
+
+  return customFetch<OrangHilangRecord>(getUpdateBencanaOrangHilangUrl(id),
+  {
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      orangHilangInput,)
+  }
+);}
+
+
+
+
+export const getUpdateBencanaOrangHilangMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateBencanaOrangHilang>>, TError,{id: number;data: BodyType<OrangHilangInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateBencanaOrangHilang>>, TError,{id: number;data: BodyType<OrangHilangInput>}, TContext> => {
+
+const mutationKey = ['updateBencanaOrangHilang'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateBencanaOrangHilang>>, {id: number;data: BodyType<OrangHilangInput>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  updateBencanaOrangHilang(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateBencanaOrangHilangMutationResult = NonNullable<Awaited<ReturnType<typeof updateBencanaOrangHilang>>>
+    export type UpdateBencanaOrangHilangMutationBody = BodyType<OrangHilangInput>
+    export type UpdateBencanaOrangHilangMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Update a missing person record
+ */
+export const useUpdateBencanaOrangHilang = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateBencanaOrangHilang>>, TError,{id: number;data: BodyType<OrangHilangInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof updateBencanaOrangHilang>>,
+        TError,
+        {id: number;data: BodyType<OrangHilangInput>},
+        TContext
+      > => {
+      return useMutation(getUpdateBencanaOrangHilangMutationOptions(options));
+    }
+
+export const getDeleteBencanaOrangHilangUrl = (id: number,) => {
+
+
+
+
+  return `/api/bencana/orang-hilang/${id}`
+}
+
+/**
+ * @summary Delete a missing person record
+ */
+export const deleteBencanaOrangHilang = async (id: number, options?: RequestInit): Promise<void> => {
+
+  return customFetch<void>(getDeleteBencanaOrangHilangUrl(id),
+  {
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+
+export const getDeleteBencanaOrangHilangMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteBencanaOrangHilang>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteBencanaOrangHilang>>, TError,{id: number}, TContext> => {
+
+const mutationKey = ['deleteBencanaOrangHilang'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteBencanaOrangHilang>>, {id: number}> = (props) => {
+          const {id} = props ?? {};
+
+          return  deleteBencanaOrangHilang(id,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteBencanaOrangHilangMutationResult = NonNullable<Awaited<ReturnType<typeof deleteBencanaOrangHilang>>>
+
+    export type DeleteBencanaOrangHilangMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Delete a missing person record
+ */
+export const useDeleteBencanaOrangHilang = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteBencanaOrangHilang>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof deleteBencanaOrangHilang>>,
+        TError,
+        {id: number},
+        TContext
+      > => {
+      return useMutation(getDeleteBencanaOrangHilangMutationOptions(options));
+    }
+
 export const getGetBencanaBantuanUrl = () => {
 
 
@@ -577,6 +1510,219 @@ export function useGetBencanaBantuan<TData = Awaited<ReturnType<typeof getBencan
 
 
 
+export const getCreateBencanaBantuanUrl = () => {
+
+
+
+
+  return `/api/bencana/bantuan`
+}
+
+/**
+ * @summary Create a new bantuan desa record
+ */
+export const createBencanaBantuan = async (bantuanDesaInput: BantuanDesaInput, options?: RequestInit): Promise<BantuanDesaRecord> => {
+
+  return customFetch<BantuanDesaRecord>(getCreateBencanaBantuanUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      bantuanDesaInput,)
+  }
+);}
+
+
+
+
+export const getCreateBencanaBantuanMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createBencanaBantuan>>, TError,{data: BodyType<BantuanDesaInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createBencanaBantuan>>, TError,{data: BodyType<BantuanDesaInput>}, TContext> => {
+
+const mutationKey = ['createBencanaBantuan'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createBencanaBantuan>>, {data: BodyType<BantuanDesaInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createBencanaBantuan(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateBencanaBantuanMutationResult = NonNullable<Awaited<ReturnType<typeof createBencanaBantuan>>>
+    export type CreateBencanaBantuanMutationBody = BodyType<BantuanDesaInput>
+    export type CreateBencanaBantuanMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Create a new bantuan desa record
+ */
+export const useCreateBencanaBantuan = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createBencanaBantuan>>, TError,{data: BodyType<BantuanDesaInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createBencanaBantuan>>,
+        TError,
+        {data: BodyType<BantuanDesaInput>},
+        TContext
+      > => {
+      return useMutation(getCreateBencanaBantuanMutationOptions(options));
+    }
+
+export const getUpdateBencanaBantuanUrl = (id: number,) => {
+
+
+
+
+  return `/api/bencana/bantuan/${id}`
+}
+
+/**
+ * @summary Update a bantuan desa record
+ */
+export const updateBencanaBantuan = async (id: number,
+    bantuanDesaInput: BantuanDesaInput, options?: RequestInit): Promise<BantuanDesaRecord> => {
+
+  return customFetch<BantuanDesaRecord>(getUpdateBencanaBantuanUrl(id),
+  {
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      bantuanDesaInput,)
+  }
+);}
+
+
+
+
+export const getUpdateBencanaBantuanMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateBencanaBantuan>>, TError,{id: number;data: BodyType<BantuanDesaInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateBencanaBantuan>>, TError,{id: number;data: BodyType<BantuanDesaInput>}, TContext> => {
+
+const mutationKey = ['updateBencanaBantuan'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateBencanaBantuan>>, {id: number;data: BodyType<BantuanDesaInput>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  updateBencanaBantuan(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateBencanaBantuanMutationResult = NonNullable<Awaited<ReturnType<typeof updateBencanaBantuan>>>
+    export type UpdateBencanaBantuanMutationBody = BodyType<BantuanDesaInput>
+    export type UpdateBencanaBantuanMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Update a bantuan desa record
+ */
+export const useUpdateBencanaBantuan = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateBencanaBantuan>>, TError,{id: number;data: BodyType<BantuanDesaInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof updateBencanaBantuan>>,
+        TError,
+        {id: number;data: BodyType<BantuanDesaInput>},
+        TContext
+      > => {
+      return useMutation(getUpdateBencanaBantuanMutationOptions(options));
+    }
+
+export const getDeleteBencanaBantuanUrl = (id: number,) => {
+
+
+
+
+  return `/api/bencana/bantuan/${id}`
+}
+
+/**
+ * @summary Delete a bantuan desa record
+ */
+export const deleteBencanaBantuan = async (id: number, options?: RequestInit): Promise<void> => {
+
+  return customFetch<void>(getDeleteBencanaBantuanUrl(id),
+  {
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+
+export const getDeleteBencanaBantuanMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteBencanaBantuan>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteBencanaBantuan>>, TError,{id: number}, TContext> => {
+
+const mutationKey = ['deleteBencanaBantuan'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteBencanaBantuan>>, {id: number}> = (props) => {
+          const {id} = props ?? {};
+
+          return  deleteBencanaBantuan(id,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteBencanaBantuanMutationResult = NonNullable<Awaited<ReturnType<typeof deleteBencanaBantuan>>>
+
+    export type DeleteBencanaBantuanMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Delete a bantuan desa record
+ */
+export const useDeleteBencanaBantuan = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteBencanaBantuan>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof deleteBencanaBantuan>>,
+        TError,
+        {id: number},
+        TContext
+      > => {
+      return useMutation(getDeleteBencanaBantuanMutationOptions(options));
+    }
+
 export const getGetBencanaMarkersUrl = () => {
 
 
@@ -653,4 +1799,217 @@ export function useGetBencanaMarkers<TData = Awaited<ReturnType<typeof getBencan
 
 
 
+
+export const getCreateBencanaMarkerUrl = () => {
+
+
+
+
+  return `/api/bencana/markers`
+}
+
+/**
+ * @summary Create a new map marker
+ */
+export const createBencanaMarker = async (mapMarkerInput: MapMarkerInput, options?: RequestInit): Promise<MapMarker> => {
+
+  return customFetch<MapMarker>(getCreateBencanaMarkerUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      mapMarkerInput,)
+  }
+);}
+
+
+
+
+export const getCreateBencanaMarkerMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createBencanaMarker>>, TError,{data: BodyType<MapMarkerInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createBencanaMarker>>, TError,{data: BodyType<MapMarkerInput>}, TContext> => {
+
+const mutationKey = ['createBencanaMarker'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createBencanaMarker>>, {data: BodyType<MapMarkerInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createBencanaMarker(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateBencanaMarkerMutationResult = NonNullable<Awaited<ReturnType<typeof createBencanaMarker>>>
+    export type CreateBencanaMarkerMutationBody = BodyType<MapMarkerInput>
+    export type CreateBencanaMarkerMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Create a new map marker
+ */
+export const useCreateBencanaMarker = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createBencanaMarker>>, TError,{data: BodyType<MapMarkerInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createBencanaMarker>>,
+        TError,
+        {data: BodyType<MapMarkerInput>},
+        TContext
+      > => {
+      return useMutation(getCreateBencanaMarkerMutationOptions(options));
+    }
+
+export const getUpdateBencanaMarkerUrl = (id: number,) => {
+
+
+
+
+  return `/api/bencana/markers/${id}`
+}
+
+/**
+ * @summary Update a map marker
+ */
+export const updateBencanaMarker = async (id: number,
+    mapMarkerInput: MapMarkerInput, options?: RequestInit): Promise<MapMarker> => {
+
+  return customFetch<MapMarker>(getUpdateBencanaMarkerUrl(id),
+  {
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      mapMarkerInput,)
+  }
+);}
+
+
+
+
+export const getUpdateBencanaMarkerMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateBencanaMarker>>, TError,{id: number;data: BodyType<MapMarkerInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateBencanaMarker>>, TError,{id: number;data: BodyType<MapMarkerInput>}, TContext> => {
+
+const mutationKey = ['updateBencanaMarker'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateBencanaMarker>>, {id: number;data: BodyType<MapMarkerInput>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  updateBencanaMarker(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateBencanaMarkerMutationResult = NonNullable<Awaited<ReturnType<typeof updateBencanaMarker>>>
+    export type UpdateBencanaMarkerMutationBody = BodyType<MapMarkerInput>
+    export type UpdateBencanaMarkerMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Update a map marker
+ */
+export const useUpdateBencanaMarker = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateBencanaMarker>>, TError,{id: number;data: BodyType<MapMarkerInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof updateBencanaMarker>>,
+        TError,
+        {id: number;data: BodyType<MapMarkerInput>},
+        TContext
+      > => {
+      return useMutation(getUpdateBencanaMarkerMutationOptions(options));
+    }
+
+export const getDeleteBencanaMarkerUrl = (id: number,) => {
+
+
+
+
+  return `/api/bencana/markers/${id}`
+}
+
+/**
+ * @summary Delete a map marker
+ */
+export const deleteBencanaMarker = async (id: number, options?: RequestInit): Promise<void> => {
+
+  return customFetch<void>(getDeleteBencanaMarkerUrl(id),
+  {
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+
+export const getDeleteBencanaMarkerMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteBencanaMarker>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteBencanaMarker>>, TError,{id: number}, TContext> => {
+
+const mutationKey = ['deleteBencanaMarker'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteBencanaMarker>>, {id: number}> = (props) => {
+          const {id} = props ?? {};
+
+          return  deleteBencanaMarker(id,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteBencanaMarkerMutationResult = NonNullable<Awaited<ReturnType<typeof deleteBencanaMarker>>>
+
+    export type DeleteBencanaMarkerMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Delete a map marker
+ */
+export const useDeleteBencanaMarker = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteBencanaMarker>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof deleteBencanaMarker>>,
+        TError,
+        {id: number},
+        TContext
+      > => {
+      return useMutation(getDeleteBencanaMarkerMutationOptions(options));
+    }
 

@@ -65,6 +65,98 @@ export const GetBencanaSummaryResponse = zod.object({
 
 
 /**
+ * @summary Update dashboard summary
+ */
+export const UpdateBencanaSummaryBody = zod.object({
+  "totalKorban": zod.number(),
+  "totalPengungsi": zod.number(),
+  "titikPengungsian": zod.number(),
+  "rumahRusak": zod.number(),
+  "sawahHa": zod.number(),
+  "kabupatenTerdampak": zod.number(),
+  "fasumRusak": zod.number(),
+  "kebunHa": zod.number(),
+  "tambakHa": zod.number(),
+  "rekapCluster": zod.object({
+  "kerusakan": zod.string(),
+  "kerugian": zod.string(),
+  "total": zod.string(),
+  "perSektor": zod.array(zod.object({
+  "nama": zod.string(),
+  "nilai": zod.string()
+}))
+}),
+  "faskes": zod.object({
+  "puskesmas": zod.number(),
+  "rsud": zod.number(),
+  "fasyankes": zod.number()
+}),
+  "jaringan": zod.object({
+  "critical": zod.number(),
+  "warning": zod.number(),
+  "normal": zod.number()
+}),
+  "posko": zod.object({
+  "totalPosko": zod.number(),
+  "totalPengungsi": zod.number(),
+  "titikPengungsian": zod.number()
+}),
+  "bantuan": zod.object({
+  "totalDesa": zod.number(),
+  "kuning": zod.number(),
+  "biru": zod.number(),
+  "abu": zod.number(),
+  "putih": zod.number()
+}),
+  "lastUpdate": zod.string()
+})
+
+export const UpdateBencanaSummaryResponse = zod.object({
+  "totalKorban": zod.number(),
+  "totalPengungsi": zod.number(),
+  "titikPengungsian": zod.number(),
+  "rumahRusak": zod.number(),
+  "sawahHa": zod.number(),
+  "kabupatenTerdampak": zod.number(),
+  "fasumRusak": zod.number(),
+  "kebunHa": zod.number(),
+  "tambakHa": zod.number(),
+  "rekapCluster": zod.object({
+  "kerusakan": zod.string(),
+  "kerugian": zod.string(),
+  "total": zod.string(),
+  "perSektor": zod.array(zod.object({
+  "nama": zod.string(),
+  "nilai": zod.string()
+}))
+}),
+  "faskes": zod.object({
+  "puskesmas": zod.number(),
+  "rsud": zod.number(),
+  "fasyankes": zod.number()
+}),
+  "jaringan": zod.object({
+  "critical": zod.number(),
+  "warning": zod.number(),
+  "normal": zod.number()
+}),
+  "posko": zod.object({
+  "totalPosko": zod.number(),
+  "totalPengungsi": zod.number(),
+  "titikPengungsian": zod.number()
+}),
+  "bantuan": zod.object({
+  "totalDesa": zod.number(),
+  "kuning": zod.number(),
+  "biru": zod.number(),
+  "abu": zod.number(),
+  "putih": zod.number()
+}),
+  "lastUpdate": zod.string()
+})
+
+
+/**
  * @summary Get impact data per kabupaten
  */
 export const GetBencanaDampakResponseItem = zod.object({
@@ -84,6 +176,66 @@ export const GetBencanaDampakResponse = zod.array(GetBencanaDampakResponseItem)
 
 
 /**
+ * @summary Create a new dampak record
+ */
+export const CreateBencanaDampakBody = zod.object({
+  "kabupaten": zod.string(),
+  "kecamatan": zod.string(),
+  "jenisKejadian": zod.string(),
+  "korbanJiwa": zod.number(),
+  "korbanLuka": zod.number(),
+  "rumahRusakBerat": zod.number(),
+  "rumahRusakRingan": zod.number(),
+  "sawahTerdampakHa": zod.number(),
+  "tanggal": zod.string(),
+  "status": zod.string()
+})
+
+
+/**
+ * @summary Update a dampak record
+ */
+export const UpdateBencanaDampakParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const UpdateBencanaDampakBody = zod.object({
+  "kabupaten": zod.string(),
+  "kecamatan": zod.string(),
+  "jenisKejadian": zod.string(),
+  "korbanJiwa": zod.number(),
+  "korbanLuka": zod.number(),
+  "rumahRusakBerat": zod.number(),
+  "rumahRusakRingan": zod.number(),
+  "sawahTerdampakHa": zod.number(),
+  "tanggal": zod.string(),
+  "status": zod.string()
+})
+
+export const UpdateBencanaDampakResponse = zod.object({
+  "id": zod.number(),
+  "kabupaten": zod.string(),
+  "kecamatan": zod.string(),
+  "jenisKejadian": zod.string(),
+  "korbanJiwa": zod.number(),
+  "korbanLuka": zod.number(),
+  "rumahRusakBerat": zod.number(),
+  "rumahRusakRingan": zod.number(),
+  "sawahTerdampakHa": zod.number(),
+  "tanggal": zod.string(),
+  "status": zod.string()
+})
+
+
+/**
+ * @summary Delete a dampak record
+ */
+export const DeleteBencanaDampakParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+
+/**
  * @summary Get agriculture damage data
  */
 export const GetBencanaPertanianResponseItem = zod.object({
@@ -99,6 +251,54 @@ export const GetBencanaPertanianResponse = zod.array(GetBencanaPertanianResponse
 
 
 /**
+ * @summary Create a new pertanian record
+ */
+export const CreateBencanaPertanianBody = zod.object({
+  "nama": zod.string(),
+  "kabupaten": zod.string(),
+  "kecamatan": zod.string(),
+  "volume": zod.number(),
+  "kerugian": zod.string(),
+  "kondisi": zod.string()
+})
+
+
+/**
+ * @summary Update a pertanian record
+ */
+export const UpdateBencanaPertanianParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const UpdateBencanaPertanianBody = zod.object({
+  "nama": zod.string(),
+  "kabupaten": zod.string(),
+  "kecamatan": zod.string(),
+  "volume": zod.number(),
+  "kerugian": zod.string(),
+  "kondisi": zod.string()
+})
+
+export const UpdateBencanaPertanianResponse = zod.object({
+  "id": zod.number(),
+  "nama": zod.string(),
+  "kabupaten": zod.string(),
+  "kecamatan": zod.string(),
+  "volume": zod.number(),
+  "kerugian": zod.string(),
+  "kondisi": zod.string()
+})
+
+
+/**
+ * @summary Delete a pertanian record
+ */
+export const DeleteBencanaPertanianParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+
+/**
  * @summary Get population/refugee data per kabupaten
  */
 export const GetBencanaPengungsiResponseItem = zod.object({
@@ -110,6 +310,51 @@ export const GetBencanaPengungsiResponseItem = zod.object({
   "pengungsi": zod.number()
 })
 export const GetBencanaPengungsiResponse = zod.array(GetBencanaPengungsiResponseItem)
+
+
+/**
+ * @summary Create a new penduduk record
+ */
+export const CreateBencanaPengungsiBody = zod.object({
+  "kabupaten": zod.string(),
+  "penduduk": zod.number(),
+  "kk": zod.number(),
+  "disabilitas": zod.number(),
+  "pengungsi": zod.number()
+})
+
+
+/**
+ * @summary Update a penduduk record
+ */
+export const UpdateBencanaPengungsiParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const UpdateBencanaPengungsiBody = zod.object({
+  "kabupaten": zod.string(),
+  "penduduk": zod.number(),
+  "kk": zod.number(),
+  "disabilitas": zod.number(),
+  "pengungsi": zod.number()
+})
+
+export const UpdateBencanaPengungsiResponse = zod.object({
+  "id": zod.number(),
+  "kabupaten": zod.string(),
+  "penduduk": zod.number(),
+  "kk": zod.number(),
+  "disabilitas": zod.number(),
+  "pengungsi": zod.number()
+})
+
+
+/**
+ * @summary Delete a penduduk record
+ */
+export const DeleteBencanaPengungsiParams = zod.object({
+  "id": zod.coerce.number()
+})
 
 
 /**
@@ -128,6 +373,54 @@ export const GetBencanaOrangHilangResponse = zod.array(GetBencanaOrangHilangResp
 
 
 /**
+ * @summary Create a missing person record
+ */
+export const CreateBencanaOrangHilangBody = zod.object({
+  "nama": zod.string(),
+  "usia": zod.number(),
+  "kecamatan": zod.string(),
+  "kabupaten": zod.string(),
+  "status": zod.string(),
+  "tanggal": zod.string()
+})
+
+
+/**
+ * @summary Update a missing person record
+ */
+export const UpdateBencanaOrangHilangParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const UpdateBencanaOrangHilangBody = zod.object({
+  "nama": zod.string(),
+  "usia": zod.number(),
+  "kecamatan": zod.string(),
+  "kabupaten": zod.string(),
+  "status": zod.string(),
+  "tanggal": zod.string()
+})
+
+export const UpdateBencanaOrangHilangResponse = zod.object({
+  "id": zod.number(),
+  "nama": zod.string(),
+  "usia": zod.number(),
+  "kecamatan": zod.string(),
+  "kabupaten": zod.string(),
+  "status": zod.string(),
+  "tanggal": zod.string()
+})
+
+
+/**
+ * @summary Delete a missing person record
+ */
+export const DeleteBencanaOrangHilangParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+
+/**
  * @summary Get village-level aid distribution data
  */
 export const GetBencanaBantuanResponseItem = zod.object({
@@ -139,6 +432,51 @@ export const GetBencanaBantuanResponseItem = zod.object({
   "warna": zod.string()
 })
 export const GetBencanaBantuanResponse = zod.array(GetBencanaBantuanResponseItem)
+
+
+/**
+ * @summary Create a new bantuan desa record
+ */
+export const CreateBencanaBantuanBody = zod.object({
+  "desa": zod.string(),
+  "kecamatan": zod.string(),
+  "kabupaten": zod.string(),
+  "satuan": zod.string(),
+  "warna": zod.string()
+})
+
+
+/**
+ * @summary Update a bantuan desa record
+ */
+export const UpdateBencanaBantuanParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const UpdateBencanaBantuanBody = zod.object({
+  "desa": zod.string(),
+  "kecamatan": zod.string(),
+  "kabupaten": zod.string(),
+  "satuan": zod.string(),
+  "warna": zod.string()
+})
+
+export const UpdateBencanaBantuanResponse = zod.object({
+  "id": zod.number(),
+  "desa": zod.string(),
+  "kecamatan": zod.string(),
+  "kabupaten": zod.string(),
+  "satuan": zod.string(),
+  "warna": zod.string()
+})
+
+
+/**
+ * @summary Delete a bantuan desa record
+ */
+export const DeleteBencanaBantuanParams = zod.object({
+  "id": zod.coerce.number()
+})
 
 
 /**
@@ -156,5 +494,59 @@ export const GetBencanaMarkersResponseItem = zod.object({
   "pengungsi": zod.number()
 })
 export const GetBencanaMarkersResponse = zod.array(GetBencanaMarkersResponseItem)
+
+
+/**
+ * @summary Create a new map marker
+ */
+export const CreateBencanaMarkerBody = zod.object({
+  "lat": zod.number(),
+  "lng": zod.number(),
+  "kabupaten": zod.string(),
+  "kecamatan": zod.string(),
+  "jenisBencana": zod.string(),
+  "severity": zod.string(),
+  "korban": zod.number(),
+  "pengungsi": zod.number()
+})
+
+
+/**
+ * @summary Update a map marker
+ */
+export const UpdateBencanaMarkerParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const UpdateBencanaMarkerBody = zod.object({
+  "lat": zod.number(),
+  "lng": zod.number(),
+  "kabupaten": zod.string(),
+  "kecamatan": zod.string(),
+  "jenisBencana": zod.string(),
+  "severity": zod.string(),
+  "korban": zod.number(),
+  "pengungsi": zod.number()
+})
+
+export const UpdateBencanaMarkerResponse = zod.object({
+  "id": zod.number(),
+  "lat": zod.number(),
+  "lng": zod.number(),
+  "kabupaten": zod.string(),
+  "kecamatan": zod.string(),
+  "jenisBencana": zod.string(),
+  "severity": zod.string(),
+  "korban": zod.number(),
+  "pengungsi": zod.number()
+})
+
+
+/**
+ * @summary Delete a map marker
+ */
+export const DeleteBencanaMarkerParams = zod.object({
+  "id": zod.coerce.number()
+})
 
 

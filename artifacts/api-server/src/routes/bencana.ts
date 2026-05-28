@@ -2,7 +2,7 @@ import { Router } from "express";
 
 const router = Router();
 
-const bencanaSummary = {
+let bencanaSummary: Record<string, any> = {
   totalKorban: 47,
   totalPengungsi: 3842,
   titikPengungsian: 23,
@@ -31,7 +31,7 @@ const bencanaSummary = {
   lastUpdate: "27 Mei 2025, 14:30 WIB",
 };
 
-const dampakData = [
+let dampakData: Record<string, any>[] = [
   { id: 1, kabupaten: "Aceh Besar", kecamatan: "Kuta Baro", jenisKejadian: "Banjir", korbanJiwa: 0, korbanLuka: 3, rumahRusakBerat: 12, rumahRusakRingan: 45, sawahTerdampakHa: 120.5, tanggal: "2025-05-24", status: "Siaga" },
   { id: 2, kabupaten: "Aceh Besar", kecamatan: "Darul Imarah", jenisKejadian: "Banjir", korbanJiwa: 0, korbanLuka: 0, rumahRusakBerat: 5, rumahRusakRingan: 28, sawahTerdampakHa: 75.0, tanggal: "2025-05-24", status: "Waspada" },
   { id: 3, kabupaten: "Pidie", kecamatan: "Padang Tiji", jenisKejadian: "Longsor", korbanJiwa: 2, korbanLuka: 8, rumahRusakBerat: 18, rumahRusakRingan: 22, sawahTerdampakHa: 43.0, tanggal: "2025-05-23", status: "Siaga" },
@@ -48,7 +48,7 @@ const dampakData = [
   { id: 14, kabupaten: "Simeulue", kecamatan: "Simeulue Timur", jenisKejadian: "Abrasi", korbanJiwa: 0, korbanLuka: 0, rumahRusakBerat: 8, rumahRusakRingan: 11, sawahTerdampakHa: 0, tanggal: "2025-05-17", status: "Waspada" },
 ];
 
-const pertanianData = [
+let pertanianData: Record<string, any>[] = [
   { id: 1, nama: "Sawah Irigasi Kuta Baro", kabupaten: "Aceh Besar", kecamatan: "Kuta Baro", volume: 85.5, kerugian: "Rp 427.500.000", kondisi: "Berat" },
   { id: 2, nama: "Kebun Pisang Darul Imarah", kabupaten: "Aceh Besar", kecamatan: "Darul Imarah", volume: 22.0, kerugian: "Rp 132.000.000", kondisi: "Ringan" },
   { id: 3, nama: "Sawah Tadah Hujan Padang Tiji", kabupaten: "Pidie", kecamatan: "Padang Tiji", volume: 43.0, kerugian: "Rp 258.000.000", kondisi: "Berat" },
@@ -61,7 +61,7 @@ const pertanianData = [
   { id: 10, nama: "Sawah Lebak Peusangan", kabupaten: "Bireuen", kecamatan: "Peusangan", volume: 52.0, kerugian: "Rp 208.000.000", kondisi: "Ringan" },
 ];
 
-const pendudukData = [
+let pendudukData: Record<string, any>[] = [
   { id: 1, kabupaten: "Aceh Besar", penduduk: 432850, kk: 108213, disabilitas: 1245, pengungsi: 287 },
   { id: 2, kabupaten: "Pidie", penduduk: 398124, kk: 99531, disabilitas: 1087, pengungsi: 378 },
   { id: 3, kabupaten: "Pidie Jaya", penduduk: 164285, kk: 41071, disabilitas: 476, pengungsi: 1035 },
@@ -73,7 +73,7 @@ const pendudukData = [
   { id: 9, kabupaten: "Simeulue", penduduk: 98543, kk: 24636, disabilitas: 286, pengungsi: 161 },
 ];
 
-const orangHilangData = [
+let orangHilangData: Record<string, any>[] = [
   { id: 1, nama: "Ahmad Fauzi", usia: 34, kecamatan: "Padang Tiji", kabupaten: "Pidie", status: "Dicari", tanggal: "2025-05-23" },
   { id: 2, nama: "Siti Rahma", usia: 12, kecamatan: "Bandar Baru", kabupaten: "Pidie Jaya", status: "Ditemukan", tanggal: "2025-05-23" },
   { id: 3, nama: "Zulkifli Harun", usia: 58, kecamatan: "Nisam", kabupaten: "Aceh Utara", status: "Dicari", tanggal: "2025-05-21" },
@@ -81,7 +81,7 @@ const orangHilangData = [
   { id: 5, nama: "Muhammad Rizki", usia: 8, kecamatan: "Bandar Baru", kabupaten: "Pidie Jaya", status: "Ditemukan", tanggal: "2025-05-24" },
 ];
 
-const bantuanDesaData = [
+let bantuanDesaData: Record<string, any>[] = [
   { id: 1, desa: "Gampong Cot Bak U", kecamatan: "Kuta Baro", kabupaten: "Aceh Besar", satuan: "Kecamatan Kuta Baro", warna: "kuning" },
   { id: 2, desa: "Gampong Lampisang", kecamatan: "Darul Imarah", kabupaten: "Aceh Besar", satuan: "Kecamatan Darul Imarah", warna: "kuning" },
   { id: 3, desa: "Gampong Blang Mee", kecamatan: "Padang Tiji", kabupaten: "Pidie", satuan: "Kecamatan Padang Tiji", warna: "kuning" },
@@ -102,7 +102,7 @@ const bantuanDesaData = [
   { id: 18, desa: "Gampong Meunasah Kulam", kecamatan: "Kota Juang", kabupaten: "Bireuen", satuan: "Kecamatan Kota Juang", warna: "biru" },
 ];
 
-const markersData = [
+let markersData: Record<string, any>[] = [
   { id: 1, lat: 5.1839, lng: 96.5084, kabupaten: "Pidie Jaya", kecamatan: "Bandar Baru", jenisBencana: "Banjir Bandang", severity: "critical", korban: 13, pengungsi: 1035 },
   { id: 2, lat: 5.3261, lng: 95.8572, kabupaten: "Aceh Besar", kecamatan: "Kuta Baro", jenisBencana: "Banjir", severity: "warning", korban: 3, pengungsi: 287 },
   { id: 3, lat: 5.3781, lng: 95.9862, kabupaten: "Aceh Besar", kecamatan: "Darul Imarah", jenisBencana: "Banjir", severity: "normal", korban: 0, pengungsi: 0 },
@@ -118,12 +118,149 @@ const markersData = [
   { id: 13, lat: 2.6892, lng: 96.0532, kabupaten: "Simeulue", kecamatan: "Simeulue Timur", jenisBencana: "Abrasi", severity: "normal", korban: 0, pengungsi: 161 },
 ];
 
-router.get("/bencana/summary", (req, res) => { res.json(bencanaSummary); });
-router.get("/bencana/dampak", (req, res) => { res.json(dampakData); });
-router.get("/bencana/pertanian", (req, res) => { res.json(pertanianData); });
-router.get("/bencana/pengungsi", (req, res) => { res.json(pendudukData); });
-router.get("/bencana/orang-hilang", (req, res) => { res.json(orangHilangData); });
-router.get("/bencana/bantuan", (req, res) => { res.json(bantuanDesaData); });
-router.get("/bencana/markers", (req, res) => { res.json(markersData); });
+let nextId = {
+  dampak: 15, pertanian: 11, penduduk: 10, orangHilang: 6, bantuan: 19, markers: 14,
+};
+
+// ── READ ──────────────────────────────────────────────────────────────────────
+router.get("/bencana/summary", (_req, res) => { res.json(bencanaSummary); });
+router.get("/bencana/dampak", (_req, res) => { res.json(dampakData); });
+router.get("/bencana/pertanian", (_req, res) => { res.json(pertanianData); });
+router.get("/bencana/pengungsi", (_req, res) => { res.json(pendudukData); });
+router.get("/bencana/orang-hilang", (_req, res) => { res.json(orangHilangData); });
+router.get("/bencana/bantuan", (_req, res) => { res.json(bantuanDesaData); });
+router.get("/bencana/markers", (_req, res) => { res.json(markersData); });
+
+// ── UPDATE SUMMARY ────────────────────────────────────────────────────────────
+router.put("/bencana/summary", (req, res) => {
+  bencanaSummary = { ...bencanaSummary, ...req.body };
+  res.json(bencanaSummary);
+});
+
+// ── DAMPAK CRUD ───────────────────────────────────────────────────────────────
+router.post("/bencana/dampak", (req, res) => {
+  const record = { ...req.body, id: nextId.dampak++ };
+  dampakData.push(record);
+  res.status(201).json(record);
+});
+router.put("/bencana/dampak/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const idx = dampakData.findIndex((r) => r.id === id);
+  if (idx === -1) { res.status(404).json({ error: "Not found" }); return; }
+  dampakData[idx] = { ...dampakData[idx], ...req.body, id };
+  res.json(dampakData[idx]);
+});
+router.delete("/bencana/dampak/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const before = dampakData.length;
+  dampakData = dampakData.filter((r) => r.id !== id);
+  if (dampakData.length === before) { res.status(404).json({ error: "Not found" }); return; }
+  res.status(204).end();
+});
+
+// ── PERTANIAN CRUD ────────────────────────────────────────────────────────────
+router.post("/bencana/pertanian", (req, res) => {
+  const record = { ...req.body, id: nextId.pertanian++ };
+  pertanianData.push(record);
+  res.status(201).json(record);
+});
+router.put("/bencana/pertanian/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const idx = pertanianData.findIndex((r) => r.id === id);
+  if (idx === -1) { res.status(404).json({ error: "Not found" }); return; }
+  pertanianData[idx] = { ...pertanianData[idx], ...req.body, id };
+  res.json(pertanianData[idx]);
+});
+router.delete("/bencana/pertanian/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const before = pertanianData.length;
+  pertanianData = pertanianData.filter((r) => r.id !== id);
+  if (pertanianData.length === before) { res.status(404).json({ error: "Not found" }); return; }
+  res.status(204).end();
+});
+
+// ── PENDUDUK/PENGUNGSI CRUD ───────────────────────────────────────────────────
+router.post("/bencana/pengungsi", (req, res) => {
+  const record = { ...req.body, id: nextId.penduduk++ };
+  pendudukData.push(record);
+  res.status(201).json(record);
+});
+router.put("/bencana/pengungsi/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const idx = pendudukData.findIndex((r) => r.id === id);
+  if (idx === -1) { res.status(404).json({ error: "Not found" }); return; }
+  pendudukData[idx] = { ...pendudukData[idx], ...req.body, id };
+  res.json(pendudukData[idx]);
+});
+router.delete("/bencana/pengungsi/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const before = pendudukData.length;
+  pendudukData = pendudukData.filter((r) => r.id !== id);
+  if (pendudukData.length === before) { res.status(404).json({ error: "Not found" }); return; }
+  res.status(204).end();
+});
+
+// ── ORANG HILANG CRUD ─────────────────────────────────────────────────────────
+router.post("/bencana/orang-hilang", (req, res) => {
+  const record = { ...req.body, id: nextId.orangHilang++ };
+  orangHilangData.push(record);
+  res.status(201).json(record);
+});
+router.put("/bencana/orang-hilang/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const idx = orangHilangData.findIndex((r) => r.id === id);
+  if (idx === -1) { res.status(404).json({ error: "Not found" }); return; }
+  orangHilangData[idx] = { ...orangHilangData[idx], ...req.body, id };
+  res.json(orangHilangData[idx]);
+});
+router.delete("/bencana/orang-hilang/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const before = orangHilangData.length;
+  orangHilangData = orangHilangData.filter((r) => r.id !== id);
+  if (orangHilangData.length === before) { res.status(404).json({ error: "Not found" }); return; }
+  res.status(204).end();
+});
+
+// ── BANTUAN CRUD ──────────────────────────────────────────────────────────────
+router.post("/bencana/bantuan", (req, res) => {
+  const record = { ...req.body, id: nextId.bantuan++ };
+  bantuanDesaData.push(record);
+  res.status(201).json(record);
+});
+router.put("/bencana/bantuan/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const idx = bantuanDesaData.findIndex((r) => r.id === id);
+  if (idx === -1) { res.status(404).json({ error: "Not found" }); return; }
+  bantuanDesaData[idx] = { ...bantuanDesaData[idx], ...req.body, id };
+  res.json(bantuanDesaData[idx]);
+});
+router.delete("/bencana/bantuan/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const before = bantuanDesaData.length;
+  bantuanDesaData = bantuanDesaData.filter((r) => r.id !== id);
+  if (bantuanDesaData.length === before) { res.status(404).json({ error: "Not found" }); return; }
+  res.status(204).end();
+});
+
+// ── MARKERS CRUD ──────────────────────────────────────────────────────────────
+router.post("/bencana/markers", (req, res) => {
+  const record = { ...req.body, id: nextId.markers++ };
+  markersData.push(record);
+  res.status(201).json(record);
+});
+router.put("/bencana/markers/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const idx = markersData.findIndex((r) => r.id === id);
+  if (idx === -1) { res.status(404).json({ error: "Not found" }); return; }
+  markersData[idx] = { ...markersData[idx], ...req.body, id };
+  res.json(markersData[idx]);
+});
+router.delete("/bencana/markers/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const before = markersData.length;
+  markersData = markersData.filter((r) => r.id !== id);
+  if (markersData.length === before) { res.status(404).json({ error: "Not found" }); return; }
+  res.status(204).end();
+});
 
 export default router;

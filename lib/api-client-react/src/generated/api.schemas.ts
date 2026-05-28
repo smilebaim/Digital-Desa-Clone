@@ -79,8 +79,30 @@ export interface DampakRecord {
   status: string;
 }
 
+export interface DampakInput {
+  kabupaten: string;
+  kecamatan: string;
+  jenisKejadian: string;
+  korbanJiwa: number;
+  korbanLuka: number;
+  rumahRusakBerat: number;
+  rumahRusakRingan: number;
+  sawahTerdampakHa: number;
+  tanggal: string;
+  status: string;
+}
+
 export interface PertanianRecord {
   id: number;
+  nama: string;
+  kabupaten: string;
+  kecamatan: string;
+  volume: number;
+  kerugian: string;
+  kondisi: string;
+}
+
+export interface PertanianInput {
   nama: string;
   kabupaten: string;
   kecamatan: string;
@@ -98,8 +120,25 @@ export interface PendudukRecord {
   pengungsi: number;
 }
 
+export interface PendudukInput {
+  kabupaten: string;
+  penduduk: number;
+  kk: number;
+  disabilitas: number;
+  pengungsi: number;
+}
+
 export interface OrangHilangRecord {
   id: number;
+  nama: string;
+  usia: number;
+  kecamatan: string;
+  kabupaten: string;
+  status: string;
+  tanggal: string;
+}
+
+export interface OrangHilangInput {
   nama: string;
   usia: number;
   kecamatan: string;
@@ -117,8 +156,27 @@ export interface BantuanDesaRecord {
   warna: string;
 }
 
+export interface BantuanDesaInput {
+  desa: string;
+  kecamatan: string;
+  kabupaten: string;
+  satuan: string;
+  warna: string;
+}
+
 export interface MapMarker {
   id: number;
+  lat: number;
+  lng: number;
+  kabupaten: string;
+  kecamatan: string;
+  jenisBencana: string;
+  severity: string;
+  korban: number;
+  pengungsi: number;
+}
+
+export interface MapMarkerInput {
   lat: number;
   lng: number;
   kabupaten: string;

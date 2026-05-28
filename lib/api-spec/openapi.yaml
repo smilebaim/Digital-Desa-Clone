@@ -37,6 +37,23 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BencanaSummary"
+    put:
+      operationId: updateBencanaSummary
+      tags: [bencana]
+      summary: Update dashboard summary
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BencanaSummary"
+      responses:
+        "200":
+          description: Updated summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BencanaSummary"
 
   /bencana/dampak:
     get:
@@ -52,6 +69,61 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/DampakRecord"
+    post:
+      operationId: createBencanaDampak
+      tags: [bencana]
+      summary: Create a new dampak record
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DampakInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DampakRecord"
+
+  /bencana/dampak/{id}:
+    put:
+      operationId: updateBencanaDampak
+      tags: [bencana]
+      summary: Update a dampak record
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DampakInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DampakRecord"
+    delete:
+      operationId: deleteBencanaDampak
+      tags: [bencana]
+      summary: Delete a dampak record
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
 
   /bencana/pertanian:
     get:
@@ -67,6 +139,61 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/PertanianRecord"
+    post:
+      operationId: createBencanaPertanian
+      tags: [bencana]
+      summary: Create a new pertanian record
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PertanianInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PertanianRecord"
+
+  /bencana/pertanian/{id}:
+    put:
+      operationId: updateBencanaPertanian
+      tags: [bencana]
+      summary: Update a pertanian record
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PertanianInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PertanianRecord"
+    delete:
+      operationId: deleteBencanaPertanian
+      tags: [bencana]
+      summary: Delete a pertanian record
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
 
   /bencana/pengungsi:
     get:
@@ -82,6 +209,61 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/PendudukRecord"
+    post:
+      operationId: createBencanaPengungsi
+      tags: [bencana]
+      summary: Create a new penduduk record
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PendudukInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PendudukRecord"
+
+  /bencana/pengungsi/{id}:
+    put:
+      operationId: updateBencanaPengungsi
+      tags: [bencana]
+      summary: Update a penduduk record
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PendudukInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PendudukRecord"
+    delete:
+      operationId: deleteBencanaPengungsi
+      tags: [bencana]
+      summary: Delete a penduduk record
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
 
   /bencana/orang-hilang:
     get:
@@ -97,6 +279,61 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/OrangHilangRecord"
+    post:
+      operationId: createBencanaOrangHilang
+      tags: [bencana]
+      summary: Create a missing person record
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrangHilangInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrangHilangRecord"
+
+  /bencana/orang-hilang/{id}:
+    put:
+      operationId: updateBencanaOrangHilang
+      tags: [bencana]
+      summary: Update a missing person record
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrangHilangInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrangHilangRecord"
+    delete:
+      operationId: deleteBencanaOrangHilang
+      tags: [bencana]
+      summary: Delete a missing person record
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
 
   /bencana/bantuan:
     get:
@@ -112,6 +349,61 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/BantuanDesaRecord"
+    post:
+      operationId: createBencanaBantuan
+      tags: [bencana]
+      summary: Create a new bantuan desa record
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BantuanDesaInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BantuanDesaRecord"
+
+  /bencana/bantuan/{id}:
+    put:
+      operationId: updateBencanaBantuan
+      tags: [bencana]
+      summary: Update a bantuan desa record
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BantuanDesaInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BantuanDesaRecord"
+    delete:
+      operationId: deleteBencanaBantuan
+      tags: [bencana]
+      summary: Delete a bantuan desa record
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
 
   /bencana/markers:
     get:
@@ -127,6 +419,61 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/MapMarker"
+    post:
+      operationId: createBencanaMarker
+      tags: [bencana]
+      summary: Create a new map marker
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MapMarkerInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MapMarker"
+
+  /bencana/markers/{id}:
+    put:
+      operationId: updateBencanaMarker
+      tags: [bencana]
+      summary: Update a map marker
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MapMarkerInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MapMarker"
+    delete:
+      operationId: deleteBencanaMarker
+      tags: [bencana]
+      summary: Delete a map marker
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
 
 components:
   schemas:
@@ -294,12 +641,64 @@ components:
         status:
           type: string
 
+    DampakInput:
+      type: object
+      required:
+        - kabupaten
+        - kecamatan
+        - jenisKejadian
+        - korbanJiwa
+        - korbanLuka
+        - rumahRusakBerat
+        - rumahRusakRingan
+        - sawahTerdampakHa
+        - tanggal
+        - status
+      properties:
+        kabupaten:
+          type: string
+        kecamatan:
+          type: string
+        jenisKejadian:
+          type: string
+        korbanJiwa:
+          type: integer
+        korbanLuka:
+          type: integer
+        rumahRusakBerat:
+          type: integer
+        rumahRusakRingan:
+          type: integer
+        sawahTerdampakHa:
+          type: number
+        tanggal:
+          type: string
+        status:
+          type: string
+
     PertanianRecord:
       type: object
       required: [id, nama, kabupaten, kecamatan, volume, kerugian, kondisi]
       properties:
         id:
           type: integer
+        nama:
+          type: string
+        kabupaten:
+          type: string
+        kecamatan:
+          type: string
+        volume:
+          type: number
+        kerugian:
+          type: string
+        kondisi:
+          type: string
+
+    PertanianInput:
+      type: object
+      required: [nama, kabupaten, kecamatan, volume, kerugian, kondisi]
+      properties:
         nama:
           type: string
         kabupaten:
@@ -330,12 +729,44 @@ components:
         pengungsi:
           type: integer
 
+    PendudukInput:
+      type: object
+      required: [kabupaten, penduduk, kk, disabilitas, pengungsi]
+      properties:
+        kabupaten:
+          type: string
+        penduduk:
+          type: integer
+        kk:
+          type: integer
+        disabilitas:
+          type: integer
+        pengungsi:
+          type: integer
+
     OrangHilangRecord:
       type: object
       required: [id, nama, usia, kecamatan, kabupaten, status, tanggal]
       properties:
         id:
           type: integer
+        nama:
+          type: string
+        usia:
+          type: integer
+        kecamatan:
+          type: string
+        kabupaten:
+          type: string
+        status:
+          type: string
+        tanggal:
+          type: string
+
+    OrangHilangInput:
+      type: object
+      required: [nama, usia, kecamatan, kabupaten, status, tanggal]
+      properties:
         nama:
           type: string
         usia:
@@ -366,12 +797,48 @@ components:
         warna:
           type: string
 
+    BantuanDesaInput:
+      type: object
+      required: [desa, kecamatan, kabupaten, satuan, warna]
+      properties:
+        desa:
+          type: string
+        kecamatan:
+          type: string
+        kabupaten:
+          type: string
+        satuan:
+          type: string
+        warna:
+          type: string
+
     MapMarker:
       type: object
       required: [id, lat, lng, kabupaten, kecamatan, jenisBencana, severity, korban, pengungsi]
       properties:
         id:
           type: integer
+        lat:
+          type: number
+        lng:
+          type: number
+        kabupaten:
+          type: string
+        kecamatan:
+          type: string
+        jenisBencana:
+          type: string
+        severity:
+          type: string
+        korban:
+          type: integer
+        pengungsi:
+          type: integer
+
+    MapMarkerInput:
+      type: object
+      required: [lat, lng, kabupaten, kecamatan, jenisBencana, severity, korban, pengungsi]
+      properties:
         lat:
           type: number
         lng:
