@@ -1,3 +1,5 @@
+"use client";
+
 export type TabKey = "profil" | "dana" | "idm" | "pelayanan";
 
 const TABS: { key: TabKey; label: string; icon: string }[] = [

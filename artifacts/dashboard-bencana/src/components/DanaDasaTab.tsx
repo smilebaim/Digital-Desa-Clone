@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef } from "react";
 import { useGetDesaSummary, useGetDesaDana } from "@workspace/api-client-react";
 
@@ -35,7 +37,7 @@ export default function DanaDasaTab() {
   useEffect(() => {
     if (!barRef.current || dana.length === 0) return;
     if (barChart.current) barChart.current.destroy();
-    const labels = dana.map((d: any) => d.nama_desa.replace("Gampong ", ""));
+    const labels = dana.map((d: any) => d.nama_desa.replace("Desa ", ""));
     barChart.current = new Chart(barRef.current, {
       type: "bar",
       data: {
@@ -114,14 +116,14 @@ export default function DanaDasaTab() {
         <KpiCard icon="fa-sack-dollar" value={rp(totalAlokasi)} label="Total Alokasi 2024" color="bg-blue-600" />
         <KpiCard icon="fa-circle-check" value={rp(totalRealisasi)} label="Total Realisasi" sub={`${((totalRealisasi / totalAlokasi) * 100).toFixed(1)}% terserap`} color="bg-green-600" />
         <KpiCard icon="fa-percent" value={`${summary?.rataRealisasiPct?.toFixed(1) ?? 0}%`} label="Rata-rata Realisasi" color="bg-teal-600" />
-        <KpiCard icon="fa-trophy" value={String(desaDiAtas90)} label="Gampong ≥90% Realisasi" color="bg-emerald-600" />
+        <KpiCard icon="fa-trophy" value={String(desaDiAtas90)} label="Desa ≥90% Realisasi" color="bg-emerald-600" />
       </div>
 
       {/* Charts */}
       <div className="grid md:grid-cols-3 gap-6">
         <div className="md:col-span-2 bg-white rounded-xl shadow-sm border border-gray-100 p-4">
           <h3 className="font-semibold text-gray-800 mb-4 flex items-center gap-2">
-            <i className="fas fa-chart-bar text-blue-600"></i> Alokasi vs Realisasi per Gampong (Rp)
+            <i className="fas fa-chart-bar text-blue-600"></i> Alokasi vs Realisasi per Desa (Rp)
           </h3>
           <div style={{ height: 300 }}>
             <canvas ref={barRef} />
@@ -149,7 +151,7 @@ export default function DanaDasaTab() {
           <table className="w-full text-sm">
             <thead className="bg-gray-50 text-gray-600 text-xs uppercase">
               <tr>
-                <th className="text-left px-4 py-3">Gampong</th>
+                <th className="text-left px-4 py-3">Desa</th>
                 <th className="text-right px-4 py-3">Alokasi</th>
                 <th className="text-right px-4 py-3">Realisasi</th>
                 <th className="text-right px-4 py-3">%</th>
@@ -162,7 +164,7 @@ export default function DanaDasaTab() {
                 const barColor = pct >= 90 ? "bg-green-500" : pct >= 75 ? "bg-yellow-500" : "bg-red-500";
                 return (
                   <tr key={d.id} className="hover:bg-gray-50 transition">
-                    <td className="px-4 py-3 font-medium text-gray-800">{d.nama_desa.replace("Gampong ", "")}</td>
+                    <td className="px-4 py-3 font-medium text-gray-800">{d.nama_desa.replace("Desa ", "")}</td>
                     <td className="px-4 py-3 text-right text-gray-600">{rp(d.alokasi)}</td>
                     <td className="px-4 py-3 text-right text-gray-700 font-medium">{rp(d.realisasi)}</td>
                     <td className="px-4 py-3 text-right font-bold" style={{ color: pct >= 90 ? "#16a34a" : pct >= 75 ? "#d97706" : "#dc2626" }}>

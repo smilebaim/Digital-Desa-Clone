@@ -1,4 +1,6 @@
-import { Link } from "wouter";
+"use client";
+
+import Link from "next/link";
 import type { TabKey } from "./TabBar";
 
 const TABS: { key: TabKey; label: string; icon: string }[] = [

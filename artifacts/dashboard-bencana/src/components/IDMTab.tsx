@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef } from "react";
 import { useGetDesaSummary, useGetDesaIDM } from "@workspace/api-client-react";
 
@@ -41,7 +43,7 @@ export default function IDMTab() {
     barChart.current = new Chart(barRef.current, {
       type: "bar",
       data: {
-        labels: sorted.map((d: any) => d.nama_desa.replace("Gampong ", "")),
+        labels: sorted.map((d: any) => d.nama_desa.replace("Desa ", "")),
         datasets: [
           {
             label: "Skor IDM 2024",
@@ -116,7 +118,7 @@ export default function IDMTab() {
       <div className="grid md:grid-cols-3 gap-6">
         <div className="md:col-span-2 bg-white rounded-xl shadow-sm border border-gray-100 p-4">
           <h3 className="font-semibold text-gray-800 mb-4 flex items-center gap-2">
-            <i className="fas fa-chart-bar text-green-600"></i> Perbandingan Skor IDM per Gampong
+            <i className="fas fa-chart-bar text-green-600"></i> Perbandingan Skor IDM per Desa
           </h3>
           <div style={{ height: 300 }}>
             <canvas ref={barRef} />
@@ -136,7 +138,7 @@ export default function IDMTab() {
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="px-4 py-3 border-b flex items-center gap-2">
           <i className="fas fa-chart-line text-green-600"></i>
-          <h3 className="font-semibold text-gray-800">Rincian IDM per Gampong — Tahun 2024</h3>
+          <h3 className="font-semibold text-gray-800">Rincian IDM per Desa — Tahun 2024</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -156,7 +158,7 @@ export default function IDMTab() {
                 const meta = STATUS_META[d.status_idm] ?? STATUS_META["Berkembang"];
                 return (
                   <tr key={d.id} className="hover:bg-gray-50 transition">
-                    <td className="px-4 py-3 font-medium text-gray-800">{d.nama_desa.replace("Gampong ", "")}</td>
+                    <td className="px-4 py-3 font-medium text-gray-800">{d.nama_desa.replace("Desa ", "")}</td>
                     <td className="px-4 py-3 text-center">
                       <span className={`px-2 py-1 rounded-full text-xs font-semibold ${meta.badge}`}>{d.status_idm}</span>
                     </td>

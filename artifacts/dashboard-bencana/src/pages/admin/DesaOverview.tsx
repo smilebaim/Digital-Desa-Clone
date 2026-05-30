@@ -1,3 +1,5 @@
+"use client";
+
 import { useGetDesaSummary, useGetDesaProfil, useGetDesaDana, useGetDesaIDM, useGetDesaPelayanan } from "@workspace/api-client-react";
 
 function StatCard({ icon, value, label, color }: { icon: string; value: string | number; label: string; color: string }) {

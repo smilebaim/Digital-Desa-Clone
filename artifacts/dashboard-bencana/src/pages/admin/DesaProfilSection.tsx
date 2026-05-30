@@ -1,9 +1,11 @@
+"use client";
+
 import { useState } from "react";
 import { useGetDesaProfil, useCreateDesaProfil, useUpdateDesaProfil, useDeleteDesaProfil } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { getGetDesaProfilQueryKey } from "@workspace/api-client-react";
 
-const BLANK = { nama: "", kecamatan: "Kuta Malaka", kabupaten: "Aceh Besar", luas_ha: 0, jumlah_penduduk: 0, jumlah_kk: 0, kepala_desa: "", jenis_desa: "Berkembang", lat: 5.41, lng: 95.63, tahun_berdiri: 1950 };
+const BLANK = { nama: "", kecamatan: "Sekernan", kabupaten: "Muaro Jambi", luas_ha: 0, jumlah_penduduk: 0, jumlah_kk: 0, kepala_desa: "", jenis_desa: "Berkembang", lat: -1.62, lng: 103.56, tahun_berdiri: 1950 };
 const STATUS = ["Mandiri", "Maju", "Berkembang", "Tertinggal", "Sangat Tertinggal"];
 const STATUS_COLORS: Record<string, string> = { Mandiri: "bg-green-100 text-green-800", Maju: "bg-blue-100 text-blue-800", Berkembang: "bg-yellow-100 text-yellow-800", Tertinggal: "bg-orange-100 text-orange-800", "Sangat Tertinggal": "bg-red-100 text-red-800" };
 

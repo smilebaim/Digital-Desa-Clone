@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useGetDesaPelayanan, useCreateDesaPelayanan, useUpdateDesaPelayanan, useDeleteDesaPelayanan, getGetDesaPelayananQueryKey } from "@workspace/api-client-react";

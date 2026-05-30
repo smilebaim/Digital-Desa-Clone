@@ -5,193 +5,250 @@ const router = Router();
 // ── SUMMARY KPIs ─────────────────────────────────────────────────────────────
 let desaSummary: Record<string, any> = {
   totalDesa: 15,
-  totalPenduduk: 14872,
-  totalKK: 3648,
-  totalLuasHa: 2847.5,
-  totalDanaDesa2024: 15234500000,
-  rataRealisasiPct: 87.4,
-  rataSkorIDM: 0.7012,
+  totalPenduduk: 16348,
+  totalKK: 4012,
+  totalLuasHa: 3124.7,
+  totalDanaDesa2024: 16875000000,
+  rataRealisasiPct: 88.6,
+  rataSkorIDM: 0.7134,
   desaMandiri: 2,
-  desaMaju: 5,
-  desaBerkembang: 6,
+  desaMaju: 6,
+  desaBerkembang: 5,
   desaTertinggal: 2,
   desaSangatTertinggal: 0,
-  kecamatan: "Kuta Malaka",
-  kabupaten: "Aceh Besar",
-  provinsi: "Aceh",
+  kecamatan: "Sekernan",
+  kabupaten: "Muaro Jambi",
+  provinsi: "Jambi",
   lastUpdate: "30 Mei 2026, 08:00 WIB",
 };
 
 // ── PROFIL DESA ───────────────────────────────────────────────────────────────
 let profilData: Record<string, any>[] = [
-  { id: 1, nama: "Gampong Cot Glie", kecamatan: "Kuta Malaka", kabupaten: "Aceh Besar", luas_ha: 215.3, jumlah_penduduk: 1245, jumlah_kk: 312, kepala_desa: "Faisal Hasan", jenis_desa: "Berkembang", lat: 5.4123, lng: 95.6234, tahun_berdiri: 1945 },
-  { id: 2, nama: "Gampong Meunasah Tuha", kecamatan: "Kuta Malaka", kabupaten: "Aceh Besar", luas_ha: 183.7, jumlah_penduduk: 987, jumlah_kk: 241, kepala_desa: "Rusli Ibrahim", jenis_desa: "Maju", lat: 5.4089, lng: 95.6312, tahun_berdiri: 1932 },
-  { id: 3, nama: "Gampong Lamjamee", kecamatan: "Kuta Malaka", kabupaten: "Aceh Besar", luas_ha: 147.2, jumlah_penduduk: 756, jumlah_kk: 189, kepala_desa: "Zulkifli Mahmud", jenis_desa: "Berkembang", lat: 5.4056, lng: 95.6178, tahun_berdiri: 1950 },
-  { id: 4, nama: "Gampong Kuta Karang", kecamatan: "Kuta Malaka", kabupaten: "Aceh Besar", luas_ha: 298.1, jumlah_penduduk: 1432, jumlah_kk: 358, kepala_desa: "Mahyuddin Umar", jenis_desa: "Mandiri", lat: 5.4201, lng: 95.6089, tahun_berdiri: 1928 },
-  { id: 5, nama: "Gampong Blang Bintang", kecamatan: "Kuta Malaka", kabupaten: "Aceh Besar", luas_ha: 312.8, jumlah_penduduk: 1389, jumlah_kk: 347, kepala_desa: "Syarifuddin", jenis_desa: "Maju", lat: 5.4267, lng: 95.6145, tahun_berdiri: 1938 },
-  { id: 6, nama: "Gampong Lamreh", kecamatan: "Kuta Malaka", kabupaten: "Aceh Besar", luas_ha: 189.4, jumlah_penduduk: 823, jumlah_kk: 206, kepala_desa: "Hamdani Said", jenis_desa: "Berkembang", lat: 5.4178, lng: 95.6401, tahun_berdiri: 1955 },
-  { id: 7, nama: "Gampong Siron", kecamatan: "Kuta Malaka", kabupaten: "Aceh Besar", luas_ha: 234.6, jumlah_penduduk: 1067, jumlah_kk: 267, kepala_desa: "Abdul Wahid", jenis_desa: "Maju", lat: 5.4312, lng: 95.6289, tahun_berdiri: 1942 },
-  { id: 8, nama: "Gampong Mon Ikeun", kecamatan: "Kuta Malaka", kabupaten: "Aceh Besar", luas_ha: 156.9, jumlah_penduduk: 634, jumlah_kk: 158, kepala_desa: "Razali Yusuf", jenis_desa: "Tertinggal", lat: 5.3978, lng: 95.6523, tahun_berdiri: 1960 },
-  { id: 9, nama: "Gampong Ateuk", kecamatan: "Kuta Malaka", kabupaten: "Aceh Besar", luas_ha: 201.3, jumlah_penduduk: 912, jumlah_kk: 228, kepala_desa: "Burhanuddin", jenis_desa: "Berkembang", lat: 5.4023, lng: 95.6467, tahun_berdiri: 1948 },
-  { id: 10, nama: "Gampong Baet", kecamatan: "Kuta Malaka", kabupaten: "Aceh Besar", luas_ha: 178.6, jumlah_penduduk: 798, jumlah_kk: 199, kepala_desa: "Mukhlis Yahya", jenis_desa: "Berkembang", lat: 5.4134, lng: 95.6556, tahun_berdiri: 1952 },
-  { id: 11, nama: "Gampong Tanjong", kecamatan: "Kuta Malaka", kabupaten: "Aceh Besar", luas_ha: 267.4, jumlah_penduduk: 1234, jumlah_kk: 309, kepala_desa: "Nasruddin Ali", jenis_desa: "Mandiri", lat: 5.4345, lng: 95.6378, tahun_berdiri: 1935 },
-  { id: 12, nama: "Gampong Reudeup", kecamatan: "Kuta Malaka", kabupaten: "Aceh Besar", luas_ha: 143.8, jumlah_penduduk: 578, jumlah_kk: 144, kepala_desa: "Sarwani Hamid", jenis_desa: "Tertinggal", lat: 5.3956, lng: 95.6601, tahun_berdiri: 1965 },
-  { id: 13, nama: "Gampong Lamtamot", kecamatan: "Kuta Malaka", kabupaten: "Aceh Besar", luas_ha: 189.1, jumlah_penduduk: 867, jumlah_kk: 217, kepala_desa: "Ahmadi Zakaria", jenis_desa: "Berkembang", lat: 5.4089, lng: 95.6634, tahun_berdiri: 1957 },
-  { id: 14, nama: "Gampong Cot Iri", kecamatan: "Kuta Malaka", kabupaten: "Aceh Besar", luas_ha: 167.5, jumlah_penduduk: 723, jumlah_kk: 181, kepala_desa: "Junaidi Husein", jenis_desa: "Maju", lat: 5.4156, lng: 95.6712, tahun_berdiri: 1943 },
-  { id: 15, nama: "Gampong Blang Krueng", kecamatan: "Kuta Malaka", kabupaten: "Aceh Besar", luas_ha: 261.8, jumlah_penduduk: 1127, jumlah_kk: 282, kepala_desa: "Ramli Daud", jenis_desa: "Maju", lat: 5.4234, lng: 95.6489, tahun_berdiri: 1939 },
+  { id: 1,  nama: "Desa Sekernan",      kecamatan: "Sekernan", kabupaten: "Muaro Jambi", luas_ha: 248.5, jumlah_penduduk: 1523, jumlah_kk: 378, kepala_desa: "Marjono",          jenis_desa: "Maju",              lat: -1.5812, lng: 103.5634, tahun_berdiri: 1945 },
+  { id: 2,  nama: "Desa Pondok Meja",   kecamatan: "Sekernan", kabupaten: "Muaro Jambi", luas_ha: 312.1, jumlah_penduduk: 1876, jumlah_kk: 461, kepala_desa: "Wahyu Santoso",    jenis_desa: "Mandiri",           lat: -1.5634, lng: 103.5489, tahun_berdiri: 1932 },
+  { id: 3,  nama: "Desa Arang-Arang",   kecamatan: "Sekernan", kabupaten: "Muaro Jambi", luas_ha: 187.4, jumlah_penduduk: 987,  jumlah_kk: 241, kepala_desa: "Heru Prasetyo",    jenis_desa: "Berkembang",        lat: -1.6023, lng: 103.5312, tahun_berdiri: 1950 },
+  { id: 4,  nama: "Desa Berembang",     kecamatan: "Sekernan", kabupaten: "Muaro Jambi", luas_ha: 276.8, jumlah_penduduk: 1412, jumlah_kk: 347, kepala_desa: "Slamet Riyadi",    jenis_desa: "Maju",              lat: -1.6189, lng: 103.5178, tahun_berdiri: 1928 },
+  { id: 5,  nama: "Desa Sungai Rotan",  kecamatan: "Sekernan", kabupaten: "Muaro Jambi", luas_ha: 203.6, jumlah_penduduk: 1134, jumlah_kk: 278, kepala_desa: "Bambang Sutrisno", jenis_desa: "Berkembang",        lat: -1.6345, lng: 103.5456, tahun_berdiri: 1938 },
+  { id: 6,  nama: "Desa Gerunggung",    kecamatan: "Sekernan", kabupaten: "Muaro Jambi", luas_ha: 159.3, jumlah_penduduk: 823,  jumlah_kk: 201, kepala_desa: "Edi Purwanto",     jenis_desa: "Berkembang",        lat: -1.6512, lng: 103.5623, tahun_berdiri: 1955 },
+  { id: 7,  nama: "Desa Tanjung Katung",kecamatan: "Sekernan", kabupaten: "Muaro Jambi", luas_ha: 234.7, jumlah_penduduk: 1267, jumlah_kk: 312, kepala_desa: "Tri Wibowo",       jenis_desa: "Maju",              lat: -1.6678, lng: 103.5789, tahun_berdiri: 1942 },
+  { id: 8,  nama: "Desa Kilangan",      kecamatan: "Sekernan", kabupaten: "Muaro Jambi", luas_ha: 148.9, jumlah_penduduk: 734,  jumlah_kk: 179, kepala_desa: "Agus Supriyadi",   jenis_desa: "Tertinggal",        lat: -1.6834, lng: 103.5934, tahun_berdiri: 1960 },
+  { id: 9,  nama: "Desa Tunas Baru",    kecamatan: "Sekernan", kabupaten: "Muaro Jambi", luas_ha: 298.2, jumlah_penduduk: 1589, jumlah_kk: 392, kepala_desa: "Dwi Cahyono",      jenis_desa: "Mandiri",           lat: -1.6156, lng: 103.6012, tahun_berdiri: 1948 },
+  { id: 10, nama: "Desa Parit Culum",   kecamatan: "Sekernan", kabupaten: "Muaro Jambi", luas_ha: 167.4, jumlah_penduduk: 856,  jumlah_kk: 211, kepala_desa: "Supri Hartono",    jenis_desa: "Berkembang",        lat: -1.6289, lng: 103.6167, tahun_berdiri: 1952 },
+  { id: 11, nama: "Desa Mekar Jaya",    kecamatan: "Sekernan", kabupaten: "Muaro Jambi", luas_ha: 213.5, jumlah_penduduk: 1145, jumlah_kk: 282, kepala_desa: "Jumadi",           jenis_desa: "Maju",              lat: -1.5956, lng: 103.6234, tahun_berdiri: 1935 },
+  { id: 12, nama: "Desa Sungai Gelam",  kecamatan: "Sekernan", kabupaten: "Muaro Jambi", luas_ha: 178.6, jumlah_penduduk: 923,  jumlah_kk: 228, kepala_desa: "Rusdi Effendi",    jenis_desa: "Maju",              lat: -1.5789, lng: 103.6389, tahun_berdiri: 1957 },
+  { id: 13, nama: "Desa Karya Maju",    kecamatan: "Sekernan", kabupaten: "Muaro Jambi", luas_ha: 289.1, jumlah_penduduk: 1423, jumlah_kk: 351, kepala_desa: "Purnomo",          jenis_desa: "Maju",              lat: -1.5623, lng: 103.6512, tahun_berdiri: 1943 },
+  { id: 14, nama: "Desa Bukit Baling",  kecamatan: "Sekernan", kabupaten: "Muaro Jambi", luas_ha: 134.7, jumlah_penduduk: 612,  jumlah_kk: 150, kepala_desa: "Sutomo",           jenis_desa: "Tertinggal",        lat: -1.7012, lng: 103.5567, tahun_berdiri: 1965 },
+  { id: 15, nama: "Desa Muara Sebapo",  kecamatan: "Sekernan", kabupaten: "Muaro Jambi", luas_ha: 371.9, jumlah_penduduk: 1844, jumlah_kk: 455, kepala_desa: "Hariyanto",        jenis_desa: "Maju",              lat: -1.7178, lng: 103.5234, tahun_berdiri: 1939 },
 ];
 
 // ── DANA DESA ─────────────────────────────────────────────────────────────────
 let danaDesa: Record<string, any>[] = [
-  { id: 1, desa_id: 1, nama_desa: "Gampong Cot Glie", tahun: 2024, alokasi: 987500000, realisasi: 921350000, persen_realisasi: 93.3, infra_pct: 55, pemberdayaan_pct: 30, operasional_pct: 15, sumber: "DD+ADD" },
-  { id: 2, desa_id: 2, nama_desa: "Gampong Meunasah Tuha", tahun: 2024, alokasi: 856200000, realisasi: 789430000, persen_realisasi: 92.2, infra_pct: 50, pemberdayaan_pct: 35, operasional_pct: 15, sumber: "DD+ADD" },
-  { id: 3, desa_id: 3, nama_desa: "Gampong Lamjamee", tahun: 2024, alokasi: 743800000, realisasi: 601650000, persen_realisasi: 80.9, infra_pct: 60, pemberdayaan_pct: 25, operasional_pct: 15, sumber: "DD+ADD" },
-  { id: 4, desa_id: 4, nama_desa: "Gampong Kuta Karang", tahun: 2024, alokasi: 1123400000, realisasi: 1089500000, persen_realisasi: 97.0, infra_pct: 45, pemberdayaan_pct: 40, operasional_pct: 15, sumber: "DD+ADD" },
-  { id: 5, desa_id: 5, nama_desa: "Gampong Blang Bintang", tahun: 2024, alokasi: 1089700000, realisasi: 1012300000, persen_realisasi: 92.9, infra_pct: 48, pemberdayaan_pct: 37, operasional_pct: 15, sumber: "DD+ADD" },
-  { id: 6, desa_id: 6, nama_desa: "Gampong Lamreh", tahun: 2024, alokasi: 812300000, realisasi: 698900000, persen_realisasi: 86.0, infra_pct: 58, pemberdayaan_pct: 27, operasional_pct: 15, sumber: "DD+ADD" },
-  { id: 7, desa_id: 7, nama_desa: "Gampong Siron", tahun: 2024, alokasi: 934600000, realisasi: 887200000, persen_realisasi: 94.9, infra_pct: 52, pemberdayaan_pct: 33, operasional_pct: 15, sumber: "DD+ADD" },
-  { id: 8, desa_id: 8, nama_desa: "Gampong Mon Ikeun", tahun: 2024, alokasi: 687400000, realisasi: 512300000, persen_realisasi: 74.5, infra_pct: 65, pemberdayaan_pct: 20, operasional_pct: 15, sumber: "DD+ADD" },
-  { id: 9, desa_id: 9, nama_desa: "Gampong Ateuk", tahun: 2024, alokasi: 867300000, realisasi: 756800000, persen_realisasi: 87.3, infra_pct: 55, pemberdayaan_pct: 30, operasional_pct: 15, sumber: "DD+ADD" },
-  { id: 10, desa_id: 10, nama_desa: "Gampong Baet", tahun: 2024, alokasi: 798500000, realisasi: 671200000, persen_realisasi: 84.1, infra_pct: 57, pemberdayaan_pct: 28, operasional_pct: 15, sumber: "DD+ADD" },
-  { id: 11, desa_id: 11, nama_desa: "Gampong Tanjong", tahun: 2024, alokasi: 1067800000, realisasi: 1045600000, persen_realisasi: 97.9, infra_pct: 42, pemberdayaan_pct: 43, operasional_pct: 15, sumber: "DD+ADD" },
-  { id: 12, desa_id: 12, nama_desa: "Gampong Reudeup", tahun: 2024, alokasi: 623400000, realisasi: 498700000, persen_realisasi: 80.0, infra_pct: 67, pemberdayaan_pct: 18, operasional_pct: 15, sumber: "DD+ADD" },
-  { id: 13, desa_id: 13, nama_desa: "Gampong Lamtamot", tahun: 2024, alokasi: 834200000, realisasi: 723450000, persen_realisasi: 86.7, infra_pct: 54, pemberdayaan_pct: 31, operasional_pct: 15, sumber: "DD+ADD" },
-  { id: 14, desa_id: 14, nama_desa: "Gampong Cot Iri", tahun: 2024, alokasi: 756900000, realisasi: 703200000, persen_realisasi: 92.9, infra_pct: 50, pemberdayaan_pct: 35, operasional_pct: 15, sumber: "DD+ADD" },
-  { id: 15, desa_id: 15, nama_desa: "Gampong Blang Krueng", tahun: 2024, alokasi: 951500000, realisasi: 903120000, persen_realisasi: 94.9, infra_pct: 48, pemberdayaan_pct: 37, operasional_pct: 15, sumber: "DD+ADD" },
+  { id: 1,  desa_id: 1,  nama_desa: "Desa Sekernan",       tahun: 2024, alokasi: 1087500000, realisasi: 1021300000, persen_realisasi: 93.9, infra_pct: 52, pemberdayaan_pct: 33, operasional_pct: 15, sumber: "DD+ADD" },
+  { id: 2,  desa_id: 2,  nama_desa: "Desa Pondok Meja",    tahun: 2024, alokasi: 1234600000, realisasi: 1212500000, persen_realisasi: 98.2, infra_pct: 45, pemberdayaan_pct: 40, operasional_pct: 15, sumber: "DD+ADD" },
+  { id: 3,  desa_id: 3,  nama_desa: "Desa Arang-Arang",    tahun: 2024, alokasi: 843800000,  realisasi: 701650000,  persen_realisasi: 83.2, infra_pct: 60, pemberdayaan_pct: 25, operasional_pct: 15, sumber: "DD+ADD" },
+  { id: 4,  desa_id: 4,  nama_desa: "Desa Berembang",      tahun: 2024, alokasi: 1089700000, realisasi: 1034300000, persen_realisasi: 94.9, infra_pct: 48, pemberdayaan_pct: 37, operasional_pct: 15, sumber: "DD+ADD" },
+  { id: 5,  desa_id: 5,  nama_desa: "Desa Sungai Rotan",   tahun: 2024, alokasi: 934600000,  realisasi: 812300000,  persen_realisasi: 86.9, infra_pct: 55, pemberdayaan_pct: 30, operasional_pct: 15, sumber: "DD+ADD" },
+  { id: 6,  desa_id: 6,  nama_desa: "Desa Gerunggung",     tahun: 2024, alokasi: 812300000,  realisasi: 698900000,  persen_realisasi: 86.0, infra_pct: 58, pemberdayaan_pct: 27, operasional_pct: 15, sumber: "DD+ADD" },
+  { id: 7,  desa_id: 7,  nama_desa: "Desa Tanjung Katung", tahun: 2024, alokasi: 1056900000, realisasi: 1003200000, persen_realisasi: 94.9, infra_pct: 50, pemberdayaan_pct: 35, operasional_pct: 15, sumber: "DD+ADD" },
+  { id: 8,  desa_id: 8,  nama_desa: "Desa Kilangan",       tahun: 2024, alokasi: 687400000,  realisasi: 512300000,  persen_realisasi: 74.5, infra_pct: 65, pemberdayaan_pct: 20, operasional_pct: 15, sumber: "DD+ADD" },
+  { id: 9,  desa_id: 9,  nama_desa: "Desa Tunas Baru",     tahun: 2024, alokasi: 1267300000, realisasi: 1245600000, persen_realisasi: 98.3, infra_pct: 42, pemberdayaan_pct: 43, operasional_pct: 15, sumber: "DD+ADD" },
+  { id: 10, desa_id: 10, nama_desa: "Desa Parit Culum",    tahun: 2024, alokasi: 798500000,  realisasi: 671200000,  persen_realisasi: 84.1, infra_pct: 57, pemberdayaan_pct: 28, operasional_pct: 15, sumber: "DD+ADD" },
+  { id: 11, desa_id: 11, nama_desa: "Desa Mekar Jaya",     tahun: 2024, alokasi: 967800000,  realisasi: 934600000,  persen_realisasi: 96.6, infra_pct: 47, pemberdayaan_pct: 38, operasional_pct: 15, sumber: "DD+ADD" },
+  { id: 12, desa_id: 12, nama_desa: "Desa Sungai Gelam",   tahun: 2024, alokasi: 867300000,  realisasi: 823450000,  persen_realisasi: 94.9, infra_pct: 53, pemberdayaan_pct: 32, operasional_pct: 15, sumber: "DD+ADD" },
+  { id: 13, desa_id: 13, nama_desa: "Desa Karya Maju",     tahun: 2024, alokasi: 1123400000, realisasi: 1089500000, persen_realisasi: 97.0, infra_pct: 48, pemberdayaan_pct: 37, operasional_pct: 15, sumber: "DD+ADD" },
+  { id: 14, desa_id: 14, nama_desa: "Desa Bukit Baling",   tahun: 2024, alokasi: 623400000,  realisasi: 498700000,  persen_realisasi: 80.0, infra_pct: 67, pemberdayaan_pct: 18, operasional_pct: 15, sumber: "DD+ADD" },
+  { id: 15, desa_id: 15, nama_desa: "Desa Muara Sebapo",   tahun: 2024, alokasi: 1378700000, realisasi: 1323100000, persen_realisasi: 96.0, infra_pct: 44, pemberdayaan_pct: 41, operasional_pct: 15, sumber: "DD+ADD" },
 ];
 
 // ── IDM ───────────────────────────────────────────────────────────────────────
 let idmData: Record<string, any>[] = [
-  { id: 1, desa_id: 1, nama_desa: "Gampong Cot Glie", tahun: 2024, skor_idm: 0.6842, status_idm: "Berkembang", iks: 0.7123, ike: 0.6534, ikl: 0.6869, skor_sebelumnya: 0.6612, delta: 0.0230 },
-  { id: 2, desa_id: 2, nama_desa: "Gampong Meunasah Tuha", tahun: 2024, skor_idm: 0.7534, status_idm: "Maju", iks: 0.7812, ike: 0.7201, ikl: 0.7589, skor_sebelumnya: 0.7234, delta: 0.0300 },
-  { id: 3, desa_id: 3, nama_desa: "Gampong Lamjamee", tahun: 2024, skor_idm: 0.6523, status_idm: "Berkembang", iks: 0.6845, ike: 0.6231, ikl: 0.6493, skor_sebelumnya: 0.6321, delta: 0.0202 },
-  { id: 4, desa_id: 4, nama_desa: "Gampong Kuta Karang", tahun: 2024, skor_idm: 0.8423, status_idm: "Mandiri", iks: 0.8734, ike: 0.8123, ikl: 0.8412, skor_sebelumnya: 0.8134, delta: 0.0289 },
-  { id: 5, desa_id: 5, nama_desa: "Gampong Blang Bintang", tahun: 2024, skor_idm: 0.7823, status_idm: "Maju", iks: 0.8012, ike: 0.7634, ikl: 0.7823, skor_sebelumnya: 0.7512, delta: 0.0311 },
-  { id: 6, desa_id: 6, nama_desa: "Gampong Lamreh", tahun: 2024, skor_idm: 0.6712, status_idm: "Berkembang", iks: 0.6934, ike: 0.6523, ikl: 0.6679, skor_sebelumnya: 0.6501, delta: 0.0211 },
-  { id: 7, desa_id: 7, nama_desa: "Gampong Siron", tahun: 2024, skor_idm: 0.7234, status_idm: "Maju", iks: 0.7512, ike: 0.6987, ikl: 0.7203, skor_sebelumnya: 0.6934, delta: 0.0300 },
-  { id: 8, desa_id: 8, nama_desa: "Gampong Mon Ikeun", tahun: 2024, skor_idm: 0.5623, status_idm: "Tertinggal", iks: 0.5912, ike: 0.5289, ikl: 0.5668, skor_sebelumnya: 0.5401, delta: 0.0222 },
-  { id: 9, desa_id: 9, nama_desa: "Gampong Ateuk", tahun: 2024, skor_idm: 0.6934, status_idm: "Berkembang", iks: 0.7201, ike: 0.6678, ikl: 0.6923, skor_sebelumnya: 0.6712, delta: 0.0222 },
-  { id: 10, desa_id: 10, nama_desa: "Gampong Baet", tahun: 2024, skor_idm: 0.6445, status_idm: "Berkembang", iks: 0.6712, ike: 0.6189, ikl: 0.6434, skor_sebelumnya: 0.6223, delta: 0.0222 },
-  { id: 11, desa_id: 11, nama_desa: "Gampong Tanjong", tahun: 2024, skor_idm: 0.8312, status_idm: "Mandiri", iks: 0.8623, ike: 0.8001, ikl: 0.8312, skor_sebelumnya: 0.8001, delta: 0.0311 },
-  { id: 12, desa_id: 12, nama_desa: "Gampong Reudeup", tahun: 2024, skor_idm: 0.5312, status_idm: "Tertinggal", iks: 0.5601, ike: 0.5023, ikl: 0.5312, skor_sebelumnya: 0.5101, delta: 0.0211 },
-  { id: 13, desa_id: 13, nama_desa: "Gampong Lamtamot", tahun: 2024, skor_idm: 0.6734, status_idm: "Berkembang", iks: 0.7001, ike: 0.6467, ikl: 0.6734, skor_sebelumnya: 0.6512, delta: 0.0222 },
-  { id: 14, desa_id: 14, nama_desa: "Gampong Cot Iri", tahun: 2024, skor_idm: 0.7123, status_idm: "Maju", iks: 0.7412, ike: 0.6845, ikl: 0.7112, skor_sebelumnya: 0.6823, delta: 0.0300 },
-  { id: 15, desa_id: 15, nama_desa: "Gampong Blang Krueng", tahun: 2024, skor_idm: 0.7645, status_idm: "Maju", iks: 0.7934, ike: 0.7356, ikl: 0.7645, skor_sebelumnya: 0.7334, delta: 0.0311 },
+  { id: 1,  desa_id: 1,  nama_desa: "Desa Sekernan",       tahun: 2024, skor_idm: 0.7534, status_idm: "Maju",        iks: 0.7812, ike: 0.7201, ikl: 0.7589, skor_sebelumnya: 0.7234, delta: 0.0300 },
+  { id: 2,  desa_id: 2,  nama_desa: "Desa Pondok Meja",    tahun: 2024, skor_idm: 0.8423, status_idm: "Mandiri",     iks: 0.8734, ike: 0.8123, ikl: 0.8412, skor_sebelumnya: 0.8134, delta: 0.0289 },
+  { id: 3,  desa_id: 3,  nama_desa: "Desa Arang-Arang",    tahun: 2024, skor_idm: 0.6523, status_idm: "Berkembang",  iks: 0.6845, ike: 0.6231, ikl: 0.6493, skor_sebelumnya: 0.6321, delta: 0.0202 },
+  { id: 4,  desa_id: 4,  nama_desa: "Desa Berembang",      tahun: 2024, skor_idm: 0.7823, status_idm: "Maju",        iks: 0.8012, ike: 0.7634, ikl: 0.7823, skor_sebelumnya: 0.7512, delta: 0.0311 },
+  { id: 5,  desa_id: 5,  nama_desa: "Desa Sungai Rotan",   tahun: 2024, skor_idm: 0.6842, status_idm: "Berkembang",  iks: 0.7123, ike: 0.6534, ikl: 0.6869, skor_sebelumnya: 0.6612, delta: 0.0230 },
+  { id: 6,  desa_id: 6,  nama_desa: "Desa Gerunggung",     tahun: 2024, skor_idm: 0.6712, status_idm: "Berkembang",  iks: 0.6934, ike: 0.6523, ikl: 0.6679, skor_sebelumnya: 0.6501, delta: 0.0211 },
+  { id: 7,  desa_id: 7,  nama_desa: "Desa Tanjung Katung", tahun: 2024, skor_idm: 0.7234, status_idm: "Maju",        iks: 0.7512, ike: 0.6987, ikl: 0.7203, skor_sebelumnya: 0.6934, delta: 0.0300 },
+  { id: 8,  desa_id: 8,  nama_desa: "Desa Kilangan",       tahun: 2024, skor_idm: 0.5623, status_idm: "Tertinggal",  iks: 0.5912, ike: 0.5289, ikl: 0.5668, skor_sebelumnya: 0.5401, delta: 0.0222 },
+  { id: 9,  desa_id: 9,  nama_desa: "Desa Tunas Baru",     tahun: 2024, skor_idm: 0.8312, status_idm: "Mandiri",     iks: 0.8623, ike: 0.8001, ikl: 0.8312, skor_sebelumnya: 0.8001, delta: 0.0311 },
+  { id: 10, desa_id: 10, nama_desa: "Desa Parit Culum",    tahun: 2024, skor_idm: 0.6445, status_idm: "Berkembang",  iks: 0.6712, ike: 0.6189, ikl: 0.6434, skor_sebelumnya: 0.6223, delta: 0.0222 },
+  { id: 11, desa_id: 11, nama_desa: "Desa Mekar Jaya",     tahun: 2024, skor_idm: 0.7645, status_idm: "Maju",        iks: 0.7934, ike: 0.7356, ikl: 0.7645, skor_sebelumnya: 0.7334, delta: 0.0311 },
+  { id: 12, desa_id: 12, nama_desa: "Desa Sungai Gelam",   tahun: 2024, skor_idm: 0.7123, status_idm: "Maju",        iks: 0.7412, ike: 0.6845, ikl: 0.7112, skor_sebelumnya: 0.6823, delta: 0.0300 },
+  { id: 13, desa_id: 13, nama_desa: "Desa Karya Maju",     tahun: 2024, skor_idm: 0.7934, status_idm: "Maju",        iks: 0.8201, ike: 0.7678, ikl: 0.7923, skor_sebelumnya: 0.7612, delta: 0.0322 },
+  { id: 14, desa_id: 14, nama_desa: "Desa Bukit Baling",   tahun: 2024, skor_idm: 0.5312, status_idm: "Tertinggal",  iks: 0.5601, ike: 0.5023, ikl: 0.5312, skor_sebelumnya: 0.5101, delta: 0.0211 },
+  { id: 15, desa_id: 15, nama_desa: "Desa Muara Sebapo",   tahun: 2024, skor_idm: 0.7912, status_idm: "Maju",        iks: 0.8189, ike: 0.7645, ikl: 0.7902, skor_sebelumnya: 0.7601, delta: 0.0311 },
 ];
 
-// ── PELAYANAN DESA ────────────────────────────────────────────────────────────
+// ── PELAYANAN ─────────────────────────────────────────────────────────────────
 let pelayananData: Record<string, any>[] = [
-  { id: 1, nama_desa: "Gampong Cot Glie", jenis: "Pendidikan", nama_fasilitas: "PAUD Cot Glie", status: "Aktif", pengguna_bulan: 45, keterangan: "Gedung permanen, 2 pengajar" },
-  { id: 2, nama_desa: "Gampong Cot Glie", jenis: "Kesehatan", nama_fasilitas: "Posyandu Cot Glie", status: "Aktif", pengguna_bulan: 120, keterangan: "Jadwal rutin tiap Selasa" },
-  { id: 3, nama_desa: "Gampong Cot Glie", jenis: "Administrasi", nama_fasilitas: "Balai Gampong Cot Glie", status: "Aktif", pengguna_bulan: 89, keterangan: "Online & offline, SIPD terintegrasi" },
-  { id: 4, nama_desa: "Gampong Kuta Karang", jenis: "Pendidikan", nama_fasilitas: "TK Tunas Harapan", status: "Aktif", pengguna_bulan: 67, keterangan: "Gedung baru 2023" },
-  { id: 5, nama_desa: "Gampong Kuta Karang", jenis: "Kesehatan", nama_fasilitas: "Polindes Kuta Karang", status: "Aktif", pengguna_bulan: 178, keterangan: "1 bidan desa full-time" },
-  { id: 6, nama_desa: "Gampong Kuta Karang", jenis: "Ekonomi", nama_fasilitas: "BUMDes Kuta Mandiri", status: "Aktif", pengguna_bulan: 234, keterangan: "Unit usaha: simpan-pinjam, toko desa" },
-  { id: 7, nama_desa: "Gampong Kuta Karang", jenis: "Administrasi", nama_fasilitas: "Kantor Gampong Kuta Karang", status: "Aktif", pengguna_bulan: 145, keterangan: "Layanan 5 hari kerja, sistem digital" },
-  { id: 8, nama_desa: "Gampong Tanjong", jenis: "Pendidikan", nama_fasilitas: "PAUD Tanjong Jaya", status: "Aktif", pengguna_bulan: 58, keterangan: "2 kelas, kurikulum nasional" },
-  { id: 9, nama_desa: "Gampong Tanjong", jenis: "Ekonomi", nama_fasilitas: "BUMDes Tanjong Sejahtera", status: "Aktif", pengguna_bulan: 312, keterangan: "Wisata desa, kios pertanian" },
-  { id: 10, nama_desa: "Gampong Tanjong", jenis: "Kesehatan", nama_fasilitas: "Posyandu Balita Tanjong", status: "Aktif", pengguna_bulan: 156, keterangan: "Rutin 2x sebulan" },
-  { id: 11, nama_desa: "Gampong Blang Bintang", jenis: "Kesehatan", nama_fasilitas: "Posyandu Blang Bintang", status: "Aktif", pengguna_bulan: 134, keterangan: "Terintegrasi Puskesmas Kuta Malaka" },
-  { id: 12, nama_desa: "Gampong Blang Bintang", jenis: "Ekonomi", nama_fasilitas: "Pasar Desa Blang Bintang", status: "Aktif", pengguna_bulan: 567, keterangan: "Aktif tiap Rabu dan Sabtu" },
-  { id: 13, nama_desa: "Gampong Siron", jenis: "Pendidikan", nama_fasilitas: "TK Al-Falah Siron", status: "Aktif", pengguna_bulan: 52, keterangan: "Berbasis pesantren" },
-  { id: 14, nama_desa: "Gampong Siron", jenis: "Administrasi", nama_fasilitas: "Balai Gampong Siron", status: "Aktif", pengguna_bulan: 98, keterangan: "Renovasi 2023 via Dana Desa" },
-  { id: 15, nama_desa: "Gampong Mon Ikeun", jenis: "Kesehatan", nama_fasilitas: "Posyandu Mon Ikeun", status: "Tidak Aktif", pengguna_bulan: 34, keterangan: "Kekurangan kader, butuh intervensi" },
-  { id: 16, nama_desa: "Gampong Reudeup", jenis: "Administrasi", nama_fasilitas: "Sekretariat Gampong Reudeup", status: "Aktif", pengguna_bulan: 45, keterangan: "Pelayanan terbatas 3 hari" },
-  { id: 17, nama_desa: "Gampong Blang Krueng", jenis: "Ekonomi", nama_fasilitas: "BUMDes Krueng Mandiri", status: "Aktif", pengguna_bulan: 198, keterangan: "Agribisnis dan pengolahan hasil tani" },
-  { id: 18, nama_desa: "Gampong Meunasah Tuha", jenis: "Kesehatan", nama_fasilitas: "Posbindu Meunasah Tuha", status: "Aktif", pengguna_bulan: 89, keterangan: "Pemeriksaan lansia rutin" },
-  { id: 19, nama_desa: "Gampong Lamtamot", jenis: "Pendidikan", nama_fasilitas: "PAUD Lamtamot Ceria", status: "Aktif", pengguna_bulan: 41, keterangan: "Didukung PKK" },
-  { id: 20, nama_desa: "Gampong Ateuk", jenis: "Ekonomi", nama_fasilitas: "Koperasi Desa Ateuk", status: "Aktif", pengguna_bulan: 156, keterangan: "Anggota 120 KK, simpan pinjam" },
+  { id: 1,  desa_id: 1,  nama_desa: "Desa Sekernan",       jenis: "Kesehatan",    nama_layanan: "Posyandu Melati",         status: "Aktif",  jumlah_penerima: 312, frekuensi: "Bulanan",  petugas: "Bidan Sari" },
+  { id: 2,  desa_id: 2,  nama_desa: "Desa Pondok Meja",    jenis: "Pendidikan",   nama_layanan: "PAUD Ceria",              status: "Aktif",  jumlah_penerima: 45,  frekuensi: "Harian",   petugas: "Ibu Wati" },
+  { id: 3,  desa_id: 3,  nama_desa: "Desa Arang-Arang",    jenis: "Administrasi", nama_layanan: "Pelayanan KTP & KK",      status: "Aktif",  jumlah_penerima: 134, frekuensi: "Harian",   petugas: "Pak Joko" },
+  { id: 4,  desa_id: 4,  nama_desa: "Desa Berembang",      jenis: "Sosial",       nama_layanan: "Bantuan PKH",             status: "Aktif",  jumlah_penerima: 89,  frekuensi: "Triwulan", petugas: "Bu Sri" },
+  { id: 5,  desa_id: 5,  nama_desa: "Desa Sungai Rotan",   jenis: "Kesehatan",    nama_layanan: "Posyandu Mawar",          status: "Aktif",  jumlah_penerima: 245, frekuensi: "Bulanan",  petugas: "Bidan Tini" },
+  { id: 6,  desa_id: 6,  nama_desa: "Desa Gerunggung",     jenis: "Infrastruktur",nama_layanan: "Pengairan Sawah",         status: "Proses", jumlah_penerima: 156, frekuensi: "Musiman",  petugas: "Pak Budi" },
+  { id: 7,  desa_id: 7,  nama_desa: "Desa Tanjung Katung", jenis: "Pendidikan",   nama_layanan: "TPA Al-Ikhlas",           status: "Aktif",  jumlah_penerima: 78,  frekuensi: "Harian",   petugas: "Ustadz Amin" },
+  { id: 8,  desa_id: 8,  nama_desa: "Desa Kilangan",       jenis: "Ekonomi",      nama_layanan: "BUMDes Maju Bersama",     status: "Aktif",  jumlah_penerima: 67,  frekuensi: "Harian",   petugas: "Pak Supri" },
+  { id: 9,  desa_id: 9,  nama_desa: "Desa Tunas Baru",     jenis: "Kesehatan",    nama_layanan: "Polindes Tunas Sehat",    status: "Aktif",  jumlah_penerima: 389, frekuensi: "Harian",   petugas: "Bidan Rina" },
+  { id: 10, desa_id: 10, nama_desa: "Desa Parit Culum",    jenis: "Sosial",       nama_layanan: "Lansia Bahagia",          status: "Aktif",  jumlah_penerima: 112, frekuensi: "Mingguan", petugas: "Ibu Siti" },
+  { id: 11, desa_id: 11, nama_desa: "Desa Mekar Jaya",     jenis: "Administrasi", nama_layanan: "Kependudukan Digital",    status: "Aktif",  jumlah_penerima: 289, frekuensi: "Harian",   petugas: "Pak Hendra" },
+  { id: 12, desa_id: 12, nama_desa: "Desa Sungai Gelam",   jenis: "Pendidikan",   nama_layanan: "Beasiswa Anak Desa",      status: "Aktif",  jumlah_penerima: 34,  frekuensi: "Tahunan",  petugas: "Bu Wulan" },
+  { id: 13, desa_id: 13, nama_desa: "Desa Karya Maju",     jenis: "Ekonomi",      nama_layanan: "Koperasi Tani Sejahtera", status: "Aktif",  jumlah_penerima: 145, frekuensi: "Bulanan",  petugas: "Pak Ridwan" },
+  { id: 14, desa_id: 14, nama_desa: "Desa Bukit Baling",   jenis: "Kesehatan",    nama_layanan: "Posyandu Anggrek",        status: "Nonaktif",jumlah_penerima: 98, frekuensi: "Bulanan",  petugas: "Bidan Dewi" },
+  { id: 15, desa_id: 15, nama_desa: "Desa Muara Sebapo",   jenis: "Infrastruktur",nama_layanan: "Jalan Usaha Tani",        status: "Aktif",  jumlah_penerima: 412, frekuensi: "Harian",   petugas: "Pak Agus" },
 ];
 
-let nextId = { profil: 16, dana: 16, idm: 16, pelayanan: 21 };
+// ── ROUTES ────────────────────────────────────────────────────────────────────
 
-// ── READ ──────────────────────────────────────────────────────────────────────
-router.get("/desa/summary", (_req, res) => { res.json(desaSummary); });
-router.get("/desa/profil", (_req, res) => { res.json(profilData); });
-router.get("/desa/dana", (_req, res) => { res.json(danaDesa); });
-router.get("/desa/idm", (_req, res) => { res.json(idmData); });
-router.get("/desa/pelayanan", (_req, res) => { res.json(pelayananData); });
+// GET /api/desa/summary
+router.get("/summary", (req, res) => {
+  res.json(desaSummary);
+});
 
-// ── UPDATE SUMMARY ────────────────────────────────────────────────────────────
-router.put("/desa/summary", (req, res) => {
+// PUT /api/desa/summary
+router.put("/summary", (req, res) => {
   desaSummary = { ...desaSummary, ...req.body };
   res.json(desaSummary);
 });
 
-// ── PROFIL CRUD ───────────────────────────────────────────────────────────────
-router.post("/desa/profil", (req, res) => {
-  const r = { ...req.body, id: nextId.profil++ };
-  profilData.push(r); res.status(201).json(r);
-});
-router.put("/desa/profil/:id", (req, res) => {
-  const id = Number(req.params.id);
-  const idx = profilData.findIndex((r) => r.id === id);
-  if (idx === -1) { res.status(404).json({ error: "Not found" }); return; }
-  profilData[idx] = { ...profilData[idx], ...req.body, id }; res.json(profilData[idx]);
-});
-router.delete("/desa/profil/:id", (req, res) => {
-  const id = Number(req.params.id);
-  const before = profilData.length;
-  profilData = profilData.filter((r) => r.id !== id);
-  if (profilData.length === before) { res.status(404).json({ error: "Not found" }); return; }
-  res.status(204).end();
+// GET /api/desa/profil
+router.get("/profil", (req, res) => {
+  res.json(profilData);
 });
 
-// ── DANA CRUD ─────────────────────────────────────────────────────────────────
-router.post("/desa/dana", (req, res) => {
-  const r = { ...req.body, id: nextId.dana++ };
-  danaDesa.push(r); res.status(201).json(r);
-});
-router.put("/desa/dana/:id", (req, res) => {
-  const id = Number(req.params.id);
-  const idx = danaDesa.findIndex((r) => r.id === id);
-  if (idx === -1) { res.status(404).json({ error: "Not found" }); return; }
-  danaDesa[idx] = { ...danaDesa[idx], ...req.body, id }; res.json(danaDesa[idx]);
-});
-router.delete("/desa/dana/:id", (req, res) => {
-  const id = Number(req.params.id);
-  const before = danaDesa.length;
-  danaDesa = danaDesa.filter((r) => r.id !== id);
-  if (danaDesa.length === before) { res.status(404).json({ error: "Not found" }); return; }
-  res.status(204).end();
+// GET /api/desa/profil/:id
+router.get("/profil/:id", (req, res) => {
+  const item = profilData.find((d) => d.id === Number(req.params.id));
+  if (!item) return res.status(404).json({ error: "Not found" });
+  res.json(item);
 });
 
-// ── IDM CRUD ──────────────────────────────────────────────────────────────────
-router.post("/desa/idm", (req, res) => {
-  const r = { ...req.body, id: nextId.idm++ };
-  idmData.push(r); res.status(201).json(r);
-});
-router.put("/desa/idm/:id", (req, res) => {
-  const id = Number(req.params.id);
-  const idx = idmData.findIndex((r) => r.id === id);
-  if (idx === -1) { res.status(404).json({ error: "Not found" }); return; }
-  idmData[idx] = { ...idmData[idx], ...req.body, id }; res.json(idmData[idx]);
-});
-router.delete("/desa/idm/:id", (req, res) => {
-  const id = Number(req.params.id);
-  const before = idmData.length;
-  idmData = idmData.filter((r) => r.id !== id);
-  if (idmData.length === before) { res.status(404).json({ error: "Not found" }); return; }
-  res.status(204).end();
+// POST /api/desa/profil
+router.post("/profil", (req, res) => {
+  const newItem = { ...req.body, id: Date.now() };
+  profilData.push(newItem);
+  res.status(201).json(newItem);
 });
 
-// ── PELAYANAN CRUD ────────────────────────────────────────────────────────────
-router.post("/desa/pelayanan", (req, res) => {
-  const r = { ...req.body, id: nextId.pelayanan++ };
-  pelayananData.push(r); res.status(201).json(r);
+// PUT /api/desa/profil/:id
+router.put("/profil/:id", (req, res) => {
+  const idx = profilData.findIndex((d) => d.id === Number(req.params.id));
+  if (idx === -1) return res.status(404).json({ error: "Not found" });
+  profilData[idx] = { ...profilData[idx], ...req.body };
+  res.json(profilData[idx]);
 });
-router.put("/desa/pelayanan/:id", (req, res) => {
-  const id = Number(req.params.id);
-  const idx = pelayananData.findIndex((r) => r.id === id);
-  if (idx === -1) { res.status(404).json({ error: "Not found" }); return; }
-  pelayananData[idx] = { ...pelayananData[idx], ...req.body, id }; res.json(pelayananData[idx]);
+
+// DELETE /api/desa/profil/:id
+router.delete("/profil/:id", (req, res) => {
+  const idx = profilData.findIndex((d) => d.id === Number(req.params.id));
+  if (idx === -1) return res.status(404).json({ error: "Not found" });
+  profilData.splice(idx, 1);
+  res.status(204).send();
 });
-router.delete("/desa/pelayanan/:id", (req, res) => {
-  const id = Number(req.params.id);
-  const before = pelayananData.length;
-  pelayananData = pelayananData.filter((r) => r.id !== id);
-  if (pelayananData.length === before) { res.status(404).json({ error: "Not found" }); return; }
-  res.status(204).end();
+
+// GET /api/desa/dana
+router.get("/dana", (req, res) => {
+  res.json(danaDesa);
+});
+
+// GET /api/desa/dana/:id
+router.get("/dana/:id", (req, res) => {
+  const item = danaDesa.find((d) => d.id === Number(req.params.id));
+  if (!item) return res.status(404).json({ error: "Not found" });
+  res.json(item);
+});
+
+// POST /api/desa/dana
+router.post("/dana", (req, res) => {
+  const newItem = { ...req.body, id: Date.now() };
+  danaDesa.push(newItem);
+  res.status(201).json(newItem);
+});
+
+// PUT /api/desa/dana/:id
+router.put("/dana/:id", (req, res) => {
+  const idx = danaDesa.findIndex((d) => d.id === Number(req.params.id));
+  if (idx === -1) return res.status(404).json({ error: "Not found" });
+  danaDesa[idx] = { ...danaDesa[idx], ...req.body };
+  res.json(danaDesa[idx]);
+});
+
+// DELETE /api/desa/dana/:id
+router.delete("/dana/:id", (req, res) => {
+  const idx = danaDesa.findIndex((d) => d.id === Number(req.params.id));
+  if (idx === -1) return res.status(404).json({ error: "Not found" });
+  danaDesa.splice(idx, 1);
+  res.status(204).send();
+});
+
+// GET /api/desa/idm
+router.get("/idm", (req, res) => {
+  res.json(idmData);
+});
+
+// GET /api/desa/idm/:id
+router.get("/idm/:id", (req, res) => {
+  const item = idmData.find((d) => d.id === Number(req.params.id));
+  if (!item) return res.status(404).json({ error: "Not found" });
+  res.json(item);
+});
+
+// POST /api/desa/idm
+router.post("/idm", (req, res) => {
+  const newItem = { ...req.body, id: Date.now() };
+  idmData.push(newItem);
+  res.status(201).json(newItem);
+});
+
+// PUT /api/desa/idm/:id
+router.put("/idm/:id", (req, res) => {
+  const idx = idmData.findIndex((d) => d.id === Number(req.params.id));
+  if (idx === -1) return res.status(404).json({ error: "Not found" });
+  idmData[idx] = { ...idmData[idx], ...req.body };
+  res.json(idmData[idx]);
+});
+
+// DELETE /api/desa/idm/:id
+router.delete("/idm/:id", (req, res) => {
+  const idx = idmData.findIndex((d) => d.id === Number(req.params.id));
+  if (idx === -1) return res.status(404).json({ error: "Not found" });
+  idmData.splice(idx, 1);
+  res.status(204).send();
+});
+
+// GET /api/desa/pelayanan
+router.get("/pelayanan", (req, res) => {
+  res.json(pelayananData);
+});
+
+// GET /api/desa/pelayanan/:id
+router.get("/pelayanan/:id", (req, res) => {
+  const item = pelayananData.find((d) => d.id === Number(req.params.id));
+  if (!item) return res.status(404).json({ error: "Not found" });
+  res.json(item);
+});
+
+// POST /api/desa/pelayanan
+router.post("/pelayanan", (req, res) => {
+  const newItem = { ...req.body, id: Date.now() };
+  pelayananData.push(newItem);
+  res.status(201).json(newItem);
+});
+
+// PUT /api/desa/pelayanan/:id
+router.put("/pelayanan/:id", (req, res) => {
+  const idx = pelayananData.findIndex((d) => d.id === Number(req.params.id));
+  if (idx === -1) return res.status(404).json({ error: "Not found" });
+  pelayananData[idx] = { ...pelayananData[idx], ...req.body };
+  res.json(pelayananData[idx]);
+});
+
+// DELETE /api/desa/pelayanan/:id
+router.delete("/pelayanan/:id", (req, res) => {
+  const idx = pelayananData.findIndex((d) => d.id === Number(req.params.id));
+  if (idx === -1) return res.status(404).json({ error: "Not found" });
+  pelayananData.splice(idx, 1);
+  res.status(204).send();
 });
 
 export default router;

@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from "react";
-import { Link } from "wouter";
+import Link from "next/link";
 import {
   LayoutDashboard, MapPin, Coins, BarChart2, HeartHandshake,
   ChevronLeft, Menu, X,
@@ -80,12 +82,10 @@ export default function AdminPage() {
 
   return (
     <div className="flex h-screen bg-gray-100 overflow-hidden">
-      {/* Desktop Sidebar */}
       <aside className="hidden md:flex flex-col w-60 bg-gray-900 flex-shrink-0">
         <SidebarContent />
       </aside>
 
-      {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 md:hidden"
@@ -100,9 +100,7 @@ export default function AdminPage() {
         <SidebarContent />
       </aside>
 
-      {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Top Bar */}
         <header className="h-14 bg-white border-b flex items-center px-4 gap-3 flex-shrink-0">
           <button
             className="md:hidden text-gray-500 hover:text-gray-800"

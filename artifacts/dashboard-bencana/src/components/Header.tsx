@@ -1,4 +1,6 @@
-import { Link } from "wouter";
+"use client";
+
+import Link from "next/link";
 
 interface HeaderProps {
   onMenuClick: () => void;
@@ -8,7 +10,7 @@ interface HeaderProps {
   kabupaten?: string;
 }
 
-export default function Header({ onMenuClick, onRefresh, lastUpdate, kecamatan = "Kuta Malaka", kabupaten = "Aceh Besar" }: HeaderProps) {
+export default function Header({ onMenuClick, onRefresh, lastUpdate, kecamatan = "Sekernan", kabupaten = "Muaro Jambi" }: HeaderProps) {
   return (
     <header className="bg-gradient-to-r from-green-800 via-green-700 to-emerald-700 text-white shadow-lg sticky top-0 z-50">
       <div className="px-2 md:px-4">

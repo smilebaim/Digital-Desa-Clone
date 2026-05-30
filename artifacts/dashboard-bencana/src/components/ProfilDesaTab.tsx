@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef } from "react";
 import { useGetDesaSummary, useGetDesaProfil } from "@workspace/api-client-react";
 
@@ -76,7 +78,7 @@ export default function ProfilDesaTab() {
     <div className="container mx-auto px-4 md:px-6 py-6 space-y-6">
       {/* KPI Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <KpiCard icon="fa-house-chimney" value={summary?.totalDesa ?? 0} label="Total Gampong" color="bg-green-600" />
+        <KpiCard icon="fa-house-chimney" value={summary?.totalDesa ?? 0} label="Total Desa" color="bg-green-600" />
         <KpiCard icon="fa-users" value={fmt(summary?.totalPenduduk ?? 0)} label="Total Penduduk" color="bg-blue-600" />
         <KpiCard icon="fa-house-user" value={fmt(summary?.totalKK ?? 0)} label="Jumlah KK" color="bg-teal-600" />
         <KpiCard icon="fa-ruler-combined" value={`${(summary?.totalLuasHa ?? 0).toLocaleString("id-ID")} Ha`} label="Total Luas Wilayah" color="bg-emerald-600" />
@@ -87,7 +89,7 @@ export default function ProfilDesaTab() {
         <div className="md:col-span-2 bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="px-4 py-3 border-b flex items-center gap-2">
             <i className="fas fa-map-location-dot text-green-600"></i>
-            <h3 className="font-semibold text-gray-800">Peta Sebaran Gampong</h3>
+            <h3 className="font-semibold text-gray-800">Peta Sebaran Desa</h3>
           </div>
           <div ref={mapRef} style={{ height: 340 }} />
           <div className="px-4 py-2 border-t flex flex-wrap gap-3 text-xs">
@@ -102,7 +104,7 @@ export default function ProfilDesaTab() {
 
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
           <h3 className="font-semibold text-gray-800 mb-4 flex items-center gap-2">
-            <i className="fas fa-layer-group text-green-600"></i> Status Gampong
+            <i className="fas fa-layer-group text-green-600"></i> Status Desa
           </h3>
           <div className="space-y-3">
             {[
@@ -136,14 +138,14 @@ export default function ProfilDesaTab() {
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="px-4 py-3 border-b flex items-center gap-2">
           <i className="fas fa-list text-green-600"></i>
-          <h3 className="font-semibold text-gray-800">Daftar Profil Gampong</h3>
+          <h3 className="font-semibold text-gray-800">Daftar Profil Desa</h3>
           <span className="ml-auto text-xs text-gray-400">{profil.length} gampong</span>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="bg-gray-50 text-gray-600 text-xs uppercase">
               <tr>
-                <th className="text-left px-4 py-3">Nama Gampong</th>
+                <th className="text-left px-4 py-3">Nama Desa</th>
                 <th className="text-left px-4 py-3 hidden md:table-cell">Kepala Desa</th>
                 <th className="text-right px-4 py-3">Penduduk</th>
                 <th className="text-right px-4 py-3 hidden sm:table-cell">KK</th>

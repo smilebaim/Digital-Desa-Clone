@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import {
@@ -36,8 +38,8 @@ export default function Dashboard() {
         onMenuClick={() => setIsMobileMenuOpen(true)}
         onRefresh={handleRefresh}
         lastUpdate={summary?.lastUpdate ?? "-"}
-        kecamatan={summary?.kecamatan ?? "Kuta Malaka"}
-        kabupaten={summary?.kabupaten ?? "Aceh Besar"}
+        kecamatan={summary?.kecamatan ?? "Sekernan"}
+        kabupaten={summary?.kabupaten ?? "Muaro Jambi"}
       />
 
       <TabBar activeTab={activeTab} onTabChange={setActiveTab} />
@@ -55,7 +57,7 @@ export default function Dashboard() {
             <i className="fas fa-building-columns text-xl text-green-300"></i>
             <div>
               <p className="font-bold text-sm text-white">Dashboard Data Desa</p>
-              <p className="text-xs text-green-300">Kecamatan Kuta Malaka · Aceh Besar</p>
+              <p className="text-xs text-green-300">Kecamatan Sekernan · Muaro Jambi · Jambi</p>
             </div>
           </div>
           <p className="text-xs text-green-300">&copy; 2026 Sistem Informasi Desa</p>
