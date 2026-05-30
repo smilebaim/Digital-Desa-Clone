@@ -6,6 +6,11 @@
  * OpenAPI spec version: 0.2.0
  */
 
-export interface HealthStatus {
+export interface PelayananDesaInput {
+  nama_desa: string;
+  jenis: string;
+  nama_fasilitas: string;
   status: string;
+  pengguna_bulan: number;
+  keterangan: string;
 }

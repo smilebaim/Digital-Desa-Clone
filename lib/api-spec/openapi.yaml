@@ -1,16 +1,16 @@
 openapi: 3.1.0
 info:
   title: Api
-  version: 0.1.0
-  description: Dashboard Monitoring Bencana Aceh API
+  version: 0.2.0
+  description: Dashboard Data Desa API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
-  - name: bencana
-    description: Disaster monitoring data
+  - name: desa
+    description: Village data operations
 paths:
   /healthz:
     get:
@@ -25,73 +25,73 @@ paths:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
 
-  /bencana/summary:
+  /desa/summary:
     get:
-      operationId: getBencanaSummary
-      tags: [bencana]
-      summary: Get full dashboard summary
+      operationId: getDesaSummary
+      tags: [desa]
+      summary: Get dashboard summary KPIs
       responses:
         "200":
-          description: Summary stats
+          description: Summary KPIs
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BencanaSummary"
+                $ref: "#/components/schemas/DesaSummary"
     put:
-      operationId: updateBencanaSummary
-      tags: [bencana]
+      operationId: updateDesaSummary
+      tags: [desa]
       summary: Update dashboard summary
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/BencanaSummary"
+              $ref: "#/components/schemas/DesaSummary"
       responses:
         "200":
           description: Updated summary
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BencanaSummary"
+                $ref: "#/components/schemas/DesaSummary"
 
-  /bencana/dampak:
+  /desa/profil:
     get:
-      operationId: getBencanaDampak
-      tags: [bencana]
-      summary: Get impact data per kabupaten
+      operationId: getDesaProfil
+      tags: [desa]
+      summary: Get all village profiles
       responses:
         "200":
-          description: List of impact records
+          description: List of village profiles
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/DampakRecord"
+                  $ref: "#/components/schemas/ProfilDesa"
     post:
-      operationId: createBencanaDampak
-      tags: [bencana]
-      summary: Create a new dampak record
+      operationId: createDesaProfil
+      tags: [desa]
+      summary: Create a village profile
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/DampakInput"
+              $ref: "#/components/schemas/ProfilDesaInput"
       responses:
         "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DampakRecord"
+                $ref: "#/components/schemas/ProfilDesa"
 
-  /bencana/dampak/{id}:
+  /desa/profil/{id}:
     put:
-      operationId: updateBencanaDampak
-      tags: [bencana]
-      summary: Update a dampak record
+      operationId: updateDesaProfil
+      tags: [desa]
+      summary: Update a village profile
       parameters:
         - name: id
           in: path
@@ -103,18 +103,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/DampakInput"
+              $ref: "#/components/schemas/ProfilDesaInput"
       responses:
         "200":
           description: Updated
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DampakRecord"
+                $ref: "#/components/schemas/ProfilDesa"
     delete:
-      operationId: deleteBencanaDampak
-      tags: [bencana]
-      summary: Delete a dampak record
+      operationId: deleteDesaProfil
+      tags: [desa]
+      summary: Delete a village profile
       parameters:
         - name: id
           in: path
@@ -125,43 +125,43 @@ paths:
         "204":
           description: Deleted
 
-  /bencana/pertanian:
+  /desa/dana:
     get:
-      operationId: getBencanaPertanian
-      tags: [bencana]
-      summary: Get agriculture damage data
+      operationId: getDesaDana
+      tags: [desa]
+      summary: Get dana desa records
       responses:
         "200":
-          description: List of agriculture damage records
+          description: List of dana desa records
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/PertanianRecord"
+                  $ref: "#/components/schemas/DanaDesa"
     post:
-      operationId: createBencanaPertanian
-      tags: [bencana]
-      summary: Create a new pertanian record
+      operationId: createDesaDana
+      tags: [desa]
+      summary: Create a dana desa record
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PertanianInput"
+              $ref: "#/components/schemas/DanaDesa"
       responses:
         "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PertanianRecord"
+                $ref: "#/components/schemas/DanaDesa"
 
-  /bencana/pertanian/{id}:
+  /desa/dana/{id}:
     put:
-      operationId: updateBencanaPertanian
-      tags: [bencana]
-      summary: Update a pertanian record
+      operationId: updateDesaDana
+      tags: [desa]
+      summary: Update a dana desa record
       parameters:
         - name: id
           in: path
@@ -173,18 +173,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PertanianInput"
+              $ref: "#/components/schemas/DanaDesa"
       responses:
         "200":
           description: Updated
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PertanianRecord"
+                $ref: "#/components/schemas/DanaDesa"
     delete:
-      operationId: deleteBencanaPertanian
-      tags: [bencana]
-      summary: Delete a pertanian record
+      operationId: deleteDesaDana
+      tags: [desa]
+      summary: Delete a dana desa record
       parameters:
         - name: id
           in: path
@@ -195,43 +195,43 @@ paths:
         "204":
           description: Deleted
 
-  /bencana/pengungsi:
+  /desa/idm:
     get:
-      operationId: getBencanaPengungsi
-      tags: [bencana]
-      summary: Get population/refugee data per kabupaten
+      operationId: getDesaIDM
+      tags: [desa]
+      summary: Get IDM records
       responses:
         "200":
-          description: List of population records
+          description: List of IDM records
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/PendudukRecord"
+                  $ref: "#/components/schemas/IDMRecord"
     post:
-      operationId: createBencanaPengungsi
-      tags: [bencana]
-      summary: Create a new penduduk record
+      operationId: createDesaIDM
+      tags: [desa]
+      summary: Create an IDM record
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PendudukInput"
+              $ref: "#/components/schemas/IDMRecord"
       responses:
         "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PendudukRecord"
+                $ref: "#/components/schemas/IDMRecord"
 
-  /bencana/pengungsi/{id}:
+  /desa/idm/{id}:
     put:
-      operationId: updateBencanaPengungsi
-      tags: [bencana]
-      summary: Update a penduduk record
+      operationId: updateDesaIDM
+      tags: [desa]
+      summary: Update an IDM record
       parameters:
         - name: id
           in: path
@@ -243,18 +243,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PendudukInput"
+              $ref: "#/components/schemas/IDMRecord"
       responses:
         "200":
           description: Updated
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PendudukRecord"
+                $ref: "#/components/schemas/IDMRecord"
     delete:
-      operationId: deleteBencanaPengungsi
-      tags: [bencana]
-      summary: Delete a penduduk record
+      operationId: deleteDesaIDM
+      tags: [desa]
+      summary: Delete an IDM record
       parameters:
         - name: id
           in: path
@@ -265,43 +265,43 @@ paths:
         "204":
           description: Deleted
 
-  /bencana/orang-hilang:
+  /desa/pelayanan:
     get:
-      operationId: getBencanaOrangHilang
-      tags: [bencana]
-      summary: Get missing persons data
+      operationId: getDesaPelayanan
+      tags: [desa]
+      summary: Get village services data
       responses:
         "200":
-          description: List of missing persons
+          description: List of village services
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/OrangHilangRecord"
+                  $ref: "#/components/schemas/PelayananDesa"
     post:
-      operationId: createBencanaOrangHilang
-      tags: [bencana]
-      summary: Create a missing person record
+      operationId: createDesaPelayanan
+      tags: [desa]
+      summary: Create a village service record
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/OrangHilangInput"
+              $ref: "#/components/schemas/PelayananDesaInput"
       responses:
         "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/OrangHilangRecord"
+                $ref: "#/components/schemas/PelayananDesa"
 
-  /bencana/orang-hilang/{id}:
+  /desa/pelayanan/{id}:
     put:
-      operationId: updateBencanaOrangHilang
-      tags: [bencana]
-      summary: Update a missing person record
+      operationId: updateDesaPelayanan
+      tags: [desa]
+      summary: Update a village service record
       parameters:
         - name: id
           in: path
@@ -313,158 +313,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/OrangHilangInput"
+              $ref: "#/components/schemas/PelayananDesaInput"
       responses:
         "200":
           description: Updated
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/OrangHilangRecord"
+                $ref: "#/components/schemas/PelayananDesa"
     delete:
-      operationId: deleteBencanaOrangHilang
-      tags: [bencana]
-      summary: Delete a missing person record
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        "204":
-          description: Deleted
-
-  /bencana/bantuan:
-    get:
-      operationId: getBencanaBantuan
-      tags: [bencana]
-      summary: Get village-level aid distribution data
-      responses:
-        "200":
-          description: List of village aid records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/BantuanDesaRecord"
-    post:
-      operationId: createBencanaBantuan
-      tags: [bencana]
-      summary: Create a new bantuan desa record
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/BantuanDesaInput"
-      responses:
-        "201":
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BantuanDesaRecord"
-
-  /bencana/bantuan/{id}:
-    put:
-      operationId: updateBencanaBantuan
-      tags: [bencana]
-      summary: Update a bantuan desa record
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/BantuanDesaInput"
-      responses:
-        "200":
-          description: Updated
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BantuanDesaRecord"
-    delete:
-      operationId: deleteBencanaBantuan
-      tags: [bencana]
-      summary: Delete a bantuan desa record
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        "204":
-          description: Deleted
-
-  /bencana/markers:
-    get:
-      operationId: getBencanaMarkers
-      tags: [bencana]
-      summary: Get map markers
-      responses:
-        "200":
-          description: List of map markers
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/MapMarker"
-    post:
-      operationId: createBencanaMarker
-      tags: [bencana]
-      summary: Create a new map marker
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/MapMarkerInput"
-      responses:
-        "201":
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/MapMarker"
-
-  /bencana/markers/{id}:
-    put:
-      operationId: updateBencanaMarker
-      tags: [bencana]
-      summary: Update a map marker
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/MapMarkerInput"
-      responses:
-        "200":
-          description: Updated
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/MapMarker"
-    delete:
-      operationId: deleteBencanaMarker
-      tags: [bencana]
-      summary: Delete a map marker
+      operationId: deleteDesaPelayanan
+      tags: [desa]
+      summary: Delete a village service record
       parameters:
         - name: id
           in: path
@@ -484,374 +344,111 @@ components:
           type: string
       required: [status]
 
-    RekapCluster:
+    DesaSummary:
       type: object
-      required: [kerusakan, kerugian, total, perSektor]
       properties:
-        kerusakan:
-          type: string
-        kerugian:
-          type: string
-        total:
-          type: string
-        perSektor:
-          type: array
-          items:
-            type: object
-            required: [nama, nilai]
-            properties:
-              nama:
-                type: string
-              nilai:
-                type: string
+        totalDesa: { type: integer }
+        totalPenduduk: { type: integer }
+        totalKK: { type: integer }
+        totalLuasHa: { type: number }
+        totalDanaDesa2024: { type: number }
+        rataRealisasiPct: { type: number }
+        rataSkorIDM: { type: number }
+        desaMandiri: { type: integer }
+        desaMaju: { type: integer }
+        desaBerkembang: { type: integer }
+        desaTertinggal: { type: integer }
+        desaSangatTertinggal: { type: integer }
+        kecamatan: { type: string }
+        kabupaten: { type: string }
+        provinsi: { type: string }
+        lastUpdate: { type: string }
+      required: [totalDesa, totalPenduduk, totalKK, totalLuasHa, totalDanaDesa2024, rataRealisasiPct, rataSkorIDM, desaMandiri, desaMaju, desaBerkembang, desaTertinggal, desaSangatTertinggal, kecamatan, kabupaten, provinsi, lastUpdate]
 
-    FaskesStats:
+    ProfilDesa:
       type: object
-      required: [puskesmas, rsud, fasyankes]
+      required: [id, nama, kecamatan, kabupaten, luas_ha, jumlah_penduduk, jumlah_kk, kepala_desa, jenis_desa, lat, lng, tahun_berdiri]
       properties:
-        puskesmas:
-          type: integer
-        rsud:
-          type: integer
-        fasyankes:
-          type: integer
+        id: { type: integer }
+        nama: { type: string }
+        kecamatan: { type: string }
+        kabupaten: { type: string }
+        luas_ha: { type: number }
+        jumlah_penduduk: { type: integer }
+        jumlah_kk: { type: integer }
+        kepala_desa: { type: string }
+        jenis_desa: { type: string }
+        lat: { type: number }
+        lng: { type: number }
+        tahun_berdiri: { type: integer }
 
-    JaringanStats:
+    ProfilDesaInput:
       type: object
-      required: [critical, warning, normal]
+      required: [nama, kecamatan, kabupaten, luas_ha, jumlah_penduduk, jumlah_kk, kepala_desa, jenis_desa, lat, lng, tahun_berdiri]
       properties:
-        critical:
-          type: integer
-        warning:
-          type: integer
-        normal:
-          type: integer
+        nama: { type: string }
+        kecamatan: { type: string }
+        kabupaten: { type: string }
+        luas_ha: { type: number }
+        jumlah_penduduk: { type: integer }
+        jumlah_kk: { type: integer }
+        kepala_desa: { type: string }
+        jenis_desa: { type: string }
+        lat: { type: number }
+        lng: { type: number }
+        tahun_berdiri: { type: integer }
 
-    PoskoStats:
+    DanaDesa:
       type: object
-      required: [totalPosko, totalPengungsi, titikPengungsian]
+      required: [id, desa_id, nama_desa, tahun, alokasi, realisasi, persen_realisasi, infra_pct, pemberdayaan_pct, operasional_pct, sumber]
       properties:
-        totalPosko:
-          type: integer
-        totalPengungsi:
-          type: integer
-        titikPengungsian:
-          type: integer
+        id: { type: integer }
+        desa_id: { type: integer }
+        nama_desa: { type: string }
+        tahun: { type: integer }
+        alokasi: { type: number }
+        realisasi: { type: number }
+        persen_realisasi: { type: number }
+        infra_pct: { type: number }
+        pemberdayaan_pct: { type: number }
+        operasional_pct: { type: number }
+        sumber: { type: string }
 
-    BantuanStatusStats:
+    IDMRecord:
       type: object
-      required: [totalDesa, kuning, biru, abu, putih]
+      required: [id, desa_id, nama_desa, tahun, skor_idm, status_idm, iks, ike, ikl, skor_sebelumnya, delta]
       properties:
-        totalDesa:
-          type: integer
-        kuning:
-          type: integer
-        biru:
-          type: integer
-        abu:
-          type: integer
-        putih:
-          type: integer
+        id: { type: integer }
+        desa_id: { type: integer }
+        nama_desa: { type: string }
+        tahun: { type: integer }
+        skor_idm: { type: number }
+        status_idm: { type: string }
+        iks: { type: number }
+        ike: { type: number }
+        ikl: { type: number }
+        skor_sebelumnya: { type: number }
+        delta: { type: number }
 
-    BencanaSummary:
+    PelayananDesa:
       type: object
-      required:
-        - totalKorban
-        - totalPengungsi
-        - titikPengungsian
-        - rumahRusak
-        - sawahHa
-        - kabupatenTerdampak
-        - fasumRusak
-        - kebunHa
-        - tambakHa
-        - rekapCluster
-        - faskes
-        - jaringan
-        - posko
-        - bantuan
-        - lastUpdate
+      required: [id, nama_desa, jenis, nama_fasilitas, status, pengguna_bulan, keterangan]
       properties:
-        totalKorban:
-          type: integer
-        totalPengungsi:
-          type: integer
-        titikPengungsian:
-          type: integer
-        rumahRusak:
-          type: integer
-        sawahHa:
-          type: number
-        kabupatenTerdampak:
-          type: integer
-        fasumRusak:
-          type: integer
-        kebunHa:
-          type: number
-        tambakHa:
-          type: number
-        rekapCluster:
-          $ref: "#/components/schemas/RekapCluster"
-        faskes:
-          $ref: "#/components/schemas/FaskesStats"
-        jaringan:
-          $ref: "#/components/schemas/JaringanStats"
-        posko:
-          $ref: "#/components/schemas/PoskoStats"
-        bantuan:
-          $ref: "#/components/schemas/BantuanStatusStats"
-        lastUpdate:
-          type: string
+        id: { type: integer }
+        nama_desa: { type: string }
+        jenis: { type: string }
+        nama_fasilitas: { type: string }
+        status: { type: string }
+        pengguna_bulan: { type: integer }
+        keterangan: { type: string }
 
-    DampakRecord:
+    PelayananDesaInput:
       type: object
-      required:
-        - id
-        - kabupaten
-        - kecamatan
-        - jenisKejadian
-        - korbanJiwa
-        - korbanLuka
-        - rumahRusakBerat
-        - rumahRusakRingan
-        - sawahTerdampakHa
-        - tanggal
-        - status
+      required: [nama_desa, jenis, nama_fasilitas, status, pengguna_bulan, keterangan]
       properties:
-        id:
-          type: integer
-        kabupaten:
-          type: string
-        kecamatan:
-          type: string
-        jenisKejadian:
-          type: string
-        korbanJiwa:
-          type: integer
-        korbanLuka:
-          type: integer
-        rumahRusakBerat:
-          type: integer
-        rumahRusakRingan:
-          type: integer
-        sawahTerdampakHa:
-          type: number
-        tanggal:
-          type: string
-        status:
-          type: string
-
-    DampakInput:
-      type: object
-      required:
-        - kabupaten
-        - kecamatan
-        - jenisKejadian
-        - korbanJiwa
-        - korbanLuka
-        - rumahRusakBerat
-        - rumahRusakRingan
-        - sawahTerdampakHa
-        - tanggal
-        - status
-      properties:
-        kabupaten:
-          type: string
-        kecamatan:
-          type: string
-        jenisKejadian:
-          type: string
-        korbanJiwa:
-          type: integer
-        korbanLuka:
-          type: integer
-        rumahRusakBerat:
-          type: integer
-        rumahRusakRingan:
-          type: integer
-        sawahTerdampakHa:
-          type: number
-        tanggal:
-          type: string
-        status:
-          type: string
-
-    PertanianRecord:
-      type: object
-      required: [id, nama, kabupaten, kecamatan, volume, kerugian, kondisi]
-      properties:
-        id:
-          type: integer
-        nama:
-          type: string
-        kabupaten:
-          type: string
-        kecamatan:
-          type: string
-        volume:
-          type: number
-        kerugian:
-          type: string
-        kondisi:
-          type: string
-
-    PertanianInput:
-      type: object
-      required: [nama, kabupaten, kecamatan, volume, kerugian, kondisi]
-      properties:
-        nama:
-          type: string
-        kabupaten:
-          type: string
-        kecamatan:
-          type: string
-        volume:
-          type: number
-        kerugian:
-          type: string
-        kondisi:
-          type: string
-
-    PendudukRecord:
-      type: object
-      required: [id, kabupaten, penduduk, kk, disabilitas, pengungsi]
-      properties:
-        id:
-          type: integer
-        kabupaten:
-          type: string
-        penduduk:
-          type: integer
-        kk:
-          type: integer
-        disabilitas:
-          type: integer
-        pengungsi:
-          type: integer
-
-    PendudukInput:
-      type: object
-      required: [kabupaten, penduduk, kk, disabilitas, pengungsi]
-      properties:
-        kabupaten:
-          type: string
-        penduduk:
-          type: integer
-        kk:
-          type: integer
-        disabilitas:
-          type: integer
-        pengungsi:
-          type: integer
-
-    OrangHilangRecord:
-      type: object
-      required: [id, nama, usia, kecamatan, kabupaten, status, tanggal]
-      properties:
-        id:
-          type: integer
-        nama:
-          type: string
-        usia:
-          type: integer
-        kecamatan:
-          type: string
-        kabupaten:
-          type: string
-        status:
-          type: string
-        tanggal:
-          type: string
-
-    OrangHilangInput:
-      type: object
-      required: [nama, usia, kecamatan, kabupaten, status, tanggal]
-      properties:
-        nama:
-          type: string
-        usia:
-          type: integer
-        kecamatan:
-          type: string
-        kabupaten:
-          type: string
-        status:
-          type: string
-        tanggal:
-          type: string
-
-    BantuanDesaRecord:
-      type: object
-      required: [id, desa, kecamatan, kabupaten, satuan, warna]
-      properties:
-        id:
-          type: integer
-        desa:
-          type: string
-        kecamatan:
-          type: string
-        kabupaten:
-          type: string
-        satuan:
-          type: string
-        warna:
-          type: string
-
-    BantuanDesaInput:
-      type: object
-      required: [desa, kecamatan, kabupaten, satuan, warna]
-      properties:
-        desa:
-          type: string
-        kecamatan:
-          type: string
-        kabupaten:
-          type: string
-        satuan:
-          type: string
-        warna:
-          type: string
-
-    MapMarker:
-      type: object
-      required: [id, lat, lng, kabupaten, kecamatan, jenisBencana, severity, korban, pengungsi]
-      properties:
-        id:
-          type: integer
-        lat:
-          type: number
-        lng:
-          type: number
-        kabupaten:
-          type: string
-        kecamatan:
-          type: string
-        jenisBencana:
-          type: string
-        severity:
-          type: string
-        korban:
-          type: integer
-        pengungsi:
-          type: integer
-
-    MapMarkerInput:
-      type: object
-      required: [lat, lng, kabupaten, kecamatan, jenisBencana, severity, korban, pengungsi]
-      properties:
-        lat:
-          type: number
-        lng:
-          type: number
-        kabupaten:
-          type: string
-        kecamatan:
-          type: string
-        jenisBencana:
-          type: string
-        severity:
-          type: string
-        korban:
-          type: integer
-        pengungsi:
-          type: integer
+        nama_desa: { type: string }
+        jenis: { type: string }
+        nama_fasilitas: { type: string }
+        status: { type: string }
+        pengguna_bulan: { type: integer }
+        keterangan: { type: string }
