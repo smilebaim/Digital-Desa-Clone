@@ -5,6 +5,6 @@ import desaRouter from "./desa";
 const router: IRouter = Router();
 
 router.use(healthRouter);
-router.use(desaRouter);
+router.use("/desa", desaRouter);
 
 export default router;
