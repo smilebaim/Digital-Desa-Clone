@@ -1,38 +1,33 @@
-"use client";
-
-export type TabKey = "profil" | "dana" | "idm" | "pelayanan";
-
-const TABS: { key: TabKey; label: string; icon: string }[] = [
-  { key: "profil",    label: "Profil Desa",  icon: "fa-map-location-dot" },
-  { key: "dana",      label: "Dana Desa",    icon: "fa-coins" },
-  { key: "idm",       label: "IDM",          icon: "fa-chart-line" },
-  { key: "pelayanan", label: "Pelayanan",    icon: "fa-hand-holding-heart" },
-];
-
 interface TabBarProps {
-  activeTab: TabKey;
-  onTabChange: (tab: TabKey) => void;
+  activeTab: "dampak" | "peta" | "pengungsi" | "bantuan";
+  onTabChange: (tab: "dampak" | "peta" | "pengungsi" | "bantuan") => void;
 }
 
 export default function TabBar({ activeTab, onTabChange }: TabBarProps) {
+  const tabs = [
+    { id: "dampak", label: "Dampak", icon: "fa-exclamation-triangle" },
+    { id: "peta", label: "Peta Operasi", icon: "fa-map-marked-alt" },
+    { id: "pengungsi", label: "Pengungsi", icon: "fa-users" },
+    { id: "bantuan", label: "Bantuan", icon: "fa-truck" },
+  ] as const;
+
   return (
-    <nav className="bg-white border-b border-gray-200 shadow-sm sticky top-14 md:top-16 z-40">
-      <div className="flex overflow-x-auto">
-        {TABS.map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => onTabChange(tab.key)}
-            className={`flex-1 min-w-[80px] flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 px-2 md:px-6 py-3 text-xs md:text-sm font-medium whitespace-nowrap transition-colors border-b-2 ${
-              activeTab === tab.key
-                ? "border-green-600 text-green-700 bg-green-50"
-                : "border-transparent text-gray-500 hover:text-green-600 hover:bg-gray-50"
-            }`}
-          >
-            <i className={`fas ${tab.icon} text-base md:text-sm`}></i>
-            <span>{tab.label}</span>
-          </button>
-        ))}
-      </div>
-    </nav>
+    <div className="flex w-full border-b bg-white shadow-sm sticky top-[56px] md:top-[64px] z-40">
+      {tabs.map((tab) => (
+        <button
+          key={tab.id}
+          onClick={() => onTabChange(tab.id)}
+          className={`tab-btn flex-1 flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-2 whitespace-nowrap px-1 sm:px-4 md:px-6 h-12 md:h-14 transition-all duration-200 text-[10px] sm:text-sm font-semibold ${
+            activeTab === tab.id
+              ? "active text-red-600 border-b-2 border-red-600"
+              : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
+          }`}
+          data-testid={`tab-${tab.id}`}
+        >
+          <i className={`fas ${tab.icon} text-sm sm:text-base`}></i>
+          <span className="leading-tight">{tab.label}</span>
+        </button>
+      ))}
+    </div>
   );
 }

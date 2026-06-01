@@ -6,6 +6,11 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface HealthStatus {
+export interface OrangHilangInput {
+  nama: string;
+  usia: number;
+  kecamatan: string;
+  kabupaten: string;
   status: string;
+  tanggal: string;
 }

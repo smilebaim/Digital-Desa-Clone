@@ -1,6 +1,6 @@
 kind = "web"
 previewPath = "/"
-title = "Dashboard Data Desa - Jambi"
+title = "Dashboard Monitoring Bencana Aceh"
 version = "1.0.0"
 id = "artifacts/dashboard-bencana"
 router = "path"
@@ -19,7 +19,12 @@ run = "pnpm --filter @workspace/dashboard-bencana run dev"
 
 [services.production]
 build = [ "pnpm", "--filter", "@workspace/dashboard-bencana", "run", "build" ]
-run = "pnpm --filter @workspace/dashboard-bencana run start"
+publicDir = "artifacts/dashboard-bencana/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
 
 [services.env]
 PORT = "24581"

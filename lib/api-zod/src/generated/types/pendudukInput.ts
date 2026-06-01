@@ -6,6 +6,10 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface HealthStatus {
-  status: string;
+export interface PendudukInput {
+  kabupaten: string;
+  penduduk: number;
+  kk: number;
+  disabilitas: number;
+  pengungsi: number;
 }
